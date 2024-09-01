@@ -46,9 +46,15 @@
 name: 'Terraform'
 
 on:
-  push:
+  push: 
     branches: [ "main" ]
   pull_request:
+    types:
+      - closed
+      # when have changes to this folder it's will be triger.
+    paths:
+      - 'main-prod/**'
+  
 
 permissions:
   contents: read
@@ -74,7 +80,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-central-1
+        aws-region: us-east-1
         
     # same version on my local desktop
     - name: Setup Terraform
@@ -115,3 +121,4 @@ jobs:
       
     - name: Terraform Output
       run: terraform output -no-color
+
