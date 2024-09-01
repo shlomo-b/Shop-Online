@@ -51,11 +51,9 @@ on:
   pull_request:
     types:
       - closed
-      # when have changes to this folder it's will be triger.
     paths:
       - 'main-prod/**'
   
-
 permissions:
   contents: read
 
@@ -69,12 +67,12 @@ jobs:
       run:
         shell: bash
         
-    # Checkout: Access to my code, which can actually work with it.
     steps:
+    # Checkout: Access to my code, which can actually work with it.
     - name: Checkout
       uses: actions/checkout@v4
-      
-    # Configure AWS Credentials: it's for to cominication for aws, with the aws-access-key-id , aws-secret-access-key
+
+    # Configure AWS Credentials: It's for communication with AWS using the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -82,13 +80,13 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
         
-    # same version on my local desktop
+    # Setup Terraform CLI: Use the specified version of Terraform
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_version: 1.5.6
 
-    # Debug Environment: its for to verifiy if the secrets.AWS_ACCESS_KEY_ID , secrets.AWS_SECRET_ACCESS_KEY its define 
+    # Debug Environment: Verify if the AWS credentials and other environment variables are correctly set
     - name: Debug Environment
       run: |
         echo "GitHub Ref: ${{ github.ref }}"
@@ -97,8 +95,9 @@ jobs:
         echo "AWS_SECRET_ACCESS_KEY is set: ${{ secrets.AWS_SECRET_ACCESS_KEY != '' }}"
         terraform version
         aws --version
+      working-directory: ./main-prod  # Specify the directory to run the command in
 
-      # Terraform Init: sync with the S3 where the terraform.tfstate store.
+    # Terraform Init: Sync with the S3 where the terraform.tfstate is stored
     - name: Terraform Init
       run: |
         terraform init \
@@ -106,19 +105,26 @@ jobs:
           -backend-config="key=project-tf/terraform.tfstate" \
           -backend-config="region=us-east-1" \
           -input=false -no-color
-          
+      working-directory: ./main-prod  # Specify the directory to run the command in
+
+    # Terraform Validate: Validate the Terraform configuration files
     - name: Terraform Validate
       run: terraform validate
+      working-directory: ./main-prod  # Specify the directory to run the command in
       
-    # -input=false -no-color: to prevent input from the user , The output will be displayed without colors
+    # Terraform Plan: Generate and show an execution plan
     - name: Terraform Plan
       run: terraform plan -input=false -no-color
-      
-    #  check if the event it's push only on the main branch, if true the git action will do terrafrom apply.
+      working-directory: ./main-prod  # Specify the directory to run the command in
+
+    # Terraform Apply: Apply the changes required to reach the desired state of the configuration
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false -no-color
-      
+      working-directory: ./main-prod  # Specify the directory to run the command in
+
+    # Terraform Output: Show the outputs of the Terraform configuration
     - name: Terraform Output
       run: terraform output -no-color
+      working-directory: ./main-prod  # Specify the directory to run the command in
 
