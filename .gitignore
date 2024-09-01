@@ -37,8 +37,7 @@ override.tf.json
 terraform.rc
 
 # ignore file remote_state.tf
-\main-prod\remote_state.tf
+main-prod/remote_state.tf
 
 # ignore file TFkey
-TFkey
-\main-prod\TFkey
+main-prod/TFkey
