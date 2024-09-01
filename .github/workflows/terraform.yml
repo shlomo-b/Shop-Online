@@ -1,0 +1,117 @@
+# This workflow installs the latest version of Terraform CLI and configures the Terraform CLI configuration file
+# with an API token for Terraform Cloud (app.terraform.io). On pull request events, this workflow will run
+# `terraform init`, `terraform fmt`, and `terraform plan` (speculative plan via Terraform Cloud). On push events
+# to the "main" branch, `terraform apply` will be executed.
+#
+# Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
+#
+# To use this workflow, you will need to complete the following setup steps.
+#
+# 1. Create a `main.tf` file in the root of this repository with the `remote` backend and one or more resources defined.
+#   Example `main.tf`:
+#     # The configuration for the `remote` backend.
+#     terraform {
+#       backend "remote" {
+#         # The name of your Terraform Cloud organization.
+#         organization = "example-organization"
+#
+#         # The name of the Terraform Cloud workspace to store Terraform state files in.
+#         workspaces {
+#           name = "example-workspace"
+#         }
+#       }
+#     }
+#
+#     # An example resource that does nothing.
+#     resource "null_resource" "example" {
+#       triggers = {
+#         value = "A example resource that does nothing!"
+#       }
+#     }
+#
+#
+# 2. Generate a Terraform Cloud user API token and store it as a GitHub secret (e.g. TF_API_TOKEN) on this repository.
+#   Documentation:
+#     - https://www.terraform.io/docs/cloud/users-teams-organizations/api-tokens.html
+#     - https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
+#
+# 3. Reference the GitHub secret in step using the `hashicorp/setup-terraform` GitHub Action.
+#   Example:
+#     - name: Setup Terraform
+#       uses: hashicorp/setup-terraform@v1
+#       with:
+#         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+
+name: 'Terraform'
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs: 
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: production
+
+    defaults:
+      run:
+        shell: bash
+        
+    # Checkout: Access to my code, which can actually work with it.
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    # Configure AWS Credentials: it's for to cominication for aws, with the aws-access-key-id , aws-secret-access-key
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-central-1
+        
+    # same version on my local desktop
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.5.6
+
+    # Debug Environment: its for to verifiy if the secrets.AWS_ACCESS_KEY_ID , secrets.AWS_SECRET_ACCESS_KEY its define 
+    - name: Debug Environment
+      run: |
+        echo "GitHub Ref: ${{ github.ref }}"
+        echo "GitHub Event Name: ${{ github.event_name }}"
+        echo "AWS_ACCESS_KEY_ID is set: ${{ secrets.AWS_ACCESS_KEY_ID != '' }}"
+        echo "AWS_SECRET_ACCESS_KEY is set: ${{ secrets.AWS_SECRET_ACCESS_KEY != '' }}"
+        terraform version
+        aws --version
+
+      # Terraform Init: sync with the S3 where the terraform.tfstate store.
+    - name: Terraform Init
+      run: |
+        terraform init \
+          -backend-config="bucket=shlomo-project-ci-cd" \
+          -backend-config="key=project-tf/terraform.tfstate" \
+          -backend-config="region=eu-central-1" \
+          -input=false -no-color
+          
+    - name: Terraform Validate
+      run: terraform validate
+      
+    # -input=false -no-color: to prevent input from the user , The output will be displayed without colors
+    - name: Terraform Plan
+      run: terraform plan -input=false -no-color
+      
+    #  check if the event it's push only on the main branch, if true the git action will do terrafrom apply.
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve -input=false -no-color
+      
+    - name: Terraform Output
+      run: terraform output -no-color
