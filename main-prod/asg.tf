@@ -5,7 +5,7 @@ module "asg" {
   version = "6.5.0"
 
   # Autoscaling group
-  name = "jk_auto_scaling_group"
+  name = "blackjack_scaling_group"
   min_size                  = 1
   max_size                  = 5
   desired_capacity          = 1

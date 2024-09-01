@@ -27,14 +27,12 @@ module "acm" {
 resource "null_resource" "delay_acm" {
   provisioner "local-exec" {
     command = <<-EOT
-      if [ "$(uname -o)" = "GNU/Linux" ]; then
-        sleep 60
-      else
-        powershell -Command Start-Sleep -Seconds 60
-      fi
+      uname_out=$(uname 2>/dev/null || echo "Windows")
+      case "$uname_out" in
+          Linux*) sleep 60;;
+          Darwin*) sleep 60;;  # macOS
+          *) powershell -Command Start-Sleep -Seconds 60;;
+      esac
     EOT
   }
 }
-
-
-
