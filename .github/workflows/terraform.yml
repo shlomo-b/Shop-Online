@@ -102,7 +102,7 @@ jobs:
       run: |
         terraform init \
           -backend-config="bucket=shlomo-project-ci-cd" \
-          -backend-config="key=project-tf/terraform.tfstate" \
+          -backend-config="key=first-project-ci-cd/terraform.tfstate" \
           -backend-config="region=us-east-1" \
           -input=false -no-color
       working-directory: ./main-prod  # Specify the directory to run the command in
