@@ -41,3 +41,7 @@ main-prod/remote_state.tf
 
 # ignore file TFkey
 main-prod/TFkey
+
+
+# ignore file terraform.lock.hcl
+.terraform.lock.hcl
