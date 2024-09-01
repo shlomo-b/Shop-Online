@@ -19,6 +19,8 @@ module "waf" {
  }
  rules = [
     {
+      # rules
+      
       # rule 1
       # this rule for allow access to app.
       name     = "IpSetRule-0"
