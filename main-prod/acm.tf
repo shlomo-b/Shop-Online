@@ -23,6 +23,7 @@ module "acm" {
     # Add a delay after ACM creation
   depends_on = [null_resource.delay_acm]
 }
+
 # check if its runinin on linux or window
 resource "null_resource" "delay_acm" {
   provisioner "local-exec" {
