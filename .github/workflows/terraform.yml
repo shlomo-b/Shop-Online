@@ -100,7 +100,7 @@ jobs:
       run: |
         terraform init \
           -backend-config="bucket=shlomo-project-ci-cd" \
-          -backend-config="key=project-tf/terraform.tfstate" \
+          -backend-config="key=first-project-ci-cd/terraform.tfstate" \
           -backend-config="region=us-east-1" \
           -input=false -no-color
       working-directory: ./main-prod  # Specify the directory to run the command in
@@ -117,6 +117,8 @@ jobs:
 
     # Terraform Apply: Apply the changes required to reach the desired state of the configuration
     - name: Terraform Apply
+      # It's will be trigger when i push/merge to main branch
+      
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false -no-color
       working-directory: ./main-prod  # Specify the directory to run the command in
