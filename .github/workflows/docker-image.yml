@@ -35,6 +35,7 @@ jobs:
       -
         # Build the image and push it to dockerhub.
         name: Build and push
+        
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
