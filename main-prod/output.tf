@@ -45,22 +45,6 @@ output "dns_a_record_route53" {
 # }
 
 
-#---------------output vpc id -------------------#
-
-# output "subnet" {
-#   description = "output subnets"
-#   value       = module.vpc["vpc-one"].private_subnets
-# }
-
-
-#---------------route-table-------------------#
-
-# output "route-table" {
-#   description = "output subnets"
-#   value       = module.vpc["vpc-two"].private_route_table_ids
-# }
-
-
 #---------------output target_group_arns -------------------#
 
 # output "target_group_arns" {
