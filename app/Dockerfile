@@ -4,7 +4,12 @@ FROM ubuntu:latest
 
 # Update package list and install required packages
 RUN apt-get update -y && \
-    apt-get install -y apache2
+    apt-get install -y apache2 \
+    python3 \
+    python3-pip
+
+# Check if Python and pip are installed correctly
+RUN python3 --version && pip3 --version
     
 # Install prometheus_client
 RUN pip3 install prometheus_client
