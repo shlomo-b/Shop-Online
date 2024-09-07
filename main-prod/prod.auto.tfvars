@@ -31,6 +31,4 @@ vpcs = {
       name = "vpc-third"
     }
   }
-
 }
-

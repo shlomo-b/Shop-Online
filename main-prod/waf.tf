@@ -24,7 +24,7 @@ module "waf" {
       # rule 1
       # this rule for allow access to app.
       name     = "IpSetRule-0"
-      priority = "2"
+      priority = "3"
       action = "allow"
 
         visibility_config = {
@@ -43,7 +43,7 @@ module "waf" {
        # rule 2
        # this rule to block after the /
       name = "Block_after_slash"
-      priority = "1"
+      priority = "2"
 
       action = "block"
 
@@ -95,6 +95,35 @@ module "waf" {
         priority  = 0
         type      = "LOWERCASE" # The text transformation type
       }
+    },
+    
+    {
+       # rule 4
+       # allow /metrics for prometheus
+      name = "allow_metrics_for_prometheus"
+      priority = "1"
+
+      action = "allow"
+
+      visibility_config = {
+        cloudwatch_metrics_enabled = true
+        metric_name                = "RegexBadBotsUserAgent-metric"
+        sampled_requests_enabled   = true
+      }
+
+      # You need to previously create you regex pattern
+      # Refer to https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_regex_pattern_set
+      # for all of the options available.
+      regex_pattern_set_reference_statement = {
+       # url_path = {}
+        # the arn of the regex
+        arn       = aws_wafv2_regex_pattern_set.allow_metrics.arn
+        field_to_match = {
+          uri_path = "{}"
+        }
+        priority  = 0
+        type      = "LOWERCASE" # The text transformation type
+      }
     }
  ]
 }
@@ -129,7 +158,7 @@ resource "aws_wafv2_regex_pattern_set" "block_wildcard" {
 }
 
 
-# / 
+# creare regex to allow after /admin-shlomo
 resource "aws_wafv2_regex_pattern_set" "allow_admin_shlomo_slash" {
   name        = "allow_web_admin_slash"
   scope       = "REGIONAL"
@@ -137,5 +166,16 @@ resource "aws_wafv2_regex_pattern_set" "allow_admin_shlomo_slash" {
   regular_expression {
     # allow /admin-shlomo 
     regex_string = "^/admin-shlomo+"
+  }
+}
+
+# creare regex to allow after /metrics
+resource "aws_wafv2_regex_pattern_set" "allow_metrics" {
+  name        = "allow_metrics"
+  scope       = "REGIONAL"
+  
+  regular_expression {
+    # allow /admin-shlomo 
+    regex_string = "^/metrics+"
   }
 }

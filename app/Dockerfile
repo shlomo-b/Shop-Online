@@ -5,6 +5,9 @@ FROM ubuntu:latest
 # Update package list and install required packages
 RUN apt-get update -y && \
     apt-get install -y apache2
+    
+# Install prometheus_client
+RUN pip3 install prometheus_client
 
 # Remove existing content in /var/www/html
 RUN rm -rf /var/www/html/*    # this is important 
