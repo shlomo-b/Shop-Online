@@ -9,10 +9,10 @@ RUN apt-get update -y && \
     python3-pip
 
 # Check if Python and pip are installed correctly
-RUN python3 --version && pip3 --version
+# RUN python3 --version && pip3 --version
     
 # Install prometheus_client
-RUN pip3 install prometheus_client
+# RUN pip3 install prometheus_client
 
 # Remove existing content in /var/www/html
 RUN rm -rf /var/www/html/*    # this is important 
