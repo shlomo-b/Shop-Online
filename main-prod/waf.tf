@@ -43,7 +43,7 @@ module "waf" {
        # rule 2
        # this rule to block after the /
       name = "Block_after_slash"
-      priority = "2"
+      priority = "3"
 
       action = "block"
 
@@ -121,7 +121,7 @@ module "waf" {
         field_to_match = {
           uri_path = "{}"
         }
-        priority  = 0
+        priority  = 1
         type      = "LOWERCASE" # The text transformation type
       }
     }
@@ -136,7 +136,7 @@ provider "aws" {
   region  = "us-east-1"
 }
 
-# ipsets, allow only my ip
+# ipsets allow only my ip
 resource "aws_wafv2_ip_set" "allow_ips" {
   name               = "shlomo-home"
   description        = "IPset"
