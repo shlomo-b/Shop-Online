@@ -13,7 +13,7 @@ Thumbs.db
 .gitignore
 
 # Docker files
-Dockerfile
+../Dockerfile
 docker-compose.yml
 
 # Log files
