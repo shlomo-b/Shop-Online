@@ -24,7 +24,7 @@ module "waf" {
       # rule 1
       # this rule for allow access to app.
       name     = "IpSetRule-0"
-      priority = "3"
+      priority = "5"
       action = "allow"
 
         visibility_config = {
@@ -63,7 +63,7 @@ module "waf" {
         field_to_match = {
           uri_path = "{}"
         }
-        priority  = 0
+        priority  = 3
         type      = "LOWERCASE" # The text transformation type
       }
     },
