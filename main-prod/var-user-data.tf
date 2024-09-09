@@ -94,6 +94,6 @@ variable "asg-game" {
     # docker run -d -p 80:80 shlomobarzili/blackjack:$(curl -s https://hub.docker.com/v2/repositories/shlomobarzili/blackjack/tags/?page_size=1 | grep -oP '"name":\s*"\K[^"]+')
 
     docker pull shlomobarzili/blackjack:latest
-    docker run -d -p 80:80 shlomobarzili/blackjack:latest
+    docker run -d -p 80:80 full-ci-cd-blackjack shlomobarzili/blackjack:latest
     EOF
 }
