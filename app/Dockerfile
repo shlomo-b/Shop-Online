@@ -12,10 +12,13 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requisites.txt
 
 # Copy the rest of the application files
-COPY . /app/app
-
+COPY app /app
+ 
 # Make port 80 available to the world outside this container
 EXPOSE 80
+
+# dasdsad
+COPY /app/main.py /app
 
 # Run app.py when the container launches
 CMD ["python" , "main.py"]
