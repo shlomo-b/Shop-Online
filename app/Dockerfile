@@ -5,7 +5,7 @@ FROM python
 WORKDIR /app 
 
 # Copy the requirements file first
-COPY app/requisites.txt /app/
+COPY /requisites.txt /app/
 RUN pip install --upgrade pip
 
 # Install any needed packages specified in requirements.txt
@@ -18,4 +18,5 @@ COPY . /app
 EXPOSE 80
 
 # Run app.py when the container launches
-CMD ["python","main.py"]
+CMD ["python" , "main.py"]
+
