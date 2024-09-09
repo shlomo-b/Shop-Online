@@ -66,19 +66,6 @@ variable "asg_app" {
     EOF
 }
 
-# variable "asg-game" {
-#   default = <<-EOF
-#     #!/bin/bash
-#     yum update -y
-#     yum install -y docker
-#     systemctl start docker
-#     systemctl enable docker
-#     usermod -aG docker ec2-user
-
-#     docker pull shlomobarzili/blackjack:latest /root
-#     docker run -d -p 80:80 shlomobarzili/blackjack:latest
-#     EOF
-# }
 
 variable "asg-game" {
   default = <<-EOF
@@ -94,6 +81,6 @@ variable "asg-game" {
     # docker run -d -p 80:80 shlomobarzili/blackjack:$(curl -s https://hub.docker.com/v2/repositories/shlomobarzili/blackjack/tags/?page_size=1 | grep -oP '"name":\s*"\K[^"]+')
 
     docker pull shlomobarzili/blackjack:latest
-    docker run -d -p 80:80 full-ci-cd-blackjack shlomobarzili/blackjack:latest
+    docker run -d -p 80:80 --name full-ci-cd-blackjack shlomobarzili/blackjack:latest
     EOF
 }
