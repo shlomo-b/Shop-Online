@@ -21,6 +21,11 @@ NETWORK_IO_COUNTERS = Gauge('network_io_bytes', 'Network I/O counters', ['direct
 def index():
     return render_template('blackjack.html')
 
+# presentation of the project
+@app.route('/presentation')
+def presentation():
+    return render_template('presentation.html')
+
 
 # return the valuse of the /metrics
 @app.route('/metrics')
