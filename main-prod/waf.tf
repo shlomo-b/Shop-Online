@@ -70,8 +70,8 @@ module "waf" {
 
     {
        # rule 3
-       # allow /admin-shlomo
-      name = "allow_slash_admin-shlomo"
+       # allow /presentation
+      name = "allow_presentation"
       priority = "0"
 
       action = "allow"
@@ -88,7 +88,7 @@ module "waf" {
       regex_pattern_set_reference_statement = {
        # url_path = {}
         # the arn of the regex
-        arn       = aws_wafv2_regex_pattern_set.allow_presentation
+        arn       = aws_wafv2_regex_pattern_set.allow_presentation.arn
         field_to_match = {
           uri_path = "{}"
         }
