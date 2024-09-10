@@ -169,7 +169,7 @@ resource "aws_wafv2_regex_pattern_set" "presentation" {
   }
 }
 
-# creare regex to allow after /metrics
+# creares regex to allow after /metrics
 resource "aws_wafv2_regex_pattern_set" "allow_metrics" {
   name        = "allow_metrics"
   scope       = "REGIONAL"
