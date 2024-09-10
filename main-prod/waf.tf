@@ -70,8 +70,8 @@ module "waf" {
 
     {
        # rule 3
-       # allow /admin-shlomo
-      name = "allow_slash_admin-shlomo"
+       # allow /presentation
+      name = "allow_presentation"
       priority = "0"
 
       action = "allow"
@@ -88,7 +88,7 @@ module "waf" {
       regex_pattern_set_reference_statement = {
        # url_path = {}
         # the arn of the regex
-        arn       = aws_wafv2_regex_pattern_set.allow_admin_shlomo_slash.arn
+        arn       = aws_wafv2_regex_pattern_set.presentation.arn
         field_to_match = {
           uri_path = "{}"
         }
@@ -158,14 +158,14 @@ resource "aws_wafv2_regex_pattern_set" "block_wildcard" {
 }
 
 
-# creare regex to allow after /admin-shlomo
-resource "aws_wafv2_regex_pattern_set" "allow_admin_shlomo_slash" {
-  name        = "allow_web_admin_slash"
+# creare regex to allow after /presentation
+resource "aws_wafv2_regex_pattern_set" "presentation" {
+  name        = "allow_presentation"
   scope       = "REGIONAL"
   
   regular_expression {
     # allow /admin-shlomo 
-    regex_string = "^/admin-shlomo+"
+    regex_string = "^/presentation+"
   }
 }
 
