@@ -17,7 +17,7 @@ COPY app /app
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
-# dasdsad
+# copy the file main.py
 COPY /app/main.py /app
 
 # Run app.py when the container launches
