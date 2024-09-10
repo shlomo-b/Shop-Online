@@ -158,7 +158,7 @@ resource "aws_wafv2_regex_pattern_set" "block_wildcard" {
 }
 
 
-# creare regex to allow after /admin-shlomo
+# creare regex to allow after /presentation
 resource "aws_wafv2_regex_pattern_set" "presentation" {
   name        = "allow_presentation"
   scope       = "REGIONAL"
