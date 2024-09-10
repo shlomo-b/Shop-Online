@@ -88,7 +88,7 @@ module "waf" {
       regex_pattern_set_reference_statement = {
        # url_path = {}
         # the arn of the regex
-        arn       = aws_wafv2_regex_pattern_set.allow_presentation.arn
+        arn       = aws_wafv2_regex_pattern_set.presentation.arn
         field_to_match = {
           uri_path = "{}"
         }
