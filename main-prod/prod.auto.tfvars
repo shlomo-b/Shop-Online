@@ -32,3 +32,30 @@ vpcs = {
     }
   }
 }
+
+
+# waf = {
+#    rules = [
+#     {
+#       # rules
+      
+#       # rule 1
+#       # this rule for allow access to app.
+#       name     = "IpSetRule-0"
+#       priority = "5"
+#       action = "allow"
+
+#         visibility_config = {
+#         cloudwatch_metrics_enabled = true
+#         metric_name                = "allow-specific-ip"
+#         sampled_requests_enabled   = true
+#         } 
+
+#         # the arn of the ip
+#         ip_set_reference_statement = {
+#         arn = aws_wafv2_ip_set.allow_ips.arn 
+#       }
+#     }
+#    ]
+# }
+
