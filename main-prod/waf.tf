@@ -179,3 +179,17 @@ resource "aws_wafv2_regex_pattern_set" "allow_metrics" {
     regex_string = "^/metrics+"
   }
 }
+
+# for each 
+# resource "aws_wafv2_regex_pattern_set" "allow_and_block" {
+#   for_each = var.waf
+
+#   name     = each.key
+#   scope    = each.value.name
+
+#   regular_expression {
+#     # allow /admin-shlomo 
+#     regex_string = each.value.allow_and_block
+#   }
+
+# }

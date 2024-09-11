@@ -32,3 +32,17 @@ variable "vpcs" {
   }))
 }
 
+
+#---------------waf------------------#
+
+# variable "waf" {
+#   type = map(object({
+#     name        = list(string)
+#     scope       = list(string)
+
+#     regular_expression = {
+#     # allow /admin-shlomo 
+#     regex_string = list(string)
+#   }
+#   }))
+# }
