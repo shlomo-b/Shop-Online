@@ -51,3 +51,11 @@ output "dns_a_record_route53" {
 #   value = module.alb.target_group_arns.id
 # }
 
+# output "waf" {
+#   value = aws_wafv2_regex_pattern_set.allow_metrics
+# }
+
+# output "waf1" {
+#   value = module.waf
+  
+# }
