@@ -37,12 +37,32 @@ variable "vpcs" {
 
 # variable "waf" {
 #   type = map(object({
-#     name        = list(string)
-#     scope       = list(string)
+#     name               = string
+#     description        = string
+#     scope              = optional(string)
+#     ip_address_version = optional(string)
+#     addresses          = optional(list(string))
+#     priority           = number
+#     action             = string
+#     cloudwatch_metrics_enabled = bool
+#     metric_name                = string
+#     sampled_requests_enabled   = bool
+#     ip_set_reference_statement = optional(object({
+#       arn = string
+#     }))
+#   #  regex_string = optional(string)
+#     regular_expression = optional(object({
+#       regex_string = string
+#    }))
 
-#     regular_expression = {
-#     # allow /admin-shlomo 
-#     regex_string = list(string)
-#   }
+#     regex_pattern_set_reference_statement = optional(object({
+#       arn = string
+#       field_to_match = object({
+#            uri_path = string
+#            priority = number
+#            type  = string
+#         })
+#     }))
 #   }))
 # }
+

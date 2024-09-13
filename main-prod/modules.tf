@@ -2,6 +2,7 @@
 
 module "vpc" {
   for_each                = var.vpcs
+  
   source                  = "terraform-aws-modules/vpc/aws"
   version                 = "5.8.1"
 

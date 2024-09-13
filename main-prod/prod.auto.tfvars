@@ -34,28 +34,46 @@ vpcs = {
 }
 
 
+
+
 # waf = {
-#    rules = [
-#     {
-#       # rules
-      
-#       # rule 1
-#       # this rule for allow access to app.
-#       name     = "IpSetRule-0"
-#       priority = "5"
-#       action = "allow"
-
-#         visibility_config = {
-#         cloudwatch_metrics_enabled = true
-#         metric_name                = "allow-specific-ip"
-#         sampled_requests_enabled   = true
-#         } 
-
-#         # the arn of the ip
-#         ip_set_reference_statement = {
-#         arn = aws_wafv2_ip_set.allow_ips.arn 
+#   rule1 = {
+#     name               = "IpSetRule-0"
+#     description        = "Allow specific IPs"
+#     scope              = "REGIONAL"
+#     ip_address_version = "IPV4"
+#     addresses          = ["84.228.161.67/32", "84.95.239.232/29"]
+#     priority           = 5
+#     action             = "allow"
+#     cloudwatch_metrics_enabled = true
+#     metric_name                = "allow-specific-ip"
+#     sampled_requests_enabled   = true
+#     ip_set_reference_statement = {
+#       arn = "ip_set_reference_statement"
+#   },
+#   }
+#   rule2 = {
+#     name               = "Block_after_slash"
+#     description        = "allow_presentation"
+#     scope              = "REGIONAL"
+#     priority           = 0
+#     ip_address_version = "IPV4"
+#     action             = "allow"
+#     cloudwatch_metrics_enabled = true
+#     metric_name                = "presentation"
+#     sampled_requests_enabled   = true
+#     regular_expression = {
+#       regex_string = "^/presentation+"
+#      }
+#     regex_pattern_set_reference_statement = {
+#       arn = "regex_pattern_set_reference_statement"
+#           field_to_match = {
+#            uri_path = "{}"
+#            priority = 0
+#            type  = "LOWERCASE"
 #       }
 #     }
-#    ]
+#   }
 # }
 
+ 
