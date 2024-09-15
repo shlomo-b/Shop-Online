@@ -24,7 +24,7 @@ module "asg" {
   image_id                    = data.aws_ami.amazon-linux.id
   key_name                    = "TF-key"
   instance_type               = var.instance_type[1]
-  user_data                   = base64encode(var.asg-game)
+  user_data                   = filebase64("userdata.sh")
   security_groups             = [aws_security_group.vpc_one_prod.id]
 
   target_group_arns = module.alb.target_group_arns # Association the target group to asg
