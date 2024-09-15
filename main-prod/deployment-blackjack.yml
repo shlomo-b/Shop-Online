@@ -1,0 +1,27 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blackjack
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: blackjack
+  template:
+    metadata:
+      labels:
+        app: blackjack
+    spec:
+      containers:
+        - name: blackjack
+          image: shlomobarzili/blackjack:10850209350
+          ports:
+            - containerPort: 80  # Ensure this matches the port your app is listening on
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
