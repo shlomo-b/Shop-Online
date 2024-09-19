@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blackjack
+  namespace: blackjack
+spec:
+  selector:
+    matchLabels:
+      app: blackjack
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: blackjack
+    spec:
+      containers:
+      - name: blackjack
+        image: shlomobarzili/blackjack:10874055185
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
