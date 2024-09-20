@@ -5,10 +5,10 @@
 #   description = "DNS name of ALB."
 # }
 
-output "dns_a_record_route53" {
-  value       = "https://${aws_route53_record.spider-shlomo-com.name}"
-  description = "a record for alb."
-}
+# output "dns_a_record_route53" {
+#   value       = "https://${aws_route53_record.spider-shlomo-com.name}"
+#   description = "a record for alb."
+# }
 
 # #---------------all relavte to username-------------------#
 
@@ -55,7 +55,7 @@ output "dns_a_record_route53" {
 #   value = aws_wafv2_regex_pattern_set.allow_metrics
 # }
 
-# output "waf1" {
-#   value = module.waf
-  
-# }
+output "dns_a_record_route53" {
+  value       = "https://blackjack.spider-shlomo.com"
+  description = "a record for alb."
+}

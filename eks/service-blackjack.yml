@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: blackjack
+  namespace: blackjack
+spec:
+  selector:
+    app: blackjack
+  type: LoadBalancer # the type of the service
+  ports:
+    - protocol: TCP
+      port: 80   # the port svc that expose
+      targetPort: 80
