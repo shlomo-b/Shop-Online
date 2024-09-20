@@ -106,7 +106,6 @@ http_tcp_listeners = [
   
 }
 
-
 #---------------MyScaleUpPolicy + MyScaleDownPolicy-------------------#
 
 resource "aws_autoscaling_policy" "MyScaleUpPolicy" {

@@ -1,16 +1,17 @@
+# for working with alb type application you need to install helm and install the ingress controller aws.
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: blackjack
   namespace: blackjack
   annotations:
-    kubernetes.io/ingress.class: alb
+    kubernetes.io/ingress.class: alb # the type alb 
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: instance
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/12829ba5-df40-4c22-a192-1c77e620b819
-    alb.ingress.kubernetes.io/subnets: subnet-0bd27077a57e4ee13,subnet-0815e3949c466ffed
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/actions.ssl-redirect: >
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/12829ba5-df40-4c22-a192-1c77e620b819 # the acm
+    alb.ingress.kubernetes.io/subnets: subnet-0bd27077a57e4ee13,subnet-0815e3949c466ffed # subnetbs
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]' # listen ports
+    alb.ingress.kubernetes.io/actions.ssl-redirect: > # redirect to https
       {"type": "redirect", "redirectConfig": { "protocol": "HTTPS", "port": "443", "statusCode": "HTTP_301"}}
     alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=300
     alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
@@ -24,9 +25,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ssl-redirect
+                name: ssl-redirect # the name of the service
                 port:
-                  name: use-annotation
+                  name: use-annotation # use the annotation
           - path: /
             pathType: Prefix
             backend:

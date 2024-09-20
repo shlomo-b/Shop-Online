@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: blackjack
-  namespace: blackjack
+  namespace: blackjack # the namespace that sperate the pods  between envroments.
 spec:
   selector:
     matchLabels:
       app: blackjack
-  replicas: 1
+  replicas: 2 # the pods will be created and runing.
   template:
     metadata:
       labels:
@@ -15,11 +15,11 @@ spec:
     spec:
       containers:
       - name: blackjack
-        image: shlomobarzili/blackjack:10874055185
+        image: shlomobarzili/blackjack:10874055185  # the immage 
         imagePullPolicy: Always
         ports:
         - name: http
-          containerPort: 80
+          containerPort: 80 # the port svc that expose
           protocol: TCP
         resources:
           requests:
