@@ -30,7 +30,6 @@ def presentation():
 
 # return the valuse of the /metrics
 @app.route('/metrics')
-
 def metrics():
     # Update metrics before serving
     CPU_USAGE.set(psutil.cpu_percent())

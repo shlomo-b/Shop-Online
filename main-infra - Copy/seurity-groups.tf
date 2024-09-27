@@ -16,6 +16,15 @@ resource "aws_security_group" "vpc_one_prod" {
     protocol    = "tcp"
     cidr_blocks =  ["0.0.0.0/0"] 
   }
+
+  ingress {
+    description = "All traffic_in_80"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks =  ["10.10.0.0/16"] 
+  }
+
   ingress {
     description = "All traffic_in_433"
     from_port   = 443

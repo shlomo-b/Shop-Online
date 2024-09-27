@@ -50,7 +50,7 @@ on:
     branches: [ "main" ]
   pull_request:
     paths:
-      - 'main-prod/**'
+      - 'main-infra/**'
   
 permissions:
   contents: read
@@ -93,7 +93,7 @@ jobs:
         echo "AWS_SECRET_ACCESS_KEY is set: ${{ secrets.AWS_SECRET_ACCESS_KEY != '' }}"
         terraform version
         aws --version
-      working-directory: ./main-prod  # run the tf files from directory main-prod
+      working-directory: ./main-infra  # run the tf files from directory main-infra
 
     # Terraform Init: Sync with the S3 where the terraform.tfstate is stored
     - name: Terraform Init
@@ -103,17 +103,17 @@ jobs:
           -backend-config="key=first-project-ci-cd/terraform.tfstate" \
           -backend-config="region=us-east-1" \
           -input=false -no-color
-      working-directory: ./main-prod  # run the tf files from directory main-prod
+      working-directory: ./main-infra  # run the tf files from directory main-infra
 
     # Terraform Validate: Validate the Terraform configuration files
     - name: Terraform Validate
       run: terraform validate
-      working-directory: ./main-prod  # run the tf files from directory main-prod
+      working-directory: ./main-infra  # run the tf files from directory main-infra
       
     # Terraform Plan: Generate and show an execution plan
     - name: Terraform Plan
       run: terraform plan -input=false -no-color
-      working-directory: ./main-prod  # run the tf files from directory main-prod
+      working-directory: ./main-infra  # run the tf files from directory main-infra
 
     # Terraform Apply: Apply the changes required to reach the desired state of the configuration
     - name: Terraform Apply
@@ -121,10 +121,10 @@ jobs:
       
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false -no-color
-      working-directory: ./main-prod  # run the tf files from directory main-prod
+      working-directory: ./main-infra  # run the tf files from directory main-infra
 
     # Terraform Output: Show the outputs of the Terraform configuration
     - name: Terraform Output
       run: terraform output -no-color
-      working-directory: ./main-prod  # run the tf files from directory main-prod
+      working-directory: ./main-infra  # run the tf files from directory main-infra
 
