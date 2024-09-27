@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: blackjack
-  replicas: 2 # the pods will be created and runing.
+  replicas: 3 # the pods will be created and runing.
   template:
     metadata:
       labels:
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: blackjack
-        image: shlomobarzili/blackjack:10874055185  # the immage 
+        image: shlomobarzili/blackjack:latest  # the immage 
         imagePullPolicy: Always
         ports:
         - name: http

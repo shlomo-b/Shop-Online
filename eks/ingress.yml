@@ -3,18 +3,22 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: blackjack
-  namespace: blackjack
+  namespace: blackjack # the namespace that sperate the pods  between envroments.
   annotations:
     kubernetes.io/ingress.class: alb # the type alb 
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: instance
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/12829ba5-df40-4c22-a192-1c77e620b819 # the acm
-    alb.ingress.kubernetes.io/subnets: subnet-0bd27077a57e4ee13,subnet-0815e3949c466ffed # subnetbs
+    alb.ingress.kubernetes.io/target-type: ip # the alb move the traffic directly to pods
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/a8716f33-f8fe-42cd-8c2d-19c31ec39a70 # the acm certificate arn
+    alb.ingress.kubernetes.io/subnets: subnet-01d41073308d7655a,subnet-09fa1eb6dac2d47ba # Public subnetbs
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]' # listen ports
     alb.ingress.kubernetes.io/actions.ssl-redirect: > # redirect to https
       {"type": "redirect", "redirectConfig": { "protocol": "HTTPS", "port": "443", "statusCode": "HTTP_301"}}
-    alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=300
     alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
+    external-dns.alpha.kubernetes.io/hostname: blackjack.spider-shlomo.com
+    external-dns.alpha.kubernetes.io/aws-zone-id: Z0728296NHGJUZD7IM32
+    external-dns.alpha.kubernetes.io/alias: "true"
+   # alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:us-east-1:148088962203:regional/webacl/blackjack-waf/ee177ef5-207f-494e-bbbf-4d8571ea0ff9
+
 spec:
   ingressClassName: alb
   rules:
