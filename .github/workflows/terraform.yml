@@ -128,3 +128,12 @@ jobs:
       run: terraform output -no-color
       working-directory: ./main-infra  # run the tf files from directory main-infra
 
+    - name: Setup Kubectl
+      # if: github.ref == 'refs/heads/main'
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        aws eks update-kubeconfig --name my-cluster --region us-east-1
+        kubectl create namespace blackjack
+        kubectl apply -f ingress.yml
+        kubectl apply -f deployment-blackjack.yml
+        kubectl apply -f service-blackjack.yml
