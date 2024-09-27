@@ -137,3 +137,5 @@ jobs:
         kubectl apply -f ingress.yml
         kubectl apply -f deployment-blackjack.yml
         kubectl apply -f service-blackjack.yml
+
+      working-directory: ./eks
