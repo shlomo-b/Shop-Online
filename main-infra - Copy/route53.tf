@@ -5,12 +5,10 @@ resource "aws_route53_record" "spider-shlomo-com" {
   depends_on = [module.acm, null_resource.delay_acm]
   name    = "blackjack.spider-shlomo.com"
   type    = "A"
-
   alias {
     name                   = module.alb.lb_dns_name # dns name of the alb
     zone_id                = module.alb.lb_zone_id  # The hosted zone ID of the load balancer
     evaluate_target_health = true  # Set to true if you want Route 53 to evaluate the health of the target
   }
-  
 }
 

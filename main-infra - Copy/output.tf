@@ -55,8 +55,3 @@
 #   value = aws_wafv2_regex_pattern_set.allow_metrics
 # }
 
-output "dns_a_record_route53" {
-  value       = "https://blackjack.spider-shlomo.com"
-  description = "a record for alb."
-}
-
