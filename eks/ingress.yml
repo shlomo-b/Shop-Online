@@ -14,9 +14,6 @@ metadata:
     alb.ingress.kubernetes.io/actions.ssl-redirect: > # redirect to https
       {"type": "redirect", "redirectConfig": { "protocol": "HTTPS", "port": "443", "statusCode": "HTTP_301"}}
     alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
-    external-dns.alpha.kubernetes.io/hostname: blackjack.spider-shlomo.com
-    external-dns.alpha.kubernetes.io/aws-zone-id: Z0728296NHGJUZD7IM32
-    external-dns.alpha.kubernetes.io/alias: "true"
    # alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:us-east-1:148088962203:regional/webacl/blackjack-waf/ee177ef5-207f-494e-bbbf-4d8571ea0ff9
 
 spec:
