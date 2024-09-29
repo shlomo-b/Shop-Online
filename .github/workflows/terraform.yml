@@ -59,7 +59,7 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: production
+  #  environment: production
 
     defaults:
       run:
@@ -123,20 +123,28 @@ jobs:
       run: terraform apply -auto-approve -input=false -no-color
       working-directory: ./main-infra  # run the tf files from directory main-infra
 
+    - name: Install Helm and nginx ingress controller
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        helm repo add eks https://aws.github.io/eks-charts
+        helm repo update
+        helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=my-cluster --set serviceAccount.create=true --set serviceAccount.name=aws-load-balancer-controller
 
-    # - name: Setup Kubectl
-    #   # if: github.ref == 'refs/heads/main'
-    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    #   run: |
-    #     aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
-    #     kubectl create namespace blackjack        # create namespace
-    #     kubectl apply -f ingress.yml              # create ingress
-    #     kubectl apply -f deployment-blackjack.yml # create deployment
-    #     kubectl apply -f service-blackjack.yml    # create service
+      working-directory: ./eks
 
-    #   working-directory: ./eks
+    - name: Setup Kubectl
+      # if: github.ref == 'refs/heads/main'
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
+        kubectl create namespace blackjack        # create namespace
+        kubectl apply -f ingress.yml              # create ingress
+        kubectl apply -f deployment-blackjack.yml # create deployment
+        kubectl apply -f service-blackjack.yml    # create service
 
-        # Terraform Output: Show the outputs of the Terraform configuration
+      working-directory: ./eks
+
+      # Terraform Output: Show the outputs of the Terraform configuration
     - name: Terraform Output
       run: terraform output -no-color
       working-directory: ./main-infra  # run the tf files from directory main-infra
