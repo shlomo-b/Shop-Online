@@ -29,3 +29,70 @@ vpcs = {
     }
   }
 }
+
+
+sgs = {
+    vpc-one = {
+    vpc_name =  "vpc-one"
+
+    tags = {
+      name = "vpc-one"
+    }
+
+    ingress = { 
+      allow_port_80 = {
+        description = "allow access port 80"
+        from_port   = 80
+        to_port     = 80
+        protocol    = "tcp"
+        cidr_blocks =  ["0.0.0.0/0"]
+      }
+      allow_port_443 = {
+        description = "allow access port 443"
+        from_port   = 443
+        to_port     = 443
+        protocol    = "tcp"
+        cidr_blocks =  ["0.0.0.0/0"]
+      }
+      allow_from_my_ip_home = {
+        description = "all_traffic_in_my_IP_and_my_vpc"
+        from_port   = 0
+        to_port     = 0
+        protocol    = "-1"
+        cidr_blocks =  ["84.228.161.67/32","10.10.0.0/16"]
+      }
+   }
+  
+    egress = {
+      description = "All traffic_out"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+  }
+ }
+
+  vpc-third = {
+    vpc_name =  "vpc-third"
+
+    tags = {
+      name = "vpc-third"
+    }
+    ingress = { 
+      allow_port_80 = {
+        description = "allow access port 80"
+        from_port   = 80
+        to_port     = 80
+        protocol    = "tcp"
+        cidr_blocks =  ["0.0.0.0/0"]
+      }
+    }
+    egress = {
+      description = "All traffic_out"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+  }
+ }
+}
