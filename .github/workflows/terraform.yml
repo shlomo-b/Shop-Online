@@ -140,3 +140,4 @@ jobs:
     - name: Terraform Output
       run: terraform output -no-color
       working-directory: ./main-infra  # run the tf files from directory main-infra
+      

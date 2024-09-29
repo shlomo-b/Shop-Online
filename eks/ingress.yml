@@ -36,4 +36,3 @@ spec:
                 name: blackjack
                 port:
                   number: 80
- 

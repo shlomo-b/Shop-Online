@@ -55,4 +55,3 @@ output "dns_a_record_route53" {
   value       = "https://blackjack.spider-shlomo.com"
   description = "a record for alb."
 }
-
