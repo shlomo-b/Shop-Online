@@ -133,6 +133,12 @@ jobs:
 
       working-directory: ./eks
 
+    - name: Sleep for 45 seconds
+      run: sleep 45s
+      shell: bash
+
+      working-directory: ./eks 
+       
     - name: Setup Kubectl
       # if: github.ref == 'refs/heads/main'
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
