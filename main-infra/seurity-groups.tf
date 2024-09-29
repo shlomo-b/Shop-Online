@@ -3,7 +3,7 @@
 resource "aws_security_group" "sgs" {
   for_each                = var.sgs
 
-  name   = each.key
+  name   = each.key # each.key in var.sgs
   vpc_id = data.aws_vpc.vpcs_name[each.key].id # to work with vpc name and not vpc id
   
   tags = {
