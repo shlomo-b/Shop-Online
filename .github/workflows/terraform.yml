@@ -139,17 +139,17 @@ jobs:
 
     #   working-directory: ./eks 
 
-    - name: Setup Kubectl
-      # if: github.ref == 'refs/heads/main'
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: |
-        aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
-        # kubectl create namespace blackjack        # create namespace
-        # kubectl apply -f ingress.yml              # create ingress
-        # kubectl apply -f deployment-blackjack.yml # create deployment
-        # kubectl apply -f service-blackjack.yml    # create service
-        kubectl rollout restart deployment -n blackjack
-      working-directory: ./eks
+    # - name: Setup Kubectl
+    #   # if: github.ref == 'refs/heads/main'
+    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    #   run: |
+    #     aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
+    #     # kubectl create namespace blackjack        # create namespace
+    #     # kubectl apply -f ingress.yml              # create ingress
+    #     # kubectl apply -f deployment-blackjack.yml # create deployment
+    #     # kubectl apply -f service-blackjack.yml    # create service
+    #     kubectl rollout restart deployment -n blackjack
+    #   working-directory: ./eks
 
       # Terraform Output: Show the outputs of the Terraform configuration
     - name: Terraform Output
