@@ -12,7 +12,7 @@ module "eks" {
   # Disable creation of security groups
   create_cluster_security_group = false
   create_node_security_group    = false
-  cluster_security_group_id = aws_security_group.vpc_one_prod.id
+  cluster_security_group_id = aws_security_group.sgs["vpc-one"].id
   cluster_addons = {
     coredns                = {}
     eks-pod-identity-agent = {}
@@ -48,7 +48,7 @@ module "eks" {
       min_size     = 1
       max_size     = 5
       desired_size = 1
-      vpc_security_group_ids = [aws_security_group.vpc_one_prod.id]
+      vpc_security_group_ids = [aws_security_group.sgs["vpc-one"].id]
     }
   }
 
