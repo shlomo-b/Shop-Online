@@ -34,6 +34,7 @@ vpcs = {
 sgs = {
     vpc-one = {
     vpc_name =  "vpc-one"
+    cidr_block = "10.10.0.0/16"
 
     tags = {
       name = "vpc-one"
@@ -74,6 +75,7 @@ sgs = {
 
   vpc-third = {
     vpc_name =  "vpc-third"
+    cidr_block  = "10.30.0.0/16"
 
     tags = {
       name = "vpc-third"

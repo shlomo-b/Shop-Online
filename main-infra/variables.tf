@@ -23,6 +23,7 @@ variable "sgs" {
   type = map(object({       # contains the values ​​below it
     tags            = map(string)
     vpc_name = string
+    cidr_block = string
 
     ingress = map(object({ 
       description = string

@@ -155,13 +155,14 @@ jobs:
       # if: github.ref == 'refs/heads/main'
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: | 
-          aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
-          helm repo add bitnami https://charts.bitnami.com/bitnami
-          helm repo update
-          helm install external-dns bitnami/external-dns --set provider=aws --set aws.zoneType=public --set policy=upsert-only --set registry=noop --set "sources={ingress}" --set "domainFilters[0]=spider-shlomo.com" --set aws.preferCNAME=false --set logLevel=debug --set txtOwnerId="" --namespace kube-system
-      working-directory: ./eks  
+        aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
+        helm repo add bitnami https://charts.bitnami.com/bitnami       # add helm repo
+        helm repo update                                               # update helm repo
+        helm install external-dns bitnami/external-dns -f value-external-dns.yml --namespace external-dns # install external-dns with helm and value-external-dns.yml
 
-      # Terraform Output: Show the outputs of the Terraform configuration
+      working-directory: ./helm
+
+      # Terraform Output: Show the outputs of the Terraform
     - name: Terraform Output
       run: terraform output -no-color
       working-directory: ./main-infra  # run the tf files from directory main-infra
