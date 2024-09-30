@@ -3,8 +3,8 @@
 resource "aws_security_group" "sgs" {
   for_each                = var.sgs
 
-  name   = each.key # each.key 
-  vpc_id = aws_vpc.vpc[each.key].id  # to work with vpc name and not vpc id
+  name   = each.key # each.key = vpc_name
+  vpc_id = data.aws_vpc.vpcs_name[each.key].id # to work with vpc name and not vpc id
   
   tags = {
     name = each.value.tags.name
@@ -33,21 +33,11 @@ resource "aws_security_group" "sgs" {
 }
 
 # this is for work with vpc name and not vpc id.
-# data "aws_vpc" "vpcs_name" {
-#   for_each = var.sgs
-  
-#   filter {
-#     name   = "tag:Name"
-#     values = [each.value.vpc_name]
-#   }
-# }
-
-# this is for work with vpc name and not vpc id.
-resource "aws_vpc" "vpc" {
+data "aws_vpc" "vpcs_name" {
   for_each = var.sgs
-
-  cidr_block = each.value.cidr_block  # Specify the CIDR block for the VPC
-  tags = {
-    Name = each.value.vpc_name  # Tag the VPC with its name
+  
+  filter {
+    name   = "tag:Name"
+    values = [each.value.vpc_name]
   }
 }
