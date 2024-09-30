@@ -8,13 +8,13 @@ metadata:
     kubernetes.io/ingress.class: alb # the type alb 
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip # the alb move the traffic directly to pods
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/0cd45928-1c13-4e8a-af7e-c5e5000a97ad # the acm certificate arn
-    alb.ingress.kubernetes.io/subnets: subnet-09bb39d76dbe368c7,subnet-052e8a55082e0399c # Public subnetbs
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/2322a1c4-26c2-4c62-a3d4-ab35ce9b809f # the acm certificate arn
+    alb.ingress.kubernetes.io/subnets: subnet-01390f2a7520205fd,subnet-0a724ba80e5569fca # Public subnetbs
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]' # listen ports
     alb.ingress.kubernetes.io/actions.ssl-redirect: > # redirect to https
       {"type": "redirect", "redirectConfig": { "protocol": "HTTPS", "port": "443", "statusCode": "HTTP_301"}}
     alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
-   # alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:us-east-1:148088962203:regional/webacl/blackjack-waf/ee177ef5-207f-494e-bbbf-4d8571ea0ff9
+  #  alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:us-east-1:148088962203:regional/webacl/blackjack-waf/568de2c9-9afb-4e12-b500-1da3eb558698
 
 spec:
   ingressClassName: alb
