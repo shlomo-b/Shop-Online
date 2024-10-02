@@ -105,7 +105,7 @@ jobs:
           -input=false -no-color
       working-directory: ./main-infra  # run the tf files from directory main-infra
 
-    # Terraform Validate: Validate the Terraform configuration files
+    # Terraform Validate: Validate the Terraform configuration files of the tf 
     - name: Terraform Validate
       run: terraform validate
       working-directory: ./main-infra  # run the tf files from directory main-infra
@@ -158,7 +158,7 @@ jobs:
         aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
         helm repo add bitnami https://charts.bitnami.com/bitnami       # add helm repo
         helm repo update                                               # update helm repo
-        kubectl create namespace external-dns                             # create namespace
+        kubectl create namespace external-dns                          # create namespace
         helm install external-dns bitnami/external-dns -f value-external-dns.yml --namespace external-dns # install external-dns with helm and value-external-dns.yml
 
       working-directory: ./helm
