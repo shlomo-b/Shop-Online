@@ -32,19 +32,22 @@ resource "aws_iam_role_policy_attachment" "eks_cluster_admin" {
 
 }
 
-resource "aws_iam_role_policy_attachment" "eks_cluster_admin1" {
+# Attach the AmazonEC2ContainerRegistryReadOnly policy to the EKS cluster role
+resource "aws_iam_role_policy_attachment" "eks_cluster_ec2" {
   role       = aws_iam_role.eks_cluster_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 
 }
 
-resource "aws_iam_role_policy_attachment" "eks_cluster_admin2" {
+# Attach the AmazonEKS_CNI_Policy policy to the EKS cluster role
+resource "aws_iam_role_policy_attachment" "eks_cluster_eks_cni" {
   role       = aws_iam_role.eks_cluster_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 
 }
 
-resource "aws_iam_role_policy_attachment" "eks_cluster_admin3" {
+# Attach the AmazonEKSWorkerNodePolicy policy to the EKS cluster role
+resource "aws_iam_role_policy_attachment" "eks_cluster_eks_worker" {
   role       = aws_iam_role.eks_cluster_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
 
