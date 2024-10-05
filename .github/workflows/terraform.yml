@@ -123,7 +123,7 @@ jobs:
       run: terraform apply -auto-approve -input=false -no-color
       working-directory: ./main-infra  # run the tf files from directory main-infra
 
-    - name: Install Helm and nginx ingress controller
+    - name: Install Helm and aws-load-balancer-controller
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: |
         aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
