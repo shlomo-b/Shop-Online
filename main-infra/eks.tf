@@ -6,7 +6,7 @@
 #   cluster_version = "1.30"
 #   cluster_service_ipv4_cidr = "10.200.0.0/16"
 #   cluster_endpoint_public_access  = true
-#  # cluster_endpoint_public_access_cidrs = ["84.228.161.67/32"]
+#   cluster_endpoint_public_access_cidrs = ["84.228.161.67/32"]
 
 #   # Disable creation of security groups
 #   create_cluster_security_group = false
@@ -40,8 +40,8 @@
 
 #     # create self iam role and give access to node group
 #     create_iam_role = false
-#     iam_role_name = "eks-cluster-role"
-#     iam_role_arn = "arn:aws:iam::148088962203:role/eks-cluster-role"
+#     iam_role_name = aws_iam_role.eks_cluster_role.name
+#     iam_role_arn =  aws_iam_role.eks_cluster_role.arn
     
 #   }
 
