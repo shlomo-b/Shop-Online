@@ -1,0 +1,5 @@
+clusterName: my-cluster
+serviceAccount:
+  create: true
+  name: aws-load-balancer-controller
+replicaCount: 2

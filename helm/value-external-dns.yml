@@ -12,4 +12,4 @@ domainFilters:
   - spider-shlomo.com # the domain in route53
 logLevel: debug
 txtOwnerId: ""      # its empty because we dont need record txt.
-
+replicaCount: 2
