@@ -1,4 +1,4 @@
-# #---------------security_group-------------------#
+#---------------security_group-------------------#
 
 resource "aws_security_group" "sgs" {
   for_each                = var.sgs
