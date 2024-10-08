@@ -45,10 +45,10 @@
 
 
 on:
-  workflow_run:
-    workflows: ["Docker Image CI"]  # Ensure this matches the name of your Docker build workflow
-    types:
-      - completed
+  # workflow_run:
+  #   workflows: ["Docker Image CI"]  # Ensure this matches the name of your Docker build workflow
+  #   types:
+  #     - completed
   push: 
     branches:
       -  "main" 
@@ -127,46 +127,46 @@ jobs:
       run: terraform apply -auto-approve -input=false -no-color
       working-directory: ./main-infra  # run the tf files from directory main-infra
 
-    # - name: Install Helm and aws-load-balancer-controller
-    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    #   run: |
-    #     aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
-    #     helm repo add eks https://aws.github.io/eks-charts
-    #     helm repo update
-    #     kubectl create namespace aws-alb-controller
-    #     helm install aws-load-balancer-controller eks/aws-load-balancer-controller  -f value-aws-alb-controller.yml --namespace aws-alb-controller
-    #   working-directory: ./helm
+    - name: Install Helm and aws-load-balancer-controller
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
+        helm repo add eks https://aws.github.io/eks-charts
+        helm repo update
+        kubectl create namespace aws-alb-controller
+        helm install aws-load-balancer-controller eks/aws-load-balancer-controller  -f value-aws-alb-controller.yml --namespace aws-alb-controller
+      working-directory: ./helm
 
-    # # add sleep between helm and kubectl for create the pod deployment of the aws-load-balancer-controller
-    # - name: Sleep for 30 seconds
-    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    #   run: sleep 30s
-    #   shell: bash
-    #   working-directory: ./eks 
+    # add sleep between helm and kubectl for create the pod deployment of the aws-load-balancer-controller
+    - name: Sleep for 30 seconds
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: sleep 30s
+      shell: bash
+      working-directory: ./eks 
 
     - name: Setup Kubectl
       # if: github.ref == 'refs/heads/main'
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: |
         aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
-        # kubectl create namespace blackjack        # create namespace
-        # kubectl apply -f ingress.yml              # create ingress
-        # kubectl apply -f deployment-blackjack.yml # create deployment
-        # kubectl apply -f service-blackjack.yml    # create service
-        kubectl rollout restart deployment -n blackjack
+        kubectl create namespace blackjack        # create namespace
+        kubectl apply -f ingress.yml              # create ingress
+        kubectl apply -f deployment-blackjack.yml # create deployment
+        kubectl apply -f service-blackjack.yml    # create service
+       #  kubectl rollout restart deployment -n blackjack
       working-directory: ./eks
 
-    # - name: Install external dns with helm
-    #   # if: github.ref == 'refs/heads/main'
-    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    #   run: | 
-    #     aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
-    #     helm repo add bitnami https://charts.bitnami.com/bitnami       # add helm repo
-    #     helm repo update                                               # update helm repo
-    #     kubectl create namespace external-dns                          # create namespace
-    #     helm install external-dns bitnami/external-dns -f value-external-dns.yml --namespace external-dns # install external-dns with helm and value-external-dns.yml
+    - name: Install external dns with helm
+      # if: github.ref == 'refs/heads/main'
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: | 
+        aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
+        helm repo add bitnami https://charts.bitnami.com/bitnami       # add helm repo
+        helm repo update                                               # update helm repo
+        kubectl create namespace external-dns                          # create namespace
+        helm install external-dns bitnami/external-dns -f value-external-dns.yml --namespace external-dns # install external-dns with helm and value-external-dns.yml
 
-    #   working-directory: ./helm
+      working-directory: ./helm
 
       # Terraform Output: Show the outputs of the Terraform
     - name: Terraform Output
