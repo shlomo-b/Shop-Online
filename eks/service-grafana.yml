@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: grafana # the namespace that sperate the pods between envroments.
+spec:
+  selector:
+    app: grafana
+  type: NodePort # the type of the service
+  ports:
+    - protocol: TCP
+      port: 80   # the port svc that expose
+      targetPort: 80 # the port of the pod
+      NodePort: 30080 # the range of the ports is 30000-32767 | it's not necessary Unless you want to a specific port
+                      # it's external port of the service . the access from outside the cluster 

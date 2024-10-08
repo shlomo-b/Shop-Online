@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: grafana # the namespace that sperate the pods  between envroments.
+  # metadata:
+  # annotations:
+  #   "scheduler.alpha.kubernetes.io/tolerate-unspecified-resources": "true"
+spec:
+  selector:
+    matchLabels:
+      app: grafana
+  replicas: 2 # the pods will be created and runing.
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana  # the immage 
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 3000 # the port of the container that grafana expose and listen
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
