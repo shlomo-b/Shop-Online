@@ -43,11 +43,15 @@
 #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
 
-name: 'Terraform'
 
 on:
+  workflow_run:
+    workflows: ["Docker Image CI"]  # Ensure this matches the name of your Docker build workflow
+    types:
+      - completed
   push: 
-    branches: [ "main" ]
+    branches:
+      -  "main" 
   pull_request:
     paths:
       - 'main-infra/**'
