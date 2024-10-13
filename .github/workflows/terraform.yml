@@ -130,7 +130,7 @@ jobs:
     - name: Install Helm and aws-load-balancer-controller
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: |
-        aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
+        aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl com
         helm repo add eks https://aws.github.io/eks-charts
         helm repo update
         kubectl create namespace aws-alb-controller
@@ -148,7 +148,7 @@ jobs:
       # if: github.ref == 'refs/heads/main'
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: |
-        aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
+        aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl com
         kubectl create namespace blackjack        # create namespace
         kubectl apply -f ingress.yml              # create ingress
         kubectl apply -f deployment-blackjack.yml # create deployment
@@ -160,7 +160,7 @@ jobs:
       # if: github.ref == 'refs/heads/main'
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: | 
-        aws eks update-kubeconfig --name my-cluster --region us-east-1 # connect to cluster with aws cli
+        aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl 
         helm repo add bitnami https://charts.bitnami.com/bitnami       # add helm repo
         helm repo update                                               # update helm repo
         kubectl create namespace external-dns                          # create namespace
