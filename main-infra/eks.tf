@@ -40,7 +40,7 @@ module "eks" {
 
     # create self iam role and give access to node group
     create_iam_role = false
-    iam_role_name = aws_iam_role.eks_cluster_role.name
+    iam_role_name =  aws_iam_role.eks_cluster_role.name
     iam_role_arn  =  aws_iam_role.eks_cluster_role.arn
     
   }
