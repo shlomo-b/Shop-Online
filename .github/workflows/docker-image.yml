@@ -50,7 +50,7 @@ jobs:
         with:
           file: ./app/Dockerfile # the route of the file Dockerfile
           push: true
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64 # build for amd and arm
        # sync the image with the latest version   
           tags: | 
             ${{ secrets.DOCKERHUB_USERNAME }}/blackjack:${{ github.run_id }}
