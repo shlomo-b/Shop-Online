@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: blackjack
-  namespace: blackjack # the namespace that sperate the pods  between envroments.
+  namespace: blackjack # the namespace that sperate the pods between envroments.
 spec:
   selector:
     app: blackjack

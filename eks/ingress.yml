@@ -14,7 +14,6 @@ metadata:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]' # listen ports
     alb.ingress.kubernetes.io/actions.ssl-redirect: > # redirect to https
       {"type": "redirect", "redirectConfig": { "protocol": "HTTPS", "port": "443", "statusCode": "HTTP_301"}}
-  #  alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
   #  alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:us-east-1:148088962203:regional/webacl/blackjack-waf/568de2c9-9afb-4e12-b500-1da3eb558698
 
 spec:
