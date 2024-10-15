@@ -25,5 +25,3 @@ COPY /app/main.py /app
 
 # Run app.py when the container launches
 CMD ["python" , "main.py"]
-
-# ENTRYPOINT ["python" , "main.py"] @ to work only with python and not with bash or sh or any other shell
