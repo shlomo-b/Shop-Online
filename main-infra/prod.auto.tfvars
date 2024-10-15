@@ -30,69 +30,57 @@ vpcs = {
   }
 }
 
-
 sgs = {
-    vpc-one = {
-    vpc_name =  "vpc-one"
+  vpc-one = {
+    vpc_key     = "vpc-one"  # This will be used to lookup the VPC ID
+    description = "vpc-one"
   
-    tags = {
+  tags = {
       name = "vpc-one"
     }
-
-    ingress = { 
-      allow_port_80 = {
-        description = "allow access port 80"
-        from_port   = 80
-        to_port     = 80
-        protocol    = "tcp"
-        cidr_blocks =  ["0.0.0.0/0"]
-      }
-      allow_port_443 = {
-        description = "allow access port 443"
-        from_port   = 443
-        to_port     = 443
-        protocol    = "tcp"
-        cidr_blocks =  ["0.0.0.0/0"]
-      }
-      allow_from_my_ip_home = {
-        description = "all_traffic_in_my_IP_and_my_vpc"
-        from_port   = 0
-        to_port     = 0
-        protocol    = "-1"
-        cidr_blocks =  ["84.228.161.67/32","10.10.0.0/16"]
-      }
-   }
-  
-    egress = {
-      description = "All traffic_out"
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
+   ingress_cidr_blocks = ["10.10.0.0/16"] # Use the CIDR of vpc-third
+    ingress_with_cidr_blocks = {
+        all_traffic_my_home = {
+          from_port   = 0
+          to_port     = 0
+          protocol    = "-1"
+          description = "all"
+          cidr_blocks = "10.10.0.0/16"
+        },
+        all_traffic_vpc = {
+          from_port   = 0
+          to_port     = 0
+          protocol    = "-1"
+          description = "all"
+          cidr_blocks = "84.228.161.67/32"
+        }
+  }  
   }
- }
 
-  vpc-third = {
-    vpc_name =  "vpc-third"
+  vpc-two = {
+    vpc_key    = "vpc-two"  # This will be used to lookup the VPC ID
+    description = "vpc-two"
 
     tags = {
-      name = "vpc-third"
+      name = "vpc-two"
     }
-    ingress = { 
+
+    ingress_cidr_blocks = ["10.30.0.0/16"] # Use the CIDR of vpc-third
+    ingress_with_cidr_blocks = {
       allow_port_80 = {
-        description = "allow access port 80"
-        from_port   = 80
-        to_port     = 80
-        protocol    = "tcp"
-        cidr_blocks =  ["0.0.0.0/0"]
-      }
-    }
-    egress = {
-      description = "All traffic_out"
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
+          from_port   = 80
+          to_port     = 80
+          protocol    = "tcp"
+          description = "Allow HTTP"
+          cidr_blocks = "0.0.0.0/0"
+        },
+        allow_port_90 = {
+          from_port   = 90
+          to_port     = 90
+          protocol    = "tcp"
+          description = "Allow HTTP"
+          cidr_blocks = "0.0.0.0/0"
+        }
   }
  }
 }
