@@ -8,7 +8,7 @@ metadata:
     kubernetes.io/ingress.class: alb # the type alb 
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip # the alb move the traffic directly to pods
-    alb.ingress.kubernetes.io/security-groups: sg-0557e93639346c735
+    alb.ingress.kubernetes.io/security-groups: sg-0edbf099e9034313c
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/f86f25a3-ee12-4da6-a887-34ec263a6696 # the acm certificate arn
     alb.ingress.kubernetes.io/subnets: subnet-03b7311f709420e15,subnet-03ba318775adc7dfd # Public subnetbs
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]' # listen ports
@@ -19,20 +19,54 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
+  # those rules for the application to allow the metrics/presentation/and the application
     - host: blackjack.spider-shlomo.com
     - http:
         paths:
-          - path: /
+          - path: /metrics
             pathType: Prefix
             backend:
               service:
                 name: ssl-redirect # the name of the service
                 port:
                   name: use-annotation # use the annotation
+
           - path: /
+            pathType: Exact # allow only the application
+            backend:
+              service:
+                name: ssl-redirect # the name of the service
+                port:
+                  name: use-annotation # use the annotation    
+
+          - path: /presentation
+            pathType: Prefix
+            backend:
+              service:
+                name: ssl-redirect # the name of the service
+                port:
+                  name: use-annotation # use the annotation          
+
+          - path: /metrics
             pathType: Prefix
             backend:
               service:
                 name: blackjack
                 port:
                   number: 80
+
+          - path: /presentation
+            pathType: Prefix
+            backend:
+              service:
+                name: blackjack
+                port:
+                  number: 80
+
+          - path: /
+            pathType: Exact # allow only the application
+            backend:
+              service:
+                name: blackjack
+                port:
+                  number: 80        
