@@ -10,7 +10,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80   # the port svc that expose
-      targetPort: 3000 # the port of the pod
+      targetPort: 80 # the port of the pod
       nodePort: 30090 # the range of the ports is 30000-32767 | it's not necessary Unless you want to a specific port
                       # it's external port of the service . the access from outside the cluster 
 
