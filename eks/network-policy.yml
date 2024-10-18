@@ -12,3 +12,4 @@ spec:
     - namespaceSelector:  # חסום תעבורה מ-blackjack
         matchLabels:
           name: blackjack
+          

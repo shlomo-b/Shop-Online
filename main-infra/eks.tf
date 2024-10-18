@@ -32,7 +32,7 @@ module "eks" {
     
   # EKS Managed Node Group(s) 
   eks_managed_node_group_defaults = {
-    instance_types = ["t3.medium"]
+    instance_types = ["m5.large"]
 
     # create self iam role and give access to node group
     create_iam_role = false

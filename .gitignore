@@ -45,3 +45,6 @@ main-prod/TFkey
 
 # ignore file terraform.lock.hcl
 main-prod/.terraform.lock.hcl
+
+# ignore image 
+image.png
