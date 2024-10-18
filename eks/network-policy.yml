@@ -1,18 +1,14 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: network-policy-example
-  namespace: test
+  name: deny-grafana-ingress
+  namespace: grafana  # החל על ה-Namespace של Grafana
 spec:
-  podSelector:
-    matchLabels:
-      ns: grafana
+  podSelector: {}  # זה יחול על כל ה-PODים ב-Namespace הזה
   policyTypes:
-  - Egress
-  egress:
-  - to:
-    - namespaceSelector:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:  # חסום תעבורה מ-blackjack
         matchLabels:
-          ns: blackjack
-    - protocol: TCP
-      port: 80
+          name: blackjack
