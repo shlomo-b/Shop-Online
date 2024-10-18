@@ -47,4 +47,4 @@ main-prod/TFkey
 main-prod/.terraform.lock.hcl
 
 # ignore image 
-image.png
+# image.png
