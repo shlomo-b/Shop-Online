@@ -32,7 +32,7 @@ spec:
                   name: use-annotation # use the annotation
 
           - path: /
-            pathType: Exact # allow only the application
+            pathType: Exact # allow only access to application
             backend:
               service:
                 name: ssl-redirect # the name of the service
@@ -64,7 +64,7 @@ spec:
                   number: 80
 
           - path: /
-            pathType: Exact # allow only the application
+            pathType: Exact # allow only access to application
             backend:
               service:
                 name: blackjack
