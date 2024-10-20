@@ -1,0 +1,40 @@
+# Calico general configuration
+calico:
+  # Number of replicas for Calico components | pods
+  replicaCount: 1
+
+  # We don't configure any networking backend (leave this to AWS VPC CNI)
+  networkingBackend: none  # Calico does not manage networking
+  
+  # No IPAM configuration required (VPC CNI handles it)
+  ipam:
+    type: aws-vpc-cni  # VPC CNI manages pod IPs
+  
+  # Policies for controlling network traffic (Calico network policies)
+  policy:
+    enforceNetworkPolicy: true  # Enable Calico network policies to block/allow traffic
+    logLevel: debug             # Set the log level to debug for more information
+
+  # Disable encapsulation modes
+  ipipMode: Never
+  vxlanMode: Never
+
+  # Service Account for Calico components access to Kubernetes 
+  serviceAccount:
+    create: true
+    name: calico-controller
+
+  # CNI Configuration for policy enforcement only
+  cni:
+    installType: calico  # Specify Calico as the CNI, but only for policy
+    version: v3.25.0     # Calico version to install
+
+# Configure health checks and liveness probes for Calico components
+health:
+  enabled: true
+  livenessProbe:
+    initialDelaySeconds: 10
+    periodSeconds: 5
+
+# Additional log settings
+logLevel: debug
