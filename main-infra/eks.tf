@@ -51,7 +51,7 @@ module "eks" {
       max_size     = 5
       desired_size = 1
       vpc_security_group_ids = [module.sgs["vpc-one"].security_group_id]
-      key_name = "TF-key"
+     #  key_name = "TF-key"
     }
   }
 
