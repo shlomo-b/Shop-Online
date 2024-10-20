@@ -1,5 +1,4 @@
 # project-ci-cd
 project blackjack
 
-![alt text](image.png)
-
+![presentation](docs/presentation.png)
