@@ -14,12 +14,12 @@ calico:
   policy:
     enforceNetworkPolicy: true  # Enable Calico network policies to block/allow traffic
     logLevel: debug             # Set the log level to debug for more information
-
-  # Disable encapsulation modes
+  
+  # Disable encapsulation modes (Calico-specific encapsulation not needed)
   ipipMode: Never
   vxlanMode: Never
 
-  # Service Account for Calico components access to Kubernetes 
+  # Service Account for Calico components access to Kubernetes
   serviceAccount:
     create: true
     name: calico-controller
@@ -35,6 +35,15 @@ health:
   livenessProbe:
     initialDelaySeconds: 10
     periodSeconds: 5
+
+# Installation specific configuration for Calico
+installation:
+  kubernetesProvider: EKS  # Specify AWS EKS as the provider
+  cni:
+    type: Calico           # Specify Calico as the CNI for EKS
+  calicoNetwork:
+    bgp: Disabled          # Disable BGP as it's not needed
+    ipPools: []            # No IP pools; VPC CNI handles pod IP allocation
 
 # Additional log settings
 logLevel: debug

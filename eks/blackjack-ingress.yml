@@ -62,11 +62,11 @@ spec:
                 name: blackjack
                 port:
                   number: 80
-
+                  
           - path: /
             pathType: Exact # allow only access to application
             backend:
               service:
                 name: blackjack
                 port:
-                  number: 80        
+                  number: 80
