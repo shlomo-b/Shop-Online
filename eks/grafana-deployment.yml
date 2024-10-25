@@ -14,12 +14,12 @@ spec:
         app: grafana
     spec:
       containers:
-      - name: grafana/grafana
-        image: gr # the immage 
+      - name: grafana
+        image:  grafana/grafana # the immage 
         imagePullPolicy: Always
         ports:
         - name: http
-          containerPort: 80 # the port of the container that grafana expose and listen
+          containerPort: 3000 # the port of the container that grafana expose and listen
           protocol: TCP
         resources:
           requests:
