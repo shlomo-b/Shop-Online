@@ -14,9 +14,9 @@ module "eks" {
   cluster_security_group_id = module.sgs["vpc-one"].security_group_id
   
   cluster_addons = {
-    coredns                = {}
-    eks-pod-identity-agent = {}
-    kube-proxy             = {}
+    coredns                = {} # coredns its for manage the dns server
+    eks-pod-identity-agent = {} # eks-pod-identity-agent its for manage the pod identity
+   # kube-proxy             = {} # kube-proxy its for manage the kube-proxy
     vpc-cni                = {} # vpc cni its for manage the network and associate IPs  to pods
   }
 
