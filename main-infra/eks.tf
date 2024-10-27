@@ -16,7 +16,7 @@ module "eks" {
   cluster_addons = {
     coredns                = {} # coredns its for manage the dns server
     eks-pod-identity-agent = {} # eks-pod-identity-agent its for manage the pod identity
-   # kube-proxy             = {} # kube-proxy its for manage the kube-proxy
+    kube-proxy             = {} # kube-proxy its for manage the kube-proxy
     vpc-cni                = {} # vpc cni its for manage the network and associate IPs  to pods
   }
 
