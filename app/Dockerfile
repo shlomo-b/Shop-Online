@@ -21,7 +21,5 @@ EXPOSE 80
 # copy the file main.py
 COPY /app/main.py /app
 
-# COPY . = copy all the files from folder app , cope . . = copy all the filies to container app
-
 # Run app.py when the container launches
 CMD ["python" , "main.py"]
