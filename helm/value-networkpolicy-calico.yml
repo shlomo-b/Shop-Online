@@ -9,7 +9,7 @@ serviceAccount:
 # Define the installation parameters and set defaults
 installation:
   enabled: true
-  kubernetesProvider: "aws"
+  kubernetesProvider: "EKS"
 
 
 apiServer:
