@@ -1,4 +1,4 @@
-replicaCount: 2
+replicaCount: 1
 provider: aws
 aws:
   zoneType: public # the zone type is public

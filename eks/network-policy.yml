@@ -13,12 +13,9 @@ spec:
     - ipBlock:
         cidr: 84.228.161.67/32
 
-        # Block traffic from IP 89.0.142.86/32
-        except:
-          - 89.0.142.86/32
     ports:
       - protocol: TCP
-        port: 80
+        port: 3000
       - protocol: TCP
         port: 30090
 
@@ -29,4 +26,4 @@ spec:
           name: blackjack
     ports:
     - protocol: TCP
-      port: 80
+      port: 3000

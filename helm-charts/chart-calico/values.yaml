@@ -1,0 +1,67 @@
+# Image pull secrets to provision for pulling images from private registries.
+# This field is a map of desired Secret name to .dockerconfigjson formatted data to use for the secret.
+# Populates the `imagePullSecrets` property for all Pods controlled by the `Installation` resource.
+imagePullSecrets: {}
+
+# Configures general installation parameters for Calico. Schema is based
+# on the operator.tigera.io/Installation API documented
+# here: https://projectcalico.docs.tigera.io/reference/installation/api#operator.tigera.io/v1.InstallationSpec
+installation:
+  enabled: true
+  kubernetesProvider: "EKS"
+
+# Configures general installation parameters for Calico. Schema is based
+# on the operator.tigera.io/Installation API documented
+# here: https://projectcalico.docs.tigera.io/reference/installation/api#operator.tigera.io/v1.APIServerSpec
+apiServer:
+  enabled: true
+
+# Certificates for communications between calico/node and calico/typha.
+# If left blank, will be automatically provisioned.
+# certs:
+#   node:
+#     key:
+#     cert:
+#     commonName:
+#   typha:
+#     key:
+#     cert:
+#     commonName:
+#     caBundle:
+
+# Resources for the tigera/operator pod itself.
+# By default, no resource requests or limits are specified.
+resources: {}
+
+# Tolerations for the tigera/operator pod itself.
+# By default, will schedule on all possible place.
+tolerations:
+- effect: NoExecute
+  operator: Exists
+- effect: NoSchedule
+  operator: Exists
+
+# NodeSelector for the tigera/operator pod itself.
+nodeSelector:
+  kubernetes.io/os: linux
+
+# Custom annotations for the tigera/operator pod itself
+podAnnotations: {}
+
+# Custom labels for the tigera/operator pod itself
+podLabels: {}
+
+# Configuration for the tigera operator images to deploy.
+tigeraOperator:
+  image: tigera/operator
+  registry: quay.io
+calicoctl:
+  image: docker.io/calico/ctl
+
+# add namespace
+namespace: calico-controller
+
+# add service account
+serviceAccount:
+  create: true
+  name: tigera-operator
