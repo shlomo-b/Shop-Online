@@ -1,0 +1,19 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler # the kind of the horizontal pod autoscaler
+metadata:
+  name: blackjack-hpa # the name of the hpa
+spec:
+  scaleTargetRef:
+  # after the deployment will run the hpa will control the number of pods
+    apiVersion: apps/v1
+    kind: Deployment
+    name: blackjack  # the name of the deployment from deployment file application
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 30

@@ -5,7 +5,7 @@ module "eks" {
   cluster_name    = "my-cluster"
   cluster_version = "1.31"
   cluster_service_ipv4_cidr = "10.200.0.0/16"
- # cluster_endpoint_public_access  = true
+  cluster_endpoint_public_access  = true
   cluster_endpoint_public_access_cidrs = [
     "84.228.161.67/32",    # Your IP
     "192.30.252.0/22",     # GitHub Actions IP range
