@@ -2,6 +2,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler # the kind of the horizontal pod autoscaler
 metadata:
   name: blackjack-hpa # the name of the hpa
+  namespace: blackjack # the namespace that sperate the pods  between envroments.
 spec:
   scaleTargetRef:
   # after the deployment will run the hpa will control the number of pods
