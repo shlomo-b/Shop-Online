@@ -4,7 +4,7 @@ metadata:
   name: argo-test
   namespace: default
 spec:
-  project: blackjack
+  project: default
   source:
     repoURL: https://github.com/shlomo-b/project-ci-cd.git
     targetRevision: HEAD
