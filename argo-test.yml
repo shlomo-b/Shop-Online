@@ -1,17 +1,24 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: application
-# metadata:
-#   name: argo-test
-#   namespace: default
-# spec:
-#   project: blackjack
-#   source:
-#     repoURL: https://github.com/shlomo-b/project-ci-cd.git
-#     targetRevision: HEAD
-#     path: eks
-#   destination:
-#     server: https://kubernetes.default.svc
-#     namespace: blackjack
+apiVersion: argoproj.io/v1alpha1
+kind: application
+metadata:
+  name: argo-test
+  namespace: default
+spec:
+  project: blackjack
+  source:
+    repoURL: https://github.com/shlomo-b/project-ci-cd.git
+    targetRevision: HEAD
+    path: eks
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: blackjack
 
+# to create namespace automatically | this is the blackjack namespace
+syncPolicy:
+  syncOptions:
+    - CreateNamespace=true
 
-# syncPol
+# track and sync all git changes the argo will check every 3 minutes
+  automated:
+    selfHeal: true # auto sync the changes to the cluster from git
+    prune: true    # auto delete the cluster from git

@@ -17,7 +17,7 @@ jobs:
     
   # docker_build_2:
   #   runs-on: ubuntu-latest
-  #  if: github.ref == 'refs/heads/main' && github.event_name == 'push' && contains(github.event.head_commit.message, 'app/') == true 
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && contains(github.event.head_commit.message, 'app/') == true 
 
     steps:
       # - uses: actions/checkout@v2
