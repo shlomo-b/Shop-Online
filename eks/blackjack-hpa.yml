@@ -9,12 +9,12 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: blackjack  # the name of the deployment from deployment file application
-  minReplicas: 1
-  maxReplicas: 10
+  minReplicas: 2
+  maxReplicas: 6
   metrics:
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 30
+        averageUtilization: 50
