@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/shlomo-b/project-ci-cd.git
     targetRevision: HEAD
-    path: eks
+    path: ./eks
   destination:
     server: https://kubernetes.default.svc
     namespace: blackjack
