@@ -17,9 +17,15 @@ jobs:
     runs-on: ubuntu-latest
     # Checkout: Access to my code, which can actually work with it.
     
-   # if: github.ref == 'refs/heads/main' && github.event_name == 'push' && contains(github.event.head_commit.message, 'app/') == true 
-
+  # docker_build_2:
+  #   runs-on: ubuntu-latest
     steps:
+      # - uses: actions/checkout@v2
+      # - name: Debug Environment
+      #   run: |
+      #    echo "test before build "
+      #    echo "all tests works"
+
       - name: Checkout
         uses: actions/checkout@v4
       -
@@ -40,9 +46,9 @@ jobs:
         name: Build and push
         # It's will be trigger when i push/merge to main branch
 
-       # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push' && contains(github.event.head_commit.message, 'app/') == true 
-        uses: docker/build-push-action@v6 # build and push
+        
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: docker/build-push-action@v6
         with:
           file: ./app/Dockerfile # the route of the file Dockerfile
           push: true
@@ -50,4 +56,4 @@ jobs:
        # sync the image with the latest version   
           tags: | 
             ${{ secrets.DOCKERHUB_USERNAME }}/blackjack:${{ github.run_id }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/blackjack:latest #
+            ${{ secrets.DOCKERHUB_USERNAME }}/blackjack:latest
