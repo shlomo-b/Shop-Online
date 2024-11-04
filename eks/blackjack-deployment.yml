@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: blackjack
-  replicas: 3 # the pods will be created and runing.
+  replicas: 2 # the pods will be created and runing.
   template:
     metadata:
       labels:

@@ -20,12 +20,6 @@ jobs:
   # docker_build_2:
   #   runs-on: ubuntu-latest
     steps:
-      # - uses: actions/checkout@v2
-      # - name: Debug Environment
-      #   run: |
-      #    echo "test before build "
-      #    echo "all tests works"
-
       - name: Checkout
         uses: actions/checkout@v4
       -
@@ -44,9 +38,7 @@ jobs:
       -
         # Build the image and push it to dockerhub.
         name: Build and push
-        # It's will be trigger when i push/merge to main branch
-
-        
+        # It's will be trigger when i push/merge to main branch        
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
