@@ -1,172 +1,172 @@
-# # This workflow installs the latest version of Terraform CLI and configures the Terraform CLI configuration file
-# # with an API token for Terraform Cloud (app.terraform.io). On pull request events, this workflow will run
-# # `terraform init`, `terraform fmt`, and `terraform plan` (speculative plan via Terraform Cloud). On push events
-# # to the "main" branch, `terraform apply` will be executed.
-# #
-# # Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
-# #
-# # To use this workflow, you will need to complete the following setup steps.
-# #
-# # 1. Create a `main.tf` file in the root of this repository with the `remote` backend and one or more resources defined.
-# #   Example `main.tf`:
-# #     # The configuration for the `remote` backend.
-# #     terraform {
-# #       backend "remote" {
-# #         # The name of your Terraform Cloud organization.
-# #         organization = "example-organization"
-# #
-# #         # The name of the Terraform Cloud workspace to store Terraform state files in.
-# #         workspaces {
-# #           name = "example-workspace"
-# #         }
-# #       }
-# #     }
-# #
-# #     # An example resource that does nothing.
-# #     resource "null_resource" "example" {
-# #       triggers = {
-# #         value = "A example resource that does nothing!"
-# #       }
-# #     }
-# #
-# #
-# # 2. Generate a Terraform Cloud user API token and store it as a GitHub secret (e.g. TF_API_TOKEN) on this repository.
-# #   Documentation:
-# #     - https://www.terraform.io/docs/cloud/users-teams-organizations/api-tokens.html
-# #     - https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
-# #
-# # 3. Reference the GitHub secret in step using the `hashicorp/setup-terraform` GitHub Action.
-# #   Example:
-# #     - name: Setup Terraform
-# #       uses: hashicorp/setup-terraform@v1
-# #       with:
-# #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-
-
-
-# on:
-#   # workflow_run:
-#   #   workflows: ["Docker Image CI"]  # Ensure this matches the name of your Docker build workflow
-#   #   types:
-#   #     - completed
-#   push: 
-#     branches:
-#       -  "main" 
-#   pull_request:
-#     paths:
-#       - 'main-infra/**'
-  
-# permissions:
-#   contents: read
-
-# jobs: 
-#   terraform:
-#     name: 'Terraform'
-#     runs-on: ubuntu-latest
-#   #  environment: production
-
-#     defaults:
-#       run:
-#         shell: bash
-        
-#     steps:
-#     # Checkout: Access to my code, which can actually work with it.
-#     - name: Checkout
-#       uses: actions/checkout@v4
-
-#     # Configure AWS Credentials: It's for communication with AWS using the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
-#     - name: Configure AWS Credentials
-#       uses: aws-actions/configure-aws-credentials@v1
-#       with:
-#         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#         aws-region: us-east-1
-        
-#     # Setup Terraform CLI: Use the specified version of Terraform
+# This workflow installs the latest version of Terraform CLI and configures the Terraform CLI configuration file
+# with an API token for Terraform Cloud (app.terraform.io). On pull request events, this workflow will run
+# `terraform init`, `terraform fmt`, and `terraform plan` (speculative plan via Terraform Cloud). On push events
+# to the "main" branch, `terraform apply` will be executed.
+#
+# Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
+#
+# To use this workflow, you will need to complete the following setup steps.
+#
+# 1. Create a `main.tf` file in the root of this repository with the `remote` backend and one or more resources defined.
+#   Example `main.tf`:
+#     # The configuration for the `remote` backend.
+#     terraform {
+#       backend "remote" {
+#         # The name of your Terraform Cloud organization.
+#         organization = "example-organization"
+#
+#         # The name of the Terraform Cloud workspace to store Terraform state files in.
+#         workspaces {
+#           name = "example-workspace"
+#         }
+#       }
+#     }
+#
+#     # An example resource that does nothing.
+#     resource "null_resource" "example" {
+#       triggers = {
+#         value = "A example resource that does nothing!"
+#       }
+#     }
+#
+#
+# 2. Generate a Terraform Cloud user API token and store it as a GitHub secret (e.g. TF_API_TOKEN) on this repository.
+#   Documentation:
+#     - https://www.terraform.io/docs/cloud/users-teams-organizations/api-tokens.html
+#     - https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
+#
+# 3. Reference the GitHub secret in step using the `hashicorp/setup-terraform` GitHub Action.
+#   Example:
 #     - name: Setup Terraform
-#       uses: hashicorp/setup-terraform@v2
+#       uses: hashicorp/setup-terraform@v1
 #       with:
-#         terraform_version: 1.5.6
+#         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-#     # Debug Environment: Verify if the AWS credentials and other environment variables are correctly set
-#     - name: Debug Environment
-#       run: |
-#         echo "GitHub Ref: ${{ github.ref }}"
-#         echo "GitHub Event Name: ${{ github.event_name }}"
-#         echo "AWS_ACCESS_KEY_ID is set: ${{ secrets.AWS_ACCESS_KEY_ID != '' }}"
-#         echo "AWS_SECRET_ACCESS_KEY is set: ${{ secrets.AWS_SECRET_ACCESS_KEY != '' }}"
-#         terraform version
-#         aws --version
-#       working-directory: ./main-infra  # run the tf files from directory main-infra
 
-#     # Terraform Init: Sync with the S3 where the terraform.tfstate is stored
-#     - name: Terraform Init
-#       run: |
-#         terraform init \
-#           -backend-config="bucket=shlomo-project-ci-cd" \
-#           -backend-config="key=first-project-ci-cd/terraform.tfstate" \
-#           -backend-config="region=us-east-1" \
-#           -input=false -no-color
-#       working-directory: ./main-infra  # run the tf files from directory main-infra
 
-#     # Terraform Validate: Validate the Terraform configuration files of the tf 
-#     - name: Terraform Validate
-#       run: terraform validate
-#       working-directory: ./main-infra  # run the tf files from directory main-infra
+on:
+  # workflow_run:
+  #   workflows: ["Docker Image CI"]  # Ensure this matches the name of your Docker build workflow
+  #   types:
+  #     - completed
+  push: 
+    branches:
+      -  "main" 
+  pull_request:
+    paths:
+      - 'main-infra/**'
+  
+permissions:
+  contents: read
+
+jobs: 
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+  #  environment: production
+
+    defaults:
+      run:
+        shell: bash
+        
+    steps:
+    # Checkout: Access to my code, which can actually work with it.
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    # Configure AWS Credentials: It's for communication with AWS using the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+        
+    # Setup Terraform CLI: Use the specified version of Terraform
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.5.6
+
+    # Debug Environment: Verify if the AWS credentials and other environment variables are correctly set
+    - name: Debug Environment
+      run: |
+        echo "GitHub Ref: ${{ github.ref }}"
+        echo "GitHub Event Name: ${{ github.event_name }}"
+        echo "AWS_ACCESS_KEY_ID is set: ${{ secrets.AWS_ACCESS_KEY_ID != '' }}"
+        echo "AWS_SECRET_ACCESS_KEY is set: ${{ secrets.AWS_SECRET_ACCESS_KEY != '' }}"
+        terraform version
+        aws --version
+      working-directory: ./main-infra  # run the tf files from directory main-infra
+
+    # Terraform Init: Sync with the S3 where the terraform.tfstate is stored
+    - name: Terraform Init
+      run: |
+        terraform init \
+          -backend-config="bucket=shlomo-project-ci-cd" \
+          -backend-config="key=first-project-ci-cd/terraform.tfstate" \
+          -backend-config="region=us-east-1" \
+          -input=false -no-color
+      working-directory: ./main-infra  # run the tf files from directory main-infra
+
+    # Terraform Validate: Validate the Terraform configuration files of the tf 
+    - name: Terraform Validate
+      run: terraform validate
+      working-directory: ./main-infra  # run the tf files from directory main-infra
       
-#     # Terraform Plan: Generate and show an execution plan
-#     - name: Terraform Plan
-#       run: terraform plan -input=false -no-color
-#       working-directory: ./main-infra  # run the tf files from directory main-infra
+    # Terraform Plan: Generate and show an execution plan
+    - name: Terraform Plan
+      run: terraform plan -input=false -no-color
+      working-directory: ./main-infra  # run the tf files from directory main-infra
 
-#     # Terraform Apply: Apply the changes required to reach the desired state of the configuration
-#     - name: Terraform Apply
-#       # It's will be trigger when i push/merge to main branch
+    # Terraform Apply: Apply the changes required to reach the desired state of the configuration
+    - name: Terraform Apply
+      # It's will be trigger when i push/merge to main branch
       
-#       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-#       run: terraform apply -auto-approve -input=false -no-color
-#       working-directory: ./main-infra  # run the tf files from directory main-infra
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve -input=false -no-color
+      working-directory: ./main-infra  # run the tf files from directory main-infra
 
-#     # - name: Install Helm Chart with aws-load-balancer-controller
-#     #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-#     #   run: |
-#     #     aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl com
-#     #     helm repo add eks https://aws.github.io/eks-charts  # add helm repo
-#     #     helm repo update                                    # update helm repo
-#     #     helm install aws-load-balancer-controller eks/aws-load-balancer-controller  -f value-aws-alb-controller.yml --namespace aws-alb-controller --create-namespace # install aws-load-balancer-controller with helm and value-aws-alb-controller.yml
-#     #   working-directory: ./helm-charts/chart-aws-lbc # run the helm files from directory helm
+    # - name: Install Helm Chart with aws-load-balancer-controller
+    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    #   run: |
+    #     aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl com
+    #     helm repo add eks https://aws.github.io/eks-charts  # add helm repo
+    #     helm repo update                                    # update helm repo
+    #     helm install aws-load-balancer-controller eks/aws-load-balancer-controller  -f value-aws-alb-controller.yml --namespace aws-alb-controller --create-namespace # install aws-load-balancer-controller with helm and value-aws-alb-controller.yml
+    #   working-directory: ./helm-charts/chart-aws-lbc # run the helm files from directory helm
 
-#     # # add sleep between helm and kubectl for create the pod deployment of the aws-load-balancer-controller
-#     # - name: Sleep for 30 seconds
-#     #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-#     #   run: sleep 30s
-#     #   shell: bash
-#     #   working-directory: ./eks # run the kubectl files from directory eks
+    # # add sleep between helm and kubectl for create the pod deployment of the aws-load-balancer-controller
+    # - name: Sleep for 30 seconds
+    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    #   run: sleep 30s
+    #   shell: bash
+    #   working-directory: ./eks # run the kubectl files from directory eks
 
-#     # - name: Setup Kubectl
-#     #   # if: github.ref == 'refs/heads/main'
-#     #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-#     #   run: |
-#     #     aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl com
-#     #     kubectl create namespace blackjack         # create namespace
-#     #     kubectl apply -f blackjack-ingress.yml     # create ingress
-#     #     kubectl apply -f blackjack-deployment.yml  # create deployment
-#     #     kubectl apply -f blackjack-service.yml     # create service
-#     #    #  kubectl rollout restart deployment -n blackjack
-#     #   working-directory: ./eks # run the kubectl files from directory eks
+    # - name: Setup Kubectl
+    #   # if: github.ref == 'refs/heads/main'
+    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    #   run: |
+    #     aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl com
+    #     kubectl create namespace blackjack         # create namespace
+    #     kubectl apply -f blackjack-ingress.yml     # create ingress
+    #     kubectl apply -f blackjack-deployment.yml  # create deployment
+    #     kubectl apply -f blackjack-service.yml     # create service
+    #    #  kubectl rollout restart deployment -n blackjack
+    #   working-directory: ./eks # run the kubectl files from directory eks
 
-#     # - name: Install Helm Chart with external-dns
-#     #   # if: github.ref == 'refs/heads/main'
-#     #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-#     #   run: | 
-#     #     aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl 
-#     #     helm repo add bitnami https://charts.bitnami.com/bitnami       # add helm repo
-#     #     helm repo update                                               # update helm repo
-#     #     helm install external-dns bitnami/external-dns -f value-external-dns.yml --namespace external-dns --create-namespace # install external-dns with helm and value-external-dns.yml
-#     #   working-directory: ./helm-charts/chart-external-dns # run the helm files from directory helm
+    # - name: Install Helm Chart with external-dns
+    #   # if: github.ref == 'refs/heads/main'
+    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    #   run: | 
+    #     aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl 
+    #     helm repo add bitnami https://charts.bitnami.com/bitnami       # add helm repo
+    #     helm repo update                                               # update helm repo
+    #     helm install external-dns bitnami/external-dns -f value-external-dns.yml --namespace external-dns --create-namespace # install external-dns with helm and value-external-dns.yml
+    #   working-directory: ./helm-charts/chart-external-dns # run the helm files from directory helm
 
-#     #   # Terraform Output: Show the outputs of the Terraform
-#     # - name: Terraform Output
-#     #   run: terraform output -no-color
-#     #   working-directory: ./main-infra  # run the tf files from directory main-infra
+    #   # Terraform Output: Show the outputs of the Terraform
+    # - name: Terraform Output
+    #   run: terraform output -no-color
+    #   working-directory: ./main-infra  # run the tf files from directory main-infra
       
