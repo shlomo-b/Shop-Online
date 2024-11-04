@@ -1,17 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-test
+  name: argo cd
   namespace: default
 spec:
   project: default
   source:
     repoURL: https://github.com/shlomo-b/project-ci-cd.git
     targetRevision: HEAD
-    path: ./eks
+    path: ./apps
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: blackjack
+    namespace: default
 
   # to create namespace automatically | this is the blackjack namespace
   syncPolicy:
