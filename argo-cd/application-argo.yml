@@ -20,6 +20,6 @@ spec:
       - CreateNamespace=true
 
     # track and sync all git changes the argo will check every 3 minutes
-    # automated:
-    #   selfHeal: true # auto sync the changes to the cluster from git
-    #   prune: true    # auto delete resources locally if thay are not in git
+    automated:
+      selfHeal: true # auto sync the changes to the cluster from git
+      prune: true    # auto delete resources locally if thay are not in git
