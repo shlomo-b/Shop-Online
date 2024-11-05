@@ -1,24 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-cd
+  name: blackjack
   namespace: default
 spec:
   project: default
   source:
     repoURL: https://github.com/shlomo-b/project-ci-cd.git
-    targetRevision: HEAD
-    path: ./apps
-    directory:
-      recurse: true
+    path: apps/blackjack
   destination:
     server: https://kubernetes.default.svc
-
-  # to create namespace automatically | this is the blackjack namespace
+    namespace: blackjack
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-
+      
     # track and sync all git changes the argo will check every 3 minutes
     automated:
       selfHeal: true # auto sync the changes to the cluster from git

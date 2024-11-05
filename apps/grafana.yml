@@ -1,24 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-cd
+  name: grafana
   namespace: default
 spec:
   project: default
   source:
     repoURL: https://github.com/shlomo-b/project-ci-cd.git
-    targetRevision: HEAD
-    path: ./apps
-    directory:
-      recurse: true
+    path: apps/grafana
   destination:
     server: https://kubernetes.default.svc
-
-  # to create namespace automatically | this is the blackjack namespace
+    namespace: grafana
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-
+      
     # track and sync all git changes the argo will check every 3 minutes
     automated:
       selfHeal: true # auto sync the changes to the cluster from git
