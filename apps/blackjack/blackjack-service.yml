@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app: blackjack
-  type: LoadBalancer # the type of the service
+  type: ClusterIP # the type of the service
   ports:
     - protocol: TCP
       port: 80   # the port svc that expose
