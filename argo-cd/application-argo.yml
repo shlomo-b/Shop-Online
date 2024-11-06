@@ -9,6 +9,9 @@ spec:
     repoURL: https://github.com/shlomo-b/project-ci-cd.git
     targetRevision: HEAD
     path: ./apps
+
+
+
   destination:
     server: https://kubernetes.default.svc
 
