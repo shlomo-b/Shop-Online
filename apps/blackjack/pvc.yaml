@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: my-pvc
+  name: efs-claim
 spec:
+  allowVolumeExpansion: true
+  volumeMode: Filesystem
+  storageClassName: efs
   accessModes:
     - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: ebs-sc
