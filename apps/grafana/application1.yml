@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/shlomo-b/project-ci-cd.git
-    path: .apps/grafana
+    path: ./apps/grafana
   destination:
     server: https://kubernetes.default.svc
     namespace: grafana
