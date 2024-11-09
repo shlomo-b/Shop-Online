@@ -5,7 +5,7 @@ aws:
   name: external-dns
   preferCNAME: false # the preferCNAME is false | to work with ip with a record.
 policy: upsert-only  # update or create only a record without delete any record.
-registry: noop       # dont needed record txt.
+registry: noop       # no operation for record txt.
 sources:
   - ingress          # the external-dns will look on the ingress and work with the ingress
                      # for create a record to alb.
@@ -14,3 +14,10 @@ domainFilters:
 logLevel: debug
 txtOwnerId: ""      # it's empty because we dont need record txt.
 
+# create service account
+serviceAccount:
+  create: true
+  name: external-dns_service_account
+
+# region default
+region: us-east-1
