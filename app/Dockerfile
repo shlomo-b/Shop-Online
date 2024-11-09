@@ -15,7 +15,8 @@ RUN pip install --no-cache-dir -r requisites.txt
 # install packages to run the app
 RUN apt-get update -y && \
     apt-get install -y curl && \
-    apt-get install -y iputils-ping
+    apt-get install -y iputils-ping && \
+    apt install net-tools -y 
 
 # Copy the rest of the application files
 COPY app /app
