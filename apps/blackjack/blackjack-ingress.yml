@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: blackjack
+  name: ingress-blackjack
   namespace: blackjack # the namespace that sperate the pods  between envroments.
   annotations:
     kubernetes.io/ingress.class: alb # the type alb 
