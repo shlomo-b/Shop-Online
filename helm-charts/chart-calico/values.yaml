@@ -58,9 +58,6 @@ tigeraOperator:
 calicoctl:
   image: docker.io/calico/ctl
 
-# add namespace
-namespace: calico-controller
-
 # add service account
 serviceAccount:
   create: true
