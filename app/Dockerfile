@@ -12,6 +12,11 @@ RUN pip install --upgrade pip
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requisites.txt
 
+# install packages
+RUN apt-get update -y && \
+    apt install curl -Y && \
+    apt-get install -y iputils-ping
+
 # Copy the rest of the application files
 COPY app /app
  
