@@ -8,12 +8,13 @@ spec:
   source:
     repoURL: https://github.com/shlomo-b/project-ci-cd.git
     targetRevision: HEAD
-    path: ./apps
-    directory:
-      recurse: true
+    path: ./apps/blackjack
+    # directory:
+    #   recurse: true
 
   destination:
     server: https://kubernetes.default.svc
+    namespace: blackjack
 
   # to create namespace automatically | this is the blackjack namespace
   syncPolicy:
