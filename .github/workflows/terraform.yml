@@ -127,14 +127,14 @@ jobs:
       run: terraform apply -auto-approve -input=false -no-color
       working-directory: ./main-infra  # run the tf files from directory main-infra
 
-    # - name: Install Helm Chart with aws-load-balancer-controller
-    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    #   run: |
-    #     aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl com
-    #     helm repo add eks https://aws.github.io/eks-charts  # add helm repo
-    #     helm repo update                                    # update helm repo
-    #     helm install aws-load-balancer-controller eks/aws-load-balancer-controller  -f value-aws-alb-controller.yml --namespace aws-alb-controller --create-namespace # install aws-load-balancer-controller with helm and value-aws-alb-controller.yml
-    #   working-directory: ./helm-charts/chart-aws-lbc # run the helm files from directory helm
+    - name: Install Helm Chart with aws-load-balancer-controller
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl com
+        helm repo add eks https://aws.github.io/eks-charts  # add helm repo
+        helm repo update                                    # update helm repo
+        helm install aws-load-balancer-controller eks/aws-load-balancer-controller  -f value-aws-alb-controller.yml --namespace aws-alb-controller --create-namespace # install aws-load-balancer-controller with helm and value-aws-alb-controller.yml
+      working-directory: ./helm-charts/chart-aws-lbc # run the helm files from directory helm
 
     # # add sleep between helm and kubectl for create the pod deployment of the aws-load-balancer-controller
     # - name: Sleep for 30 seconds
