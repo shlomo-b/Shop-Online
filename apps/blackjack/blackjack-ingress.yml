@@ -51,7 +51,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: blackjack
+                name: svc-blackjack
                 port:
                   number: 80
 
@@ -59,7 +59,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: blackjack
+                name: svc-blackjack
                 port:
                   number: 80
                   
@@ -67,6 +67,6 @@ spec:
             pathType: Exact # allow only access to application
             backend:
               service:
-                name: blackjack
+                name: svc-blackjack
                 port:
                   number: 80
