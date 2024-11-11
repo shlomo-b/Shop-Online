@@ -30,7 +30,7 @@ spec:
             memory: 256Mi
         volumeMounts:
         - name: blackjack-storage
-          mountPath: /data    
+          mountPath: /storage-data    
       volumes:                
       - name: blackjack-storage
         persistentVolumeClaim:
