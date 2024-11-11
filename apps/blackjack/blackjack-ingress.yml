@@ -27,7 +27,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ssl-redirect # the name of the service
+                name: svc-blackjack # the name of the service
                 port:
                   name: use-annotation # use the annotation
 
@@ -35,7 +35,7 @@ spec:
             pathType: Exact # allow only access to application
             backend:
               service:
-                name: ssl-redirect # the name of the service
+                name: svc-blackjack # the name of the service
                 port:
                   name: use-annotation # use the annotation    
 
@@ -43,7 +43,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ssl-redirect # the name of the service
+                name: svc-blackjack # the name of the service
                 port:
                   name: use-annotation # use the annotation          
 
