@@ -31,7 +31,7 @@ spec:
         volumeMounts:
         - name: blackjack-storage
           mountPath: /data    
-      volumes:
+      volumes:                # זה היה בהזחה לא נכונה
       - name: blackjack-storage
         persistentVolumeClaim:
           claimName: blackjack-pvc
@@ -44,9 +44,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-   # - ReadWriteMany
   storageClassName: ebs-sc
   resources:
     requests:
       storage: 33Gi
-      
