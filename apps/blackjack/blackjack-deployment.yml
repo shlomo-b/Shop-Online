@@ -43,7 +43,8 @@ metadata:
   namespace: blackjack
 spec:
   accessModes:
-    - ReadWriteOnce
+   # - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: ebs-sc
   resources:
     requests:
