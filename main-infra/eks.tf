@@ -17,7 +17,8 @@ module "eks" {
     coredns                = {} # coredns its for manage the dns server
     eks-pod-identity-agent = {} # eks-pod-identity-agent its for manage the pod identity
     kube-proxy             = {} # kube-proxy its for manage the kube-proxy
-    vpc-cni                = {} # vpc cni its for manage the network and associate IPs  to pods
+    vpc-cni                = {} # vpc cni its for manage the network and associate IPs to pods
+    aws-ebs-csi-driver     = {}
   }
 
     vpc_id                   =  module.vpc["vpc-one"].vpc_id
