@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: blackjack
-  namespace: blackjack
+  namespace: deployment-blackjack
 spec:
   selector:
     matchLabels:
@@ -43,8 +43,8 @@ metadata:
   namespace: blackjack
 spec:
   accessModes:
-   # - ReadWriteOnce
-    - ReadWriteMany
+    - ReadWriteOnce
+   # - ReadWriteMany
   storageClassName: ebs-sc
   resources:
     requests:
