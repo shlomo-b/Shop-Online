@@ -6,7 +6,7 @@ module "eks" {
   cluster_version = "1.31"
   cluster_service_ipv4_cidr = "10.200.0.0/16"
   cluster_endpoint_public_access  = true
-  cluster_endpoint_public_access_cidrs = ["84.228.161.67/32"]
+#  cluster_endpoint_public_access_cidrs = ["84.228.161.67/32"]
 
   # Disable creation of security groups
   create_cluster_security_group = false
@@ -18,7 +18,7 @@ module "eks" {
     eks-pod-identity-agent = {} # eks-pod-identity-agent its for manage the pod identity
     kube-proxy             = {} # kube-proxy its for manage the kube-proxy
     vpc-cni                = {} # vpc cni its for manage the network and associate IPs to pods
-    aws-ebs-csi-driver     = {}
+    aws-ebs-csi-driver     = {} # aws ebs csi driver its for manage the ebs csi driver
   }
 
     vpc_id                   =  module.vpc["vpc-one"].vpc_id
