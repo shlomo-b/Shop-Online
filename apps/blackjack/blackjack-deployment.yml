@@ -31,7 +31,7 @@ spec:
         volumeMounts:
         - name: blackjack-storage
           mountPath: /data    
-      volumes:                # זה היה בהזחה לא נכונה
+      volumes:                
       - name: blackjack-storage
         persistentVolumeClaim:
           claimName: blackjack-pvc

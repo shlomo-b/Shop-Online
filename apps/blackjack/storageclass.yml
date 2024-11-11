@@ -3,6 +3,9 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: ebs-sc
+  namespace: blackjack
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer # like pod affinity
 parameters:
