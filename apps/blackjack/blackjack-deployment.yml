@@ -41,6 +41,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: blackjack-pvc
   namespace: blackjack
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   accessModes:
     - ReadWriteOnce
