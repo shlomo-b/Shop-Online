@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: svc-blackjack 
   namespace: blackjack # the namespace that sperate the pods between envroments.
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   selector:
     app: blackjack
