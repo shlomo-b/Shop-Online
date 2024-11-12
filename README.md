@@ -1,4 +1,3 @@
-# project-ci-cd
-project blackjack
+# project blackjack
 
 ![presentation](docs/presentation.png)
