@@ -5,7 +5,7 @@ metadata:
   name: ebs-sc
   namespace: blackjack
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "-1"
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer # like pod affinity
 parameters:
