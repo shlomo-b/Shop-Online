@@ -14,7 +14,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc  # the cluster url that the argo will connect
-    namespace: blackjack
+  #  namespace: blackjack
 
   # to create namespace automatically | this is the blackjack namespace
   syncPolicy:

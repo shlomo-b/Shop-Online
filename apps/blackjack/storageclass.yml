@@ -1,38 +1,38 @@
-# storage-class.yaml
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: ebs-sc
-  namespace: blackjack
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1"
-provisioner: ebs.csi.aws.com
-volumeBindingMode: WaitForFirstConsumer # like pod affinity
-parameters:
-  csi.storage.k8s.io/fstype: xfs
-  type: io1
-  iopsPerGB: "33"
-  encrypted: "true"
-  tagSpecification_1: "key1=value1"
-  tagSpecification_2: "key2=value2"
-allowedTopologies:
-- matchLabelExpressions:
-  - key: topology.ebs.csi.aws.com/zone
-    values:
-    - us-east-1a
+# # storage-class.yaml
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: ebs-sc
+#   namespace: blackjack
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "-1"
+# provisioner: ebs.csi.aws.com
+# volumeBindingMode: WaitForFirstConsumer # like pod affinity
+# parameters:
+#   csi.storage.k8s.io/fstype: xfs
+#   type: io1
+#   iopsPerGB: "33"
+#   encrypted: "true"
+#   tagSpecification_1: "key1=value1"
+#   tagSpecification_2: "key2=value2"
+# allowedTopologies:
+# - matchLabelExpressions:
+#   - key: topology.ebs.csi.aws.com/zone
+#     values:
+#     - us-east-1a
 
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: blackjack-pvc
-  namespace: blackjack
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: ebs-sc
-  resources:
-    requests:
-      storage: 33Gi
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: blackjack-pvc
+#   namespace: blackjack
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "0"
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: ebs-sc
+#   resources:
+#     requests:
+#       storage: 33Gi
