@@ -5,7 +5,7 @@ metadata:
   name: ebs-sc
   namespace: blackjack
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "1"
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer # like pod affinity
 parameters:
@@ -20,7 +20,7 @@ allowedTopologies:
   - key: topology.ebs.csi.aws.com/zone
     values:
     - us-east-1a
-    
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -28,7 +28,7 @@ metadata:
   name: blackjack-pvc
   namespace: blackjack
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   accessModes:
     - ReadWriteOnce
