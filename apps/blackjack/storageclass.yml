@@ -28,7 +28,7 @@ metadata:
   name: blackjack-pvc
   namespace: blackjack
   annotations:
-    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook: PreSync
 spec:
   accessModes:
     - ReadWriteOnce
