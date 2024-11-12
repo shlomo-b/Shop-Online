@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   name: deployment-blackjack
   namespace: blackjack
-  # annotations:
-  #   argocd.argoproj.io/sync-wave: "1"
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   selector:
     matchLabels:
@@ -15,7 +15,7 @@ spec:
       labels:
         app: blackjack
     spec:
-      containers:
+      containers:      # שים לב לרמה הזו
       - name: blackjack
         image: shlomobarzili/blackjack:latest
         imagePullPolicy: Always     
@@ -30,10 +30,10 @@ spec:
           limits:
             cpu: 200m
             memory: 256Mi
-      #   volumeMounts:
-      #   - name: blackjack-storage
-      #     mountPath: /storage-data    
-      # volumes:                
-      # - name: blackjack-storage
-      #   persistentVolumeClaim:
-      #     claimName: blackjack-pvc
+        volumeMounts:
+        - name: blackjack-storage
+          mountPath: /storage-data
+      volumes:        # באותה רמה כמו containers!
+      - name: blackjack-storage
+        persistentVolumeClaim:
+          claimName: blackjack-pvc
