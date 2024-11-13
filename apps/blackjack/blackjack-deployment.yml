@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: deployment-blackjack
   namespace: blackjack
-  annotations:
-    argocd.argoproj.io/hook: Sync
 spec:
   selector:
     matchLabels:
