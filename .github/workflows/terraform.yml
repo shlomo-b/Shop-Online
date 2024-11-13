@@ -127,14 +127,24 @@ jobs:
       run: terraform apply -auto-approve -input=false -no-color
       working-directory: ./main-infra  # run the tf files from directory main-infra
 
-    # - name: Install Helm Chart with aws-load-balancer-controller
-    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    #   run: |
-    #     aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl com
-    #     helm repo add eks https://aws.github.io/eks-charts  # add helm repo
-    #     helm repo update                                    # update helm repo
-    #     helm install aws-load-balancer-controller eks/aws-load-balancer-controller  -f value-aws-alb-controller.yml --namespace aws-alb-controller --create-namespace # install aws-load-balancer-controller with helm and value-aws-alb-controller.yml
-    #   working-directory: ./helm-charts/chart-aws-lbc # run the helm files from directory helm
+    - name: Install Helm Chart with aws-load-balancer-controller
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl com
+        helm repo add eks https://aws.github.io/eks-charts  # add helm repo
+        helm repo update                                    # update helm repo
+        helm install aws-load-balancer-controller eks/aws-load-balancer-controller  -f values-aws-alb-controller.yml --namespace aws-alb-controller --create-namespace # install aws-load-balancer-controller with helm and value-aws-alb-controller.yml
+      working-directory: ./helm-charts/chart-aws-lbc # run the helm files from directory helm
+
+    - name: Install Helm Chart with aws-load-balancer-controller
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl com
+        helm repo add keel https://charts.keel.sh  # add helm repo
+        helm repo update                                    # update helm repo
+        helm install keel keel/keel  -f values-keel.yml --namespace keel --create-namespace
+      working-directory: ./helm-charts/chart-keel # run the helm files from directory helm
+
 
     # add sleep between helm and kubectl for create the pod deployment of the aws-load-balancer-controller
     # - name: Sleep for 30 seconds
@@ -162,7 +172,7 @@ jobs:
     #     aws eks update-kubeconfig --name my-cluster --region us-east-1 # it's allow us to run commands kubectl 
     #     helm repo add bitnami https://charts.bitnami.com/bitnami       # add helm repo
     #     helm repo update                                               # update helm repo
-    #     helm install external-dns bitnami/external-dns -f value-external-dns.yml --namespace external-dns --create-namespace # install external-dns with helm and value-external-dns.yml
+    #     helm install external-dns bitnami/external-dns -f values-external-dns.yml --namespace external-dns --create-namespace # install external-dns with helm and value-external-dns.yml
     #   working-directory: ./helm-charts/chart-external-dns # run the helm files from directory helm
 
       # Terraform Output: Show the outputs of the Terraform
