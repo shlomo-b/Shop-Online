@@ -15,7 +15,7 @@ spec:
       labels:
         app: blackjack
     spec:
-      containers:      # שים לב לרמה הזו
+      containers:     
       - name: blackjack
         image: shlomobarzili/blackjack:latest
         imagePullPolicy: Always     
@@ -30,10 +30,23 @@ spec:
           limits:
             cpu: 200m
             memory: 256Mi
-        volumeMounts:
-        - name: blackjack-storage
-          mountPath: /storage-data
-      volumes:        # באותה רמה כמו containers!
-      - name: blackjack-storage
-        persistentVolumeClaim:
-          claimName: blackjack-pvc
+
+        env:
+          - name: DATABASE_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: variables
+                key: DATABASE_HOST
+          - name: DATABASE_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: variables
+                key: DATABASE_NAME
+
+      #   volumeMounts:
+      #   - name: blackjack-storage
+      #     mountPath: /storage-data
+      # volumes:       
+      # - name: blackjack-storage
+      #   persistentVolumeClaim:
+      #     claimName: blackjack-pvc
