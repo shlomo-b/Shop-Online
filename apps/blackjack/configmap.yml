@@ -1,11 +1,11 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-    name: variables
-data:
-    # key1: value
-    DATABASE_HOST: localhost
-    DATABASE_NAME: calcialtor_db
-    # DATABASE_USER: postgares
-    # DATABASE_PASSOWRDS: hodi
-    # REACT_APP_API_URL: "url data base"
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#     name: variables
+# data:
+#     # key1: value
+#     DATABASE_HOST: localhost
+#     DATABASE_NAME: calcialtor_db
+#     # DATABASE_USER: postgares
+#     # DATABASE_PASSOWRDS: hodi
+#     # REACT_APP_API_URL: "url data base"
