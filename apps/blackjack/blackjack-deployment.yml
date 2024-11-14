@@ -3,6 +3,10 @@ kind: Deployment
 metadata:
   name: deployment-blackjack
   namespace: blackjack
+  annotations:
+    keel.sh/policy: "all"
+    keel.sh/trigger: "poll"
+    keel.sh/pollSchedule: "@every 1m"  # Closing quote added here
 spec:
   selector:
     matchLabels:
@@ -13,10 +17,10 @@ spec:
       labels:
         app: blackjack
     spec:
-      containers:     
+      containers:
       - name: blackjack
         image: shlomobarzili/blackjack:latest
-        imagePullPolicy: Always     
+        imagePullPolicy: Always
         ports:
         - name: http
           containerPort: 80
@@ -41,10 +45,11 @@ spec:
                 name: variables
                 key: DATABASE_NAME
 
-      #   volumeMounts:
-      #   - name: blackjack-storage
-      #     mountPath: /storage-data
-      # volumes:       
+      # Uncomment and configure volumes if needed
+      # volumeMounts:
+      # - name: blackjack-storage
+      #   mountPath: /storage-data
+      # volumes:
       # - name: blackjack-storage
       #   persistentVolumeClaim:
       #     claimName: blackjack-pvc
