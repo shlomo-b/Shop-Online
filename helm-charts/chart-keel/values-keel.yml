@@ -4,8 +4,8 @@ keel:
   trigger: poll
   pollSchedule: "@every 3m"
   images:
-    - repository: "shlomobarzili/blackjack" # Docker Hub repository name
-      tag: "latest" # Track the 'latest' tag, or you can use dynamic tags like commit hash
+    - repository: shlomobarzili/blackjack # Docker Hub repository name
+      tag: latest # Track the 'latest' tag, or you can use dynamic tags like commit hash
 
 # if the repo is private you need to add the following 
 
