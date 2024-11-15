@@ -9,7 +9,7 @@ resources:
   - blackjack-deployment.yml
 
   
-patchesStrategicMerge:
-- storageclass.yml
-- blackjack-deployment.yml
-# - patch-service.yaml
+# patchesStrategicMerge:
+# - storageclass.yml
+# - blackjack-deployment.yml
+# # - patch-service.yaml
