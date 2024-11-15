@@ -44,10 +44,10 @@ spec:
               configMapKeyRef:
                 name: variables
                 key: DATABASE_NAME
-
-      volumeMounts:
-      - name: blackjack-storage
-        mountPath: /storage-data
+                
+        volumeMounts:
+        - name: blackjack-storage
+          mountPath: /storage-data
       volumes:
       - name: blackjack-storage
         persistentVolumeClaim:
