@@ -6,7 +6,7 @@ metadata:
   annotations:
     keel.sh/policy: "all"
     keel.sh/trigger: "poll"
-    keel.sh/pollSchedule: "@every 1m"  # Closing quote added here
+    keel.sh/pollSchedule: "@every 1m"
 spec:
   selector:
     matchLabels:
@@ -45,11 +45,10 @@ spec:
                 name: variables
                 key: DATABASE_NAME
 
-      # Uncomment and configure volumes if needed
-      # volumeMounts:
-      # - name: blackjack-storage
-      #   mountPath: /storage-data
-      # volumes:
-      # - name: blackjack-storage
-      #   persistentVolumeClaim:
-      #     claimName: blackjack-pvc
+      volumeMounts:
+      - name: blackjack-storage
+        mountPath: /storage-data
+      volumes:
+      - name: blackjack-storage
+        persistentVolumeClaim:
+          claimName: blackjack-pvc
