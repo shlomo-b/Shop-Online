@@ -1,15 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  name: blackjack
-  namespace: blackjack
-
 resources:
   - storageclass.yml
   - blackjack-deployment.yml
-
-  
-# patchesStrategicMerge:
-# - storageclass.yml
-# - blackjack-deployment.yml
-# # - patch-service.yaml
+#  - blackjack-hpa.yml
+  - blackjack-ingress.yml
+  - blackjack-service.yml
+  - configmap.yml
