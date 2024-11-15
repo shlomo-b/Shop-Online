@@ -4,8 +4,10 @@ metadata:
   name: blackjack
   namespace: blackjack
 
-# bases:
-#   - ../../_base
+resources:
+  - storageclass.yml
+  - blackjack-deployment.yml
+
   
 patchesStrategicMerge:
 - storageclass.yml
