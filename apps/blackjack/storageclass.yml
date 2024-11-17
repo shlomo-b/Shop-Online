@@ -18,16 +18,16 @@ allowedTopologies:
     values:
     - us-east-1a
 
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: blackjack-pvc
-  namespace: blackjack
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: ebs-sc
-  resources:
-    requests:
-      storage: 33Gi
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: blackjack-pvc
+#   namespace: blackjack
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: ebs-sc
+#   resources:
+#     requests:
+#       storage: 33Gi

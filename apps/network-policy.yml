@@ -1,29 +1,29 @@
-# apiVersion: networking.k8s.io/v1
-# kind: NetworkPolicy
-# metadata:
-#   name: deny-grafana-ingress
-#   namespace: grafana  # Apply to the 'blackjack' namespace
-# spec:
-#   podSelector: {}  # This will apply to all pods in the 'blackjack' namespace
-#   policyTypes:
-#   - Ingress
-#   ingress:
-#   # Allow traffic from IP 84.228.161.67/32
-#   - from:
-#     - ipBlock:
-#         cidr: 84.228.161.67/32
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-grafana-ingress
+  namespace: grafana  # Apply to the 'blackjack' namespace
+spec:
+  podSelector: {}  # This will apply to all pods in the 'blackjack' namespace
+  policyTypes:
+  - Ingress
+  ingress:
+  # Allow traffic from IP 84.228.161.67/32
+  - from:
+    - ipBlock:
+        cidr: 84.228.161.67/32 
 
-#     ports:
-#       - protocol: TCP
-#         port: 3000
-#       - protocol: TCP
-#         port: 30090
+    ports:
+      - protocol: TCP
+        port: 3000
+      - protocol: TCP
+        port: 30090
 
-#   # Block traffic from the rest of the namespace 'grafana'
-#   - from:
-#     - namespaceSelector:
-#         matchLabels:
-#           name: blackjack
-#     ports:
-#     - protocol: TCP
-#       port: 3000
+  # Block traffic from the rest of the namespace 'grafana'
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: blackjack
+    ports:
+    - protocol: TCP
+      port: 3000

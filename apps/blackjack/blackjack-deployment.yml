@@ -3,15 +3,15 @@ kind: Deployment
 metadata:
   name: deployment-blackjack
   namespace: blackjack
-  annotations:
-    keel.sh/policy: "all"
-    keel.sh/trigger: "poll"
-    keel.sh/pollSchedule: "@every 1m"
+  # annotations:
+  #   keel.sh/policy: "all"
+  #   keel.sh/trigger: "poll"
+  #   keel.sh/pollSchedule: "@every 1m"
 spec:
   selector:
     matchLabels:
       app: blackjack
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -44,7 +44,7 @@ spec:
               configMapKeyRef:
                 name: variables
                 key: DATABASE_NAME
-                
+
         volumeMounts:
         - name: blackjack-storage
           mountPath: /storage-data
