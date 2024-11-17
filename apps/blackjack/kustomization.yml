@@ -6,6 +6,7 @@ metadata:
   namespace: blackjack
 resources:
   - storageclass.yml
+  - pvc.yml
   - blackjack-deployment.yml
   - blackjack-ingress.yml
   - blackjack-service.yml

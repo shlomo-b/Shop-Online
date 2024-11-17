@@ -9,7 +9,10 @@ imagePullSecrets: {}
 installation:
   enabled: true
   kubernetesProvider: "EKS"
-
+  calicoNetwork:
+    vpcCni:
+      enabled: true
+    ipPools: []
 # Configures general installation parameters for Calico. Schema is based
 # on the operator.tigera.io/Installation API documented
 # here: https://projectcalico.docs.tigera.io/reference/installation/api#operator.tigera.io/v1.APIServerSpec
