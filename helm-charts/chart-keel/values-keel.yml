@@ -3,9 +3,10 @@ helmProvider:
 
 keel:
   # Keel policy (all/major/minor/patch/force) - this controls the update frequency based on tag versioning
+  enabled: true
   policy: all
   trigger: poll
-  pollSchedule: "@every 3m"
+  pollSchedule: "@every 1m"
   images:
     - repository: shlomobarzili/blackjack # Docker Hub repository name
       tag: latest # Track the 'latest' tag, or you can use dynamic tags like commit hash
