@@ -11,6 +11,8 @@ keel:
     - repository: shlomobarzili/blackjack # Docker Hub repository name
       tag: latest # Track the 'latest' tag, or you can use dynamic tags like commit hash
 
+aws:
+  region: us-east-1
 # if the repo is private you need to add the following 
 
 # dockerRegistry:
