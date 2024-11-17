@@ -11,12 +11,13 @@ parameters:
   iopsPerGB: "33"
   encrypted: "true"
   tagSpecification_1: "key1=value1"
-  tagSpecification_2: "key2=value2"
 allowedTopologies:
 - matchLabelExpressions:
   - key: topology.ebs.csi.aws.com/zone
     values:
     - us-east-1a
+    - us-east-1b
+    - us-east-1c
 
 ---
 apiVersion: v1
