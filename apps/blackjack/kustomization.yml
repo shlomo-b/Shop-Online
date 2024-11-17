@@ -5,8 +5,7 @@ metadata:
     argocd.argoproj.io/instance: argo-cd
   namespace: blackjack
 resources:
-  - storageclass.yml
-  - pvc.yml
+  - storageclass-svc.yml
   - blackjack-deployment.yml
   - blackjack-ingress.yml
   - blackjack-service.yml
