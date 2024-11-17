@@ -3,6 +3,8 @@ kind: StorageClass
 metadata:
   name: ebs-sc
   namespace: blackjack
+  annotations:
+    argocd.argoproj.io/sync-warn: "0"
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer # like pod affinity
 parameters:
@@ -24,6 +26,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: blackjack-pvc
   namespace: blackjack
+  annotations:
+    argocd.argoproj.io/sync-warn: "1"
 spec:
   accessModes:
     - ReadWriteOnce
