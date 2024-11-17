@@ -6,7 +6,7 @@ keel:
   enabled: true
   policy: all
   trigger: poll
-  pollSchedule: "@every 1m"
+  pollSchedule: "@every 3m"
   images:
     - repository: shlomobarzili/blackjack # Docker Hub repository name
       tag: latest # Track the 'latest' tag, or you can use dynamic tags like commit hash
