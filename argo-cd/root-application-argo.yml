@@ -9,6 +9,7 @@ spec:
     repoURL: https://github.com/shlomo-b/project-ci-cd.git
     targetRevision: HEAD
     path: apps/blackjack
+    kustomize: {}
     directory:
       recurse: true
 
