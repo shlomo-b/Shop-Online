@@ -30,6 +30,8 @@ vpcs = {
   # }
 }
 
+#---------------sgs------------------#
+
 sgs = {
   vpc-one = {
     vpc_key     = "vpc-one"  # This will be used to lookup the VPC ID
@@ -83,4 +85,21 @@ sgs = {
         }
   }
  }
+}
+
+#---------------acm------------------#
+
+acm = {
+  "blackjack.spider-shlomo.com" = {
+    domain_name   =  ["blackjack.spider-shlomo.com"]
+    tags = {
+      name = "acm-blackjack"
+    }
+  },
+  #  "argo-cd.spider-shlomo.com" = {
+  #   domain_name   =  ["argo-cd.spider-shlomo.com"]
+  #   tags = {
+  #     name = "acm-blackjack"
+  #   }
+  # }
 }
