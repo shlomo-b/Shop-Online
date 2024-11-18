@@ -35,3 +35,13 @@ variable "sgs" {
     }))
   }))
 }
+
+#---------------acm------------------#
+
+
+variable "acm" {
+  type = map(object({
+    domain_name     =   list(string)
+    tags            = map(string)
+  }))
+}
