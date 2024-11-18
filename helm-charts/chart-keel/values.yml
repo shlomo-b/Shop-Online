@@ -15,10 +15,6 @@ aws:
   region: us-east-1
 # if the repo is private you need to add the following 
 
-# create service account
-serviceAccount:
-  create: true
-  name: keel-service-account
 
 # dockerRegistry:
 #   enabled: true

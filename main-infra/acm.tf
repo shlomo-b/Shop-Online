@@ -1,7 +1,7 @@
 module "acm" {
   source  = "terraform-aws-modules/acm/aws"
   version = "~> 4.0"
-
+  count = 2
   domain_name = "blackjack.spider-shlomo.com"
   validation_method = "DNS"
   zone_id     = "Z0728296NHGJUZD7IM32"   # Hosted zone ID of the domain spider-shlomo.com
