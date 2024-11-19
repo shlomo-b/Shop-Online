@@ -8,13 +8,14 @@ spec:
   source:
     repoURL: https://github.com/shlomo-b/project-ci-cd.git
     targetRevision: HEAD
-    path: apps/blackjack
+   # path: apps/blackjack
+    path: helm-charts/
     directory:
       recurse: true
 
   destination:
     server: https://kubernetes.default.svc  # the cluster url that the argo will connect
-    namespace: blackjack
+   # namespace: blackjack
 
 
   # to create namespace automatically | this is the blackjack namespace
