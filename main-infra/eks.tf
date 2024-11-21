@@ -39,7 +39,6 @@ module "eks" {
     create_iam_role = false
     iam_role_name =  aws_iam_role.eks_cluster_role.name
     iam_role_arn  =  aws_iam_role.eks_cluster_role.arn
-    
   }
 
   eks_managed_node_groups = {
@@ -82,4 +81,3 @@ module "eks" {
     Terraform   = "true"
   }
 }
-
