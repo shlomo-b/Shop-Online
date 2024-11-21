@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/shlomo-b/project-ci-cd.git
     targetRevision: HEAD
-    path: apps/
+    path: apps/test
     directory:
       recurse: true
 
