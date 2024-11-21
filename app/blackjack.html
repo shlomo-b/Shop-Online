@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blackjack Game</title>
     <style>
+        /* Original styles remain the same */
         body {
             background-image: url('https://cdn.britannica.com/93/124393-004-B49FE2AE/Blackjack.jpg');
             background-size: cover;
@@ -35,7 +36,7 @@
             color: #FFD700;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-        #playButton, #submitInput {
+        #playButton, #submitInput, #submitUsername {
             background-color: #4CAF50;
             border: none;
             color: white;
@@ -71,11 +72,11 @@
             height: 40px;
             background-color: #006400;
         }
-        #inputContainer {
+        #inputContainer, #usernameContainer {
             display: none;
             margin-top: 20px;
         }
-        #userInput {
+        #userInput, #usernameInput {
             padding: 10px;
             font-size: 16px;
             border-radius: 5px;
@@ -92,6 +93,10 @@
         </video>
         <div id="video-overlay"></div>
     </div>
+    <div id="usernameContainer">
+        <input type="text" id="usernameInput" placeholder="Enter your username">
+        <button id="submitUsername">Submit</button>
+    </div>
     <div id="output"></div>
     <button id="playButton">Play Blackjack</button>
     <div id="inputContainer">
@@ -106,7 +111,30 @@
         const inputContainer = document.getElementById('inputContainer');
         const userInput = document.getElementById('userInput');
         const submitInput = document.getElementById('submitInput');
+        const usernameContainer = document.getElementById('usernameContainer');
+        const usernameInput = document.getElementById('usernameInput');
+        const submitUsername = document.getElementById('submitUsername');
+        
+        let username = '';
 
+        // Hide play button initially
+        playButton.style.display = 'none';
+
+        // Show username input first
+        usernameContainer.style.display = 'block';
+
+        submitUsername.onclick = () => {
+            username = usernameInput.value.trim();
+            if (username.length >= 2) {
+                usernameContainer.style.display = 'none';
+                playButton.style.display = 'inline-block';
+                output.textContent = `Welcome ${username}!\n`;
+            } else {
+                output.textContent = 'Username must be at least 2 characters long.\n';
+            }
+        };
+
+        // Rest of the original code remains exactly the same
         const blackjack = `
 .------.            _     _            _    _            _
 |A_  _ |.          | |   | |          | |  (_)          | |
@@ -151,7 +179,7 @@
         }
 
         async function play_game() {
-            output.textContent = '';
+            output.textContent = `Welcome ${username}!\n`;
             print(blackjack);
 
             let cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10];
@@ -159,7 +187,7 @@
             let computer_cards = [];
 
             function final_hand() {
-                print(`Your final hand: ${user_cards}, current score:${sum(user_cards)}`);
+                print(`${username}'s final hand: ${user_cards}, current score:${sum(user_cards)}`);
                 print(`Dealer's final hand ${computer_cards}, current score:${sum(computer_cards)}`);
             }
 
@@ -168,9 +196,10 @@
                 computer_cards.push(random_choice(cards));
             }
 
-            print(`Your cards: ${user_cards}, current score:${sum(user_cards)}`);
+            print(`${username}'s cards: ${user_cards}, current score:${sum(user_cards)}`);
             print(`Dealer's first card: ${computer_cards[0]}`);
 
+            // Rest of the original game logic remains exactly the same...
             if ((user_cards[0] === 11 && user_cards[1] === 10) || (user_cards[0] === 10 && user_cards[1] === 11)) {
                 print(`Win with a Blackjack ${user_cards}`);
             } else if ((computer_cards[0] === 11 && computer_cards[1] === 10) || (computer_cards[0] === 10 && computer_cards[1] === 11)) {
@@ -188,7 +217,7 @@
                             result_user = sum(user_cards);
                         }
 
-                        print(`Your cards: ${user_cards}, current score:${result_user}`);
+                        print(`${username}'s cards: ${user_cards}, current score:${result_user}`);
                         print(`Dealer's first card: ${computer_cards[0]}`);
 
                         if (result_user > 21) {
@@ -225,7 +254,6 @@
                 }
             }
 
-            // Increment the games played counter
             fetch('/increment_games_played', { method: 'POST' });
         }
 
@@ -241,7 +269,6 @@
 
         playButton.addEventListener('click', main);
 
-        // Increment the site visits counter when the page loads
         fetch('/increment_site_visits', { method: 'POST' });
     </script>
 </body>

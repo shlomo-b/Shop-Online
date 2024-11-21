@@ -8,8 +8,7 @@ spec:
   source:
     repoURL: https://github.com/shlomo-b/project-ci-cd.git
     targetRevision: HEAD
-   # path: apps/blackjack
-    path: helm-charts/
+    path: apps/
     directory:
       recurse: true
 
