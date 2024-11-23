@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-dns-argo-cd
+  namespace: default
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami  # Bitnami's Helm chart repo URL
+    targetRevision: HEAD  # Use the latest version of the chart
+    chart: external-dns  # The Helm chart name
+    helm:
+      valueFiles:
+        - values.yaml  # Path to your custom values.yaml file
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: external-dns # Namespace where external-dns should be deployed
+  syncPolicy:
+    automated:
+      prune: true  # Automatically remove resources no longer needed
+      selfHeal: true  # Reconcile state if changes happen outside of Argo CD
