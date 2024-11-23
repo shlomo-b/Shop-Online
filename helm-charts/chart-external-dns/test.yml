@@ -13,9 +13,16 @@ spec:
       valueFiles:
         - values.yaml  # Path to your custom values.yaml file
   destination:
-    server: https://kubernetes.default.svc
-    namespace: external-dns # Namespace where external-dns should be deployed
+    server: https://kubernetes.default.svc  # the cluster url that the argo will connect
+    namespace: external-dns
+
+
+  # to create namespace automatically | this is the blackjack namespace
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+
+    # track and sync all git changes the argo will check every 3 minutes
     automated:
-      prune: true  # Automatically remove resources no longer needed
-      selfHeal: true  # Reconcile state if changes happen outside of Argo CD
+      selfHeal: true # auto sync the changes to the cluster from git
+      prune: true    # auto delete resources locally if thay are not in git
