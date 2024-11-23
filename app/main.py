@@ -40,6 +40,7 @@ def metrics():
 
     return Response(prometheus_client.generate_latest(), mimetype='text/plain')
 
+
 # the file is main.
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
