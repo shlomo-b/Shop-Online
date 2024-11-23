@@ -18,6 +18,6 @@ txtOwnerId: ""      # it's empty because we dont need record txt.
 serviceAccount:
   create: true
   name: external-dns-service-account
-
+  
 # region default
 region: us-east-1
