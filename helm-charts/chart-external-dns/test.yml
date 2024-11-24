@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://charts.bitnami.com/bitnami  # Bitnami's Helm chart repo URL
-    targetRevision: 8.6.0  # Ensure this version exists or use 'HEAD' for the latest
+    repoURL: https://github.com/shlomo-b/project-ci-cd.git
+    targetRevision: HEAD  # Ensure this version exists or use 'HEAD' for the latest
     chart: external-dns  # The Helm chart name
     helm:
       valueFiles:
