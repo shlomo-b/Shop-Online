@@ -1,28 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: external-dns-argo-cd
+  name: external-dns-argo-cd1
   namespace: default
 spec:
   project: default
   source:
     repoURL: https://charts.bitnami.com/bitnami  # Bitnami's Helm chart repo URL
-    targetRevision: HEAD  # Use the latest version of the chart
+    targetRevision: 8.6.0  # Ensure this version exists or use 'HEAD' for the latest
     chart: external-dns  # The Helm chart name
     helm:
       valueFiles:
         - values.yaml  # Path to your custom values.yaml file
   destination:
-    server: https://kubernetes.default.svc  # the cluster url that the argo will connect
-    namespace: external-dns
-
-
-  # to create namespace automatically | this is the blackjack namespace
+    server: https://kubernetes.default.svc  # The cluster URL Argo CD will connect to
+    namespace: external-dns  # Namespace for the deployment
   syncPolicy:
     syncOptions:
-      - CreateNamespace=true
-
-    # track and sync all git changes the argo will check every 3 minutes
+      - CreateNamespace=true  # Automatically create the namespace if it doesn't exist
     automated:
-      selfHeal: true # auto sync the changes to the cluster from git
-      prune: true    # auto delete resources locally if thay are not in git
+      selfHeal: true  # Auto-sync changes from Git to the cluster
+      prune: true     # Auto-delete resources that are not in Git

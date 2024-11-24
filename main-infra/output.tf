@@ -55,3 +55,9 @@ output "dns_a_record_route53" {
   value       = "https://blackjack.spider-shlomo.com"
   description = "a record for alb."
 }
+
+
+output "arn_waf" {
+  value       = module.waf.web_acl_arn
+  description = "arn"
+}
