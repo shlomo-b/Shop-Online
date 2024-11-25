@@ -7,11 +7,12 @@ spec:
   project: default
   source:
     repoURL: https://charts.bitnami.com/bitnami  # Correct URL for Bitnami Helm charts
+    path: bitnami/external-dns
     targetRevision: 8.5.1  # Use the specific version of the chart
     chart: external-dns  # The Helm chart name
     helm:
       valueFiles:
-        - helm-charts/chart-external-dns/values.yaml  # Path to your custom values.yaml file
+        - helm-charts/chart-external-dns/values.yaml # Path to your custom values.yaml file
   destination:
     server: https://kubernetes.default.svc  # The cluster URL Argo CD will connect to
     namespace: external-dns
