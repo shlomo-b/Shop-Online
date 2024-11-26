@@ -12,7 +12,7 @@ spec:
     chart: external-dns  # The Helm chart name
     helm:
       valueFiles:
-        - ./values.yaml # Path to your custom values.yaml file
+      - values.yaml # Path to your custom values.yaml file
   destination:
     server: https://kubernetes.default.svc  # The cluster URL Argo CD will connect to
     namespace: external-dns
