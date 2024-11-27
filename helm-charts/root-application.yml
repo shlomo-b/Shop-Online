@@ -8,6 +8,7 @@ spec:
   source:
     repoURL: https://github.com/shlomo-b/project-blackjack.git # Correct URL for Bitnami Helm charts
     path: helm-charts/chart-external-dns
+    targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc  # The cluster URL Argo CD will connect to
     namespace: external-dns
