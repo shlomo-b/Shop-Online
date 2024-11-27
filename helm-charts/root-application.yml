@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/shlomo-b/project-blackjack/helm-charts/chart-external-dns # Correct URL for Bitnami Helm charts
-    path: chart-external-dns
+    repoURL: https://github.com/shlomo-b/project-blackjack.git # Correct URL for Bitnami Helm charts
+    path: helm-charts/chart-external-dns
   destination:
     server: https://kubernetes.default.svc  # The cluster URL Argo CD will connect to
     namespace: external-dns
