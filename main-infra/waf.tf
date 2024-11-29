@@ -4,14 +4,14 @@ module "waf" {
 
   name_prefix = "blackjack-waf"
 #  alb_arn     = "arn:aws:elasticloadbalancing:us-east-1:148088962203:loadbalancer/app/k8s-blackjac-blackjac-1c968980a4/24e706fcaf42ca5f" # the arn of the alb "
-    create_alb_association = false
+  create_alb_association = false
   allow_default_action = false # block all the request https
   
    # it's for show the logs of allow or block
     visibility_config = {
-    cloudwatch_metrics_enabled = true
+    cloudwatch_metrics_enabled = false
     metric_name                = "blackjack-waf-logs"
-    sampled_requests_enabled   = true
+    sampled_requests_enabled   = false
  }
  rules = [
     {
@@ -24,9 +24,9 @@ module "waf" {
       action = "allow"
 
         visibility_config = {
-        cloudwatch_metrics_enabled = true
+        cloudwatch_metrics_enabled = false
         metric_name                = "allow-specific-ip"
-        sampled_requests_enabled   = true
+        sampled_requests_enabled   = false
         } 
 
         # the arn of the ip
@@ -44,7 +44,7 @@ module "waf" {
       action = "block"
 
       visibility_config = {
-        cloudwatch_metrics_enabled = true
+        cloudwatch_metrics_enabled = false
         metric_name                = "RegexBadBotsUserAgent-metric"
         sampled_requests_enabled   = false
       }
@@ -73,7 +73,7 @@ module "waf" {
       action = "allow"
 
       visibility_config = {
-        cloudwatch_metrics_enabled = true
+        cloudwatch_metrics_enabled = false
         metric_name                = "RegexBadBotsUserAgent-metric"
         sampled_requests_enabled   = false
       }
