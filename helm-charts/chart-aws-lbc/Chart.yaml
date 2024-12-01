@@ -12,6 +12,6 @@ keywords:
 - nlb
 dependencies:
 - name: aws-load-balancer-controller
-  repository: https://github.com/aws/eks-charts
+  repository: https://aws.github.io/eks-charts
   version: 1.10.1
   condition: aws-load-balancer-controller.enabled # only install if aws-load-balancer-controller is enabled
