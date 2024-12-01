@@ -9,8 +9,8 @@ spec:
     repoURL: https://github.com/shlomo-b/project-blackjack.git # the repo
     path: helm-charts/ # the path of the helm chart
     targetRevision: HEAD
-    directory:
-      recurse: true
+    # directory:
+    #   recurse: true
   destination:
     server: https://kubernetes.default.svc  # The cluster URL Argo CD will connect to
   syncPolicy:
