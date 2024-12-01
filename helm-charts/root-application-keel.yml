@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: keel
+  name: argo
   namespace: default
 spec:
   project: default
