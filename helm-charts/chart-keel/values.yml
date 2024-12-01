@@ -1,6 +1,3 @@
-helmProvider:
-  enabled: true # enable helm provider
-
 keel:
   # Keel policy (all/major/minor/patch/force) - this controls the update frequency based on tag versioning
   enabled: true
@@ -11,8 +8,11 @@ keel:
     - repository: shlomobarzili/blackjack # Docker Hub repository name
       tag: latest # Track the 'latest' tag, or you can use dynamic tags like commit hash
 
-aws:
-  region: us-east-1
+  aws:
+    region: us-east-1
+
+  helmProvider:
+    enabled: true # enable helm provider  
 # if the repo is private you need to add the following 
 
 
