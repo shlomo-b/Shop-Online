@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/shlomo-b/project-blackjack.git # the repo
-    path: helm-charts # the path of the helm chart
+    path: helm-charts/ # the path of the helm chart
     targetRevision: HEAD
     directory:
       recurse: true
