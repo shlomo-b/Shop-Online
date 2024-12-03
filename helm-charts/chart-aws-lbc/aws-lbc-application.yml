@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: aws-alb-controller
-  namespace: default
+  namespace: argo-cd
 spec:
   project: default
   source:
