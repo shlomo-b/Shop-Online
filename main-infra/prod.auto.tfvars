@@ -96,10 +96,10 @@ acm = {
       name = "acm-blackjack"
     }
   },
-  #  "argo-cd.spider-shlomo.com" = {
-  #   domain_name   =  ["argo-cd.spider-shlomo.com"]
-  #   tags = {
-  #     name = "acm-blackjack"
-  #   }
-  # }
+   "argo-cd.spider-shlomo.com" = {
+    domain_name   =  ["argo-cd.spider-shlomo.com"]
+    tags = {
+      name = "acm-blackjack"
+    }
+  }
 }
