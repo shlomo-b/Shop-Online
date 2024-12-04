@@ -34,6 +34,24 @@ spec:
             cpu: 200m
             memory: 256Mi
 
+
+# node-exporter for app monitoring and metrics collection
+      - name: node-exporter
+        image: prom/node-exporter:latest
+        imagePullPolicy: Always
+        ports:
+        - name: node-exporter
+          protocol: TCP
+          containerPort: 9100
+          hostPort: 9100
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+
         env:
           - name: DATABASE_HOST
             valueFrom:
