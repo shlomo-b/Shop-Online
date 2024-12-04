@@ -1,0 +1,11 @@
+apiVersion: v2
+name: argo-cd
+description: A Helm chart for argo-cd
+type: application
+version: v2.13.1
+appVersion: v2.13.1
+dependencies:
+- name: argo-cd
+  repository: https://github.com/argoproj/argo-cd
+  version: 7.7.7
+  condition: argo-cd.enabled # only install if keel is enabled
