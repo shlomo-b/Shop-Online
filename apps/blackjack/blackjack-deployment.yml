@@ -47,13 +47,13 @@ spec:
                 name: variables
                 key: DATABASE_NAME
 
-        volumeMounts:
-        - name: blackjack-storage
-          mountPath: /storage-data
-      volumes:
-      - name: blackjack-storage
-        persistentVolumeClaim:
-          claimName: blackjack-pvc
+      #   volumeMounts:
+      #   - name: blackjack-storage
+      #     mountPath: /storage-data
+      # volumes:
+      # - name: blackjack-storage
+      #   persistentVolumeClaim:
+      #     claimName: blackjack-pvc
 
       # node-exporter for app monitoring and metrics collection
       - name: node-exporter
