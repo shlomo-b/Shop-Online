@@ -46,14 +46,9 @@ spec:
               configMapKeyRef:
                 name: variables
                 key: DATABASE_NAME
-
-                volumeMounts:
-                - name: blackjack-storage
-                  mountPath: /storage-data
-              volumes:
-              - name: blackjack-storage
-                persistentVolumeClaim:
-                  claimName: blackjack-pvc
+        volumeMounts:
+        - name: blackjack-storage
+          mountPath: /storage-data
 
       # node-exporter for app monitoring and metrics collection
       - name: node-exporter
@@ -71,3 +66,7 @@ spec:
             cpu: 200m
             memory: 256Mi
 
+      volumes:
+      - name: blackjack-storage
+        persistentVolumeClaim:
+          claimName: blackjack-pvc
