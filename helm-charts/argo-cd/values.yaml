@@ -1,4 +1,4 @@
-# argo-cd:
+#argo-cd:
   global:
     domain: argo-cd.spider-shlomo.com
 
@@ -15,8 +15,8 @@
         alb.ingress.kubernetes.io/scheme: internet-facing
         alb.ingress.kubernetes.io/target-type: ip
         alb.ingress.kubernetes.io/backend-protocol: HTTP
-        alb.ingress.kubernetes.io/subnets: subnet-0952293eea1cd2039 # Public subnetbs
         alb.ingress.kubernetes.io/security-groups: sg-0de4d874368510b0f
+        alb.ingress.kubernetes.io/subnets: subnet-0952293eea1cd2039,subnet-04a7b66e961fc6aa6 # Public subnetbs
         alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":80}, {"HTTPS":443}]'
         alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/ec9fe460-316a-4c28-af91-ac9e7d530cca
         alb.ingress.kubernetes.io/ssl-redirect: '443'

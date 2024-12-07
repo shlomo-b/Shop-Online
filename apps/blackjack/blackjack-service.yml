@@ -20,9 +20,9 @@ metadata:
   name: svc-node-exporter
   namespace: blackjack
 spec:
-  selector:
-    type: NodePort 
+  selector: 
     node-exporter: node-exporter
+  type: NodePort  
   ports:
     - name: node-exporter
       protocol: TCP
