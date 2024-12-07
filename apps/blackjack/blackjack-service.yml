@@ -21,9 +21,11 @@ metadata:
   namespace: blackjack
 spec:
   selector:
-    app: node-exporter
+    type: NodePort 
+    node-exporter: node-exporter
   ports:
     - name: node-exporter
       protocol: TCP
       port: 9100
       targetPort: 9100
+      nodePort: 30910

@@ -3,7 +3,6 @@ module "waf" {
   version = "~> 5.0.0"
 
   name_prefix = "blackjack-waf"
-#  alb_arn     = "arn:aws:elasticloadbalancing:us-east-1:148088962203:loadbalancer/app/k8s-blackjac-blackjac-1c968980a4/24e706fcaf42ca5f" # the arn of the alb "
   create_alb_association = false
   allow_default_action = false # block all the request https
   
