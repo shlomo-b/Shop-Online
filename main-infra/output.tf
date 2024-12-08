@@ -61,3 +61,9 @@ output "arn_waf" {
   value       = module.waf.web_acl_arn
   description = "arn"
 }
+
+# output "tes" {
+#   value       = module.eks.eks_managed_node_group_defaults
+#   description = "arn"
+# }
+
