@@ -8,6 +8,9 @@ metadata:
     keel.sh/policy: "all"
     keel.sh/trigger: "poll"
     keel.sh/pollSchedule: "@every 3m"
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "80"
+    prometheus.io/path: "/metrics"
 spec:
   selector:
     matchLabels:
