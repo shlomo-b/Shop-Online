@@ -62,7 +62,7 @@ output "arn_waf" {
   description = "arn"
 }
 
-output "eks_managed_node_group_defaults" {
+output "test" {
   value       = module.eks.eks_managed_node_group_defaults
   description = "arn"
 }
