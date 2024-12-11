@@ -14,12 +14,28 @@ spec:
     metadata:
       labels:
         app: mongodb-lab4
-    containers:
+    spec:
+      containers:
       - name: mongodb
         image: shlomobarzili/lab4-mongo:latest
-        imagePullPolicy: Always
         ports:
-          - containerPort: 27017
+        - containerPort: 27017
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: variables-app-sean-shlomo
+              key: MONGO_INITDB_ROOT_USERNAME
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: variables-app-sean-shlomo
+              key: MONGO_INITDB_ROOT_PASSWORD
+        - name: MONGO_DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: variables-app-sean-shlomo
+              key: MONGO_DB_HOST
         resources:
           requests:
             cpu: 100m
@@ -27,19 +43,3 @@ spec:
           limits:
             cpu: 200m
             memory: 256Mi
-        env:
-          - name: MONGO_INITDB_ROOT_USERNAME
-            valueFrom:
-              configMapKeyRef:
-                name: variables-app-sean-shlomo
-                key: MONGO_INITDB_ROOT_USERNAME
-          - name: MONGO_INITDB_ROOT_PASSWORD
-            valueFrom:
-              configMapKeyRef:
-                name: variables-app-sean-shlomo
-                key: MONGO_INITDB_ROOT_PASSWORD
-          - name: MONGO_DB_HOST
-            valueFrom:
-              configMapKeyRef:
-                name: variables-app-sean-shlomo
-                key: MONGO_DB_HOST
