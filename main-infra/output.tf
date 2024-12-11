@@ -56,8 +56,12 @@ output "dns_a_record_route53" {
   description = "a record for alb."
 }
 
+# output "arn_waf" {
+#   value       = module.waf.web_acl_arn
+#   description = "arn"
+# }
 
-output "arn_waf" {
-  value       = module.waf.web_acl_arn
-  description = "arn"
-}
+# output "rds" {
+#   value       = module.db.db_instance_endpoint
+#   description = "rds"
+# }

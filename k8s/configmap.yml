@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    namespace: lab4
+    name: variables-app-sean-shlomo
+data:
+    MONGO_INITDB_ROOT_USERNAME: root
+    MONGO_INITDB_ROOT_PASSWORD: example
+    MONGO_DB_HOST: mongodb-service
+    REACT_APP_API_URL: http://lab4-backend-svc:30056

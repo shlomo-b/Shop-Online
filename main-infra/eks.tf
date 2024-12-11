@@ -1,7 +1,7 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 20.0"
-# fsdf
+
   cluster_name    = "my-cluster"
   cluster_version = "1.31"
   cluster_service_ipv4_cidr = "10.200.0.0/16"

@@ -102,4 +102,10 @@ acm = {
       name = "acm-blackjack"
     }
   }
+   "fronted-cd.spider-shlomo.com" = {
+    domain_name   =  ["fronted-cd.spider-shlomo.com"]
+    tags = {
+      name = "acm-blackjack"
+    }
+  }
 }
