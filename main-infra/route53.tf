@@ -1,14 +1,11 @@
-# resource "aws_route53_record" "spider-shlomo-com" {
-#   zone_id = "Z0728296NHGJUZD7IM32"  # Hosted zone ID of the domain spider-shlomo.com
+resource "aws_route53_record" "spider-shlomo-com" {
+  zone_id = "Z0728296NHGJUZD7IM32"  # Hosted zone ID of the domain spider-shlomo.com
   
-#   # send Delay untile the module acm will finish Delay of 60 sec
-#   depends_on = [module.acm, null_resource.delay_acm]
-#   name    = "blackjack.spider-shlomo.com"
-#   type    = "A"
-#   alias {
-#     name                   = "k8s-blackjac-blackjac-1c968980a4-122402735.us-east-1.elb.amazonaws.com" # dns name of the alb
-#     zone_id                = "Z35SXDOTRQ7X7K" # The hosted zone ID of the load balancer
-#     evaluate_target_health = true  # Set to true if you want Route 53 to evaluate the health of the target
-#   }
-# }
+  # send Delay untile the module acm will finish Delay of 60 sec
+ # depends_on = [module.acm, null_resource.delay_acm]
+  name    = "bshlomo.spider-shlomo.com"
+  type    = "A"
+  records = ["89.0.142.86"]
+  ttl     = 60
+}
 
