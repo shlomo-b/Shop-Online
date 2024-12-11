@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fronted-ingress
+  namespace: lab4 # the namespace that separates the pods between environments.
+  annotations:
+    kubernetes.io/ingress.class: alb # the type alb 
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip # the alb move the traffic directly to pods
+    alb.ingress.kubernetes.io/security-groups: sg-0de4d874368510b0f
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/69341016-2913-4096-bfb3-ff9e546e9a32
+    alb.ingress.kubernetes.io/subnets: subnet-0952293eea1cd2039,subnet-04a7b66e961fc6aa6 # Public subnetbs
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}, {"HTTP": 3000}]' # listen ports
+    alb.ingress.kubernetes.io/actions.ssl-redirect: > # redirect to https
+      {"type": "redirect", "redirectConfig": { "protocol": "HTTPS", "port": "443", "statusCode": "HTTP_301"}}
+   # alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:us-east-1:148088962203:regional/webacl/blackjack-waf/6583d044-16e4-4b0c-99fb-20864ea5b1f8
+
+spec:
+  ingressClassName: alb
+  rules:
+    - host: fronted-cd.spider-shlomo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix # allow only access to application
+            backend:
+              service:
+                name: ssl-redirect # the name of the service
+                port:
+                  name: use-annotation # use the annotation
+
+          - path: /
+            pathType: Prefix # allow only access to application
+            backend:
+              service:
+                name: react-svc
+                port:
+                  number: 3000
