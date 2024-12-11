@@ -7,4 +7,4 @@ data:
     MONGO_INITDB_ROOT_USERNAME: root
     MONGO_INITDB_ROOT_PASSWORD: example
     MONGO_DB_HOST: mongodb-service
-    REACT_APP_API_URL: https://lab4-backend-svc:5050
+    REACT_APP_API_URL: https://lab4-backend-svc.lab4.svc.cluster.local:5050
