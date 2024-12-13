@@ -45,3 +45,17 @@ variable "acm" {
     tags            = map(string)
   }))
 }
+
+
+#---------------route53------------------#
+
+
+variable "route53" {
+  type = map(object({
+    name    = list(string)
+    type    = string
+    records = list(string)
+    ttl     = number
+    tags    = map(string)
+  }))
+}
