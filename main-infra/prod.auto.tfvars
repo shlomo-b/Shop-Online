@@ -115,3 +115,26 @@ acm = {
     }
   }
 }
+
+#---------------route53 a record------------------#
+
+route53 = {
+  # "node-exporter.spider-shlomo.com" = {
+  #   name    = ["node-exporter.spider-shlomo.com"]
+  #   type    = "A"
+  #   records = ["2.2.2.2"]
+  #   ttl     = 60
+  #   tags = {
+  #     name = "node-exporter"
+  #   }
+  # }
+  # "snode-exporter.spider-shlomo.com" = {
+  #   name    = ["snode-exporter.spider-shlomo.com"]
+  #   type    = "A"
+  #   records = ["1.2.2.2"]
+  #   ttl     = 60
+  #   tags = {
+  #     name = "node-exporter"
+  #   }
+  # }
+}
