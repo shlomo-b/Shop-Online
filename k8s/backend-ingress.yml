@@ -2,19 +2,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: backend-ingress
-  namespace: lab4 # the namespace that separates the pods between environments.
+  namespace: lab4
   annotations:
-    kubernetes.io/ingress.class: alb # the type alb 
+    kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip # the alb move the traffic directly to pods
+    alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/security-groups: sg-0de4d874368510b0f
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/5908f9c5-db8c-492e-9401-502359408ef4
-    alb.ingress.kubernetes.io/subnets: subnet-0952293eea1cd2039,subnet-04a7b66e961fc6aa6 # Public subnetbs
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}, {"HTTPS": 5050}]' # listen ports
-    alb.ingress.kubernetes.io/actions.ssl-redirect: > # redirect to https
+    alb.ingress.kubernetes.io/subnets: subnet-0952293eea1cd2039,subnet-04a7b66e961fc6aa6
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/actions.ssl-redirect: >
       {"type": "redirect", "redirectConfig": { "protocol": "HTTPS", "port": "443", "statusCode": "HTTP_301"}}
-   # alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:us-east-1:148088962203:regional/webacl/blackjack-waf/6583d044-16e4-4b0c-99fb-20864ea5b1f8
-
 spec:
   ingressClassName: alb
   rules:
@@ -22,57 +20,16 @@ spec:
       http:
         paths:
           - path: /
-            pathType: Prefix # allow only access to application
+            pathType: Prefix
             backend:
               service:
-                name: ssl-redirect # the name of the service
+                name: ssl-redirect
                 port:
-                  name: use-annotation # use the annotation
-
-          - path: /
-            pathType: Prefix # allow only access to application
+                  name: use-annotation
+          - path: /api/
+            pathType: Prefix
             backend:
               service:
                 name: lab4-backend-svc
                 port:
                   number: 5050
-
-          # - path: /register
-          #   pathType: Exact
-          #   backend:
-          #     service:
-          #       name: react-svc
-          #       port:
-          #         number: 30100
-
-          # - path: /api/login
-          #   pathType: Exact # allow only access to application
-          #   backend:
-          #     service:
-          #       name: react-svc
-          #       port:
-          #         number: 30100          
-
-          # - path: /api/health
-          #   pathType: Exact
-          #   backend:
-          #     service:
-          #       name: lab4-backend-svc
-          #       port:
-          #         number: 30056
-
-          # - path: /api/products
-          #   pathType: Exact # allow only access to application
-          #   backend:
-          #     service:
-          #       name: lab4-backend-svc
-          #       port:
-          #         number: 30056
-
-          # - path: /api/users
-          #   pathType: Exact # allow only access to application
-          #   backend:
-          #     service:
-          #       name: lab4-backend-svc
-          #       port:
-          #         number: 30056
