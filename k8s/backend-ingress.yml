@@ -26,6 +26,7 @@ spec:
                 name: ssl-redirect
                 port:
                   name: use-annotation
+
           - path: /api/
             pathType: Prefix
             backend:
@@ -33,3 +34,11 @@ spec:
                 name: lab4-backend-svc
                 port:
                   number: 5050
+
+          - path: /api/register/
+            pathType: Prefix
+            backend:
+              service:
+                name: lab4-backend-svc
+                port:
+                  number: 5050        
