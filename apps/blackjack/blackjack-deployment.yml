@@ -8,20 +8,15 @@ metadata:
     keel.sh/policy: "all"
     keel.sh/trigger: "poll"
     keel.sh/pollSchedule: "@every 3m"
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "9090"  # Change this
-    prometheus.io/path: "/metrics"
 spec:
   selector:
     matchLabels:
       app: blackjack
-      node-exporter: node-exporter
   replicas: 1
   template:
     metadata:
       labels:
         app: blackjack
-        node-exporter: node-exporter
     spec:
       containers:
       - name: blackjack
@@ -38,6 +33,7 @@ spec:
           limits:
             cpu: 200m
             memory: 256Mi
+
         env:
           - name: DATABASE_HOST
             valueFrom:
@@ -49,26 +45,10 @@ spec:
               configMapKeyRef:
                 name: variables
                 key: DATABASE_NAME
+
         volumeMounts:
         - name: blackjack-storage
           mountPath: /storage-data
-
-      # node-exporter for app monitoring and metrics collection
-      - name: node-exporter
-        image: prom/node-exporter:latest
-        imagePullPolicy: Always
-        ports:
-        - name: node-exporter
-          protocol: TCP
-          containerPort: 9100
-        resources:
-          requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 200m
-            memory: 256Mi
-
       volumes:
       - name: blackjack-storage
         persistentVolumeClaim:

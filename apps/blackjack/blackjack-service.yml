@@ -11,21 +11,3 @@ spec:
     - protocol: TCP
       port: 80   # the port svc that expose
       targetPort: 80 # the port of the pod | container
-
-
----     
-apiVersion: v1
-kind: Service
-metadata:
-  name: svc-node-exporter
-  namespace: blackjack
-spec:
-  selector: 
-    node-exporter: node-exporter
-  type: NodePort  
-  ports:
-    - name: node-exporter
-      protocol: TCP
-      port: 9100
-      targetPort: 9100
-      nodePort: 30910

@@ -38,17 +38,14 @@ variable "sgs" {
 
 #---------------acm------------------#
 
-
 variable "acm" {
   type = map(object({
-    domain_name     =   list(string)
+    domain_name     = list(string)
     tags            = map(string)
   }))
 }
 
-
 #---------------route53------------------#
-
 
 variable "route53" {
   type = map(object({
@@ -58,4 +55,21 @@ variable "route53" {
     ttl     = number
     tags    = map(string)
   }))
+}
+
+#---------------cluster-eks------------------#
+
+variable "cluster_name" {
+  default = "my-cluster"
+  type = string
+}
+
+variable "cluster_version" {
+  default = "1.31"
+  type = string
+}
+
+variable "cluster_service_ipv4_cidr" {
+  default = "10.200.0.0/16"
+  type = string
 }
