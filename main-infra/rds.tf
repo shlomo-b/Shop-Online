@@ -14,10 +14,10 @@
 #     max_allocated_storage = 0
 #     storage_type          = "gp3"
 
-#     db_name                     = "mydbpostgres"
 #     manage_master_user_password = false
-#     username                    = "postgres"
-#     password                    = "TZkv70%RE$!$7bm!"
+#     db_name                     = jsondecode(aws_secretsmanager_secret_version.database_credentials.secret_string)["DATABASE_NAME"]
+#     username                    = jsondecode(aws_secretsmanager_secret_version.database_credentials.secret_string)["DATABASE_USER"]
+#     password                    = jsondecode(aws_secretsmanager_secret_version.database_credentials.secret_string)["DATABASE_PASSWORD"]
 #     port                        = 5432
 
 #     multi_az               = false
