@@ -1,7 +1,7 @@
 external-secrets:
   replicaCount: 1
   installCRDs: true
-  scopedNamespace: blackjack
+ # scopedNamespace: blackjack
   scopedRBAC: true
   serviceAccount:
     create: true
