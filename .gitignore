@@ -50,4 +50,4 @@ main-infra/.terraform.lock.hcl
 # image.png
 
 # ignore secrets
-main-infra/secrets
+main-infra/secrets.tf
