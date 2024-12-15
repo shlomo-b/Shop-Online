@@ -1,9 +1,12 @@
 external-secrets:
   replicaCount: 1
-  installCRDs: true
+  provider: aws
+  providerConfig:
+    region: us-east-1
   scopedNamespace: blackjack
   scopedRBAC: true
   
+  # create service account
   serviceAccount:
     create: true
     name: external-secrets
