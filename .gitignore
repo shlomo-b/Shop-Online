@@ -52,6 +52,3 @@ main-infra/.terraform.lock.hcl
 # ignore secrets
 main-infra/secrets.tf
 main-infra/secrets.csv
-
-# ignore file remote_state.tf
-main-infra/remote_state.tf
