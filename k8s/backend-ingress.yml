@@ -7,9 +7,9 @@ metadata:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/security-groups: sg-0de4d874368510b0f
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/5908f9c5-db8c-492e-9401-502359408ef4
-    alb.ingress.kubernetes.io/subnets: subnet-0952293eea1cd2039,subnet-04a7b66e961fc6aa6
+    alb.ingress.kubernetes.io/security-groups: sg-011ca41f253701b5f
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/a7e7aad2-81cc-43f5-98b2-17c24bcd54ec
+    alb.ingress.kubernetes.io/subnets: subnet-09672c6cc819efd39,subnet-0c40539995bbdbfff
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
     alb.ingress.kubernetes.io/actions.ssl-redirect: >
       {"type": "redirect", "redirectConfig": { "protocol": "HTTPS", "port": "443", "statusCode": "HTTP_301"}}
