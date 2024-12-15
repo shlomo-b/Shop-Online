@@ -1,4 +1,4 @@
-external-dns: # dependencies for external-dns 
+external-dns:
   replicaCount: 1
   provider: aws
   aws:

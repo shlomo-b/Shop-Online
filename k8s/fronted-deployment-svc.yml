@@ -33,6 +33,6 @@ spec:
           - name: REACT_APP_API_URL
             valueFrom:
               configMapKeyRef:
-                name: variables-app-sean-shlomo
+                name: variables-lab4
                 key: REACT_APP_API_URL
 

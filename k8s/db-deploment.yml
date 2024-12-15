@@ -20,22 +20,24 @@ spec:
         image: shlomobarzili/lab4-mongo:latest
         ports:
         - containerPort: 27017
+
         env:
-        - name: MONGO_INITDB_ROOT_USERNAME
-          valueFrom:
-            configMapKeyRef:
-              name: variables-app-sean-shlomo
-              key: MONGO_INITDB_ROOT_USERNAME
-        - name: MONGO_INITDB_ROOT_PASSWORD
-          valueFrom:
-            configMapKeyRef:
-              name: variables-app-sean-shlomo
-              key: MONGO_INITDB_ROOT_PASSWORD
+        # - name: MONGO_INITDB_ROOT_USERNAME
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: variables-lab4
+        #       key: MONGO_INITDB_ROOT_USERNAME
+        # - name: MONGO_INITDB_ROOT_PASSWORD
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: variables-lab4
+        #       key: MONGO_INITDB_ROOT_PASSWORD
         - name: MONGO_DB_HOST
           valueFrom:
             configMapKeyRef:
-              name: variables-app-sean-shlomo
+              name: variables-lab4
               key: MONGO_DB_HOST
+
         resources:
           requests:
             cpu: 100m
