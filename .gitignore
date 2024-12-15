@@ -36,8 +36,7 @@ override.tf.json
 .terraformrc
 terraform.rc
 .terraform.lock.hcl
-# ignore file remote_state.tf
-main-infra/remote_state.tf
+
 
 # ignore file TFkey
 main-infra/TFkey
