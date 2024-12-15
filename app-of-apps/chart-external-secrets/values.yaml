@@ -1,33 +1,28 @@
 external-secrets:
   replicaCount: 1
-  provider: aws
-  providerConfig:
-    region: us-east-1
+  installCRDs: true
   scopedNamespace: blackjack
   scopedRBAC: true
-  
-  # create service account
   serviceAccount:
     create: true
     name: external-secrets
-
-  # This is how you use extraObjects to add custom resources
-  # extraObjects:
-  # - apiVersion: external-secrets.io/v1beta1    # Define the API version
-  #   kind: SecretStore                          # Specify the resource type
-  #   metadata:
-  #     name: aws-secret-store                   # Name of your SecretStore
-  #     namespace: blackjack                     # Must match scopedNamespace
-  #   spec:                                      # SecretStore specification
-  #     provider:
-  #       aws:
-  #         service: SecretsManager
-  #         region: us-east-1
-  #         auth:
-  #           secretRef:
-  #             accessKeyIDSecretRef:
-  #               name: awssm-secret
-  #               key: access-key
-  #             secretAccessKeySecretRef:
-  #               name: awssm-secret
-  #               key: secret-access-key
+    
+  extraObjects:
+    - apiVersion: external-secrets.io/v1beta1
+      kind: SecretStore
+      metadata:
+        name: aws-secret-store
+        namespace: blackjack
+      spec:
+        provider:
+          aws:
+            service: SecretsManager
+            region: us-east-1
+            auth:
+              secretRef:
+                accessKeyIDSecretRef:
+                  name: awssm-secret
+                  key: access-key
+                secretAccessKeySecretRef:
+                  name: awssm-secret
+                  key: secret-access-key
