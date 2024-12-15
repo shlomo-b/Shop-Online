@@ -1,7 +1,7 @@
 external-secrets:
   replicaCount: 1
   installCRDs: true
- # scopedNamespace: blackjack
+  scopedNamespace: blackjack
   scopedRBAC: true
   serviceAccount:
     create: true
@@ -12,7 +12,7 @@ external-secrets:
       kind: SecretStore
       metadata:
         name: aws-secret-store
-      #  namespace: blackjack
+        namespace: blackjack
       spec:
         provider:
           aws:
