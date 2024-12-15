@@ -51,3 +51,4 @@ main-infra/.terraform.lock.hcl
 
 # ignore secrets
 main-infra/secrets.tf
+main-infra/secrets.csv
