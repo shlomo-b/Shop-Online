@@ -46,17 +46,3 @@ spec:
               secretKeyRef:
                 name: aws-secret       # Kubernetes secret created by ExternalSecret
                 key: MONGO_INITDB_ROOT_PASSWORD
-        restartPolicy: Always
-
-
-          # - name: MONGO_INITDB_ROOT_USERNAME
-          #   valueFrom:
-          #     configMapKeyRef:
-          #       name: variables-lab4
-          #       key: MONGO_INITDB_ROOT_USERNAME
-
-          # - name: MONGO_INITDB_ROOT_PASSWORD
-          #   valueFrom:
-          #     configMapKeyRef:
-          #       name: variables-lab4
-          #       key: MONGO_INITDB_ROOT_PASSWORD
