@@ -40,9 +40,9 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: aws-secret       # Kubernetes secret created by ExternalSecret
-                key: MONGO_INITDB_ROOT_USERNAME
-          - name: MONGO_INITDB_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: aws-secret       # Kubernetes secret created by ExternalSecret
-                key: MONGO_INITDB_ROOT_PASSWORD
+                key: DB-CREDENTIALS
+          # - name: MONGO_INITDB_ROOT_PASSWORD
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: aws-secret       # Kubernetes secret created by ExternalSecret
+          #       key: MONGO_INITDB_ROOT_PASSWORD
