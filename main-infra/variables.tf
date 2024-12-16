@@ -73,3 +73,8 @@ variable "cluster_service_ipv4_cidr" {
   default = "10.200.0.0/16"
   type = string
 }
+
+variable "instance_types" {
+  default = ["m5.large"]
+  type = list(string)
+}

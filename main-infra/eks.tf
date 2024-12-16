@@ -32,7 +32,7 @@ module "eks" {
     
   # EKS Managed Node Group(s) 
   eks_managed_node_group_defaults = {
-    instance_types = ["m5.large"]
+    instance_types = var.instance_types
 
     # create self iam role and give access to node group
     create_iam_role = false
@@ -44,7 +44,7 @@ module "eks" {
     blackjack_k8s = {
       # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
       ami_type       = "AL2023_x86_64_STANDARD"
-      instance_types = ["m5.large"]
+      instance_types = var.instance_types
 
       min_size     = 1
       max_size     = 5
@@ -74,7 +74,7 @@ module "eks" {
       }
     }
   }
-   
+
   tags = {
     Environment = "dev"
     Terraform   = "true"
