@@ -36,6 +36,7 @@ spec:
               configMapKeyRef:
                 name: variables-lab4
                 key: MONGO_DB_HOST
+                
           - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
               secretKeyRef:
