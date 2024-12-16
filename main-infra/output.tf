@@ -12,12 +12,6 @@
 
 #---------------output EC2s id -------------------#
 
-# output "ec2_instances" {
-#   description = "ID of the EC2 instance2"
-#   value = { for i, v in module.ec2_instance_public : i => v.id }
-# }
-
-
 output "dns_a_record_route53" {
   value       = "https://blackjack.spider-shlomo.com"
   description = "a record for alb."
@@ -35,14 +29,15 @@ output "dns_a_record_route53" {
 
 # output "vpc_public_subnets" {
 #   value = { for k, v in module.vpc : k => v.public_subnets }
+#   description = "vpcs"
 # }
 
 # output "acm" {
 #   value       = { for k, v in module.acm : k => v.acm_certificate_arn }
-#   description = "rds"
+#   description = "acms"
 # }
 
 # output "sgs" {
 #   value       = { for k, v in module.sgs : k => v.security_group_id }
-#   description = "rds"
+#   description = "sgs"
 # }
