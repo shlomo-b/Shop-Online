@@ -1,28 +1,28 @@
-external-secrets:
-  enabled: true
-  replicaCount: 1
-  installCRDs: true
-  scopedRBAC: true
-  serviceAccount:
-    create: true
-    name: external-secrets
+# external-secrets:
+#   enabled: true
+#   replicaCount: 1
+#   installCRDs: true
+#   scopedRBAC: true
+#   serviceAccount:
+#     create: true
+#     name: external-secrets
 
-#   # extraObjects:
-#   #   - apiVersion: external-secrets.io/v1beta1
-#   #     kind: SecretStore
-#   #     metadata:
-#   #       name: aws-secret-store
-#   #       namespace: blackjack
-#   #     spec:
-#   #       provider:
-#   #         aws:
-#   #           service: SecretsManager
-#   #           region: us-east-1
-#   #           auth:
-#   #             secretRef:
-#   #               accessKeyIDSecretRef:
-#   #                 name: awssm-secret
-#   #                 key: access-key
-#   #               secretAccessKeySecretRef:
-#   #                 name: awssm-secret
-#   #                 key: secret-access-key
+# #   # extraObjects:
+# #   #   - apiVersion: external-secrets.io/v1beta1
+# #   #     kind: SecretStore
+# #   #     metadata:
+# #   #       name: aws-secret-store
+# #   #       namespace: blackjack
+# #   #     spec:
+# #   #       provider:
+# #   #         aws:
+# #   #           service: SecretsManager
+# #   #           region: us-east-1
+# #   #           auth:
+# #   #             secretRef:
+# #   #               accessKeyIDSecretRef:
+# #   #                 name: awssm-secret
+# #   #                 key: access-key
+# #   #               secretAccessKeySecretRef:
+# #   #                 name: awssm-secret
+# #   #                 key: secret-access-key
