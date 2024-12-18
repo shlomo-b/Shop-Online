@@ -3,7 +3,7 @@ name: calico
 description: A Helm chart for calico
 version: v3.29.1
 dependencies:
-  - name: tigera-operator
+  - name: calico
     version: 3.29.1
     repository: https://docs.tigera.io/calico/charts
-    condition: tigera-operator.enabled
+    condition: calico.enabled
