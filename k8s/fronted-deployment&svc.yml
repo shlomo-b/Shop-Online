@@ -36,3 +36,17 @@ spec:
                 name: variables-lab4
                 key: REACT_APP_API_URL
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-svc
+  namespace: lab4 # the namespace that sperate the pods between envroments.
+spec:
+  selector:
+    app: react-app
+  type: ClusterIP # the type of the service
+  ports:
+    - protocol: TCP
+      port: 3000   # the port svc that expose
+      targetPort: 3000 # the port of the pod
