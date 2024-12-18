@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: calico
+  name: tigera-operator
   namespace: argo-cd
 spec:
   project: default
