@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: lab-fronted-backend
+  name: fronted-backend-db
   namespace: argo-cd
 spec:
   project: default

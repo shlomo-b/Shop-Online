@@ -1,16 +1,9 @@
-tigera-operator:
-  # Configures general installation parameters for Calico. Schema is based
-  # on the operator.tigera.io/Installation API documented
-  # here: https://projectcalico.docs.tigera.io/reference/installation/api#operator.tigera.io/v1.InstallationSpec
-  installation:
-    enabled: true
-    kubernetesProvider: "EKS"
-    calicoNetwork:
-      vpcCni:
-        enabled: true
-      ipPools: []
-
-  # add service account
-  serviceAccount:
-    create: true
-    name: tigera-operator
+installation:
+  enabled: true
+  kubernetesProvider: "EKS"  # Specify EKS as the provider
+  calicoNetwork:
+    # Explicitly enable VPC-CNI integration
+    vpcCni:
+      enabled: true
+    # Empty ipPools to ensure Calico doesn't try to manage IP allocation
+    ipPools: []
