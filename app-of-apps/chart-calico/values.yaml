@@ -1,4 +1,4 @@
-tigera-operator:
+calico:
   installation:
     enabled: true
     kubernetesProvider: "EKS"  # Specify EKS as the provider
