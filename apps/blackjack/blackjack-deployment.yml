@@ -35,16 +35,28 @@ spec:
             memory: 256Mi
 
         env:
-          - name: DATABASE_HOST
+          # - name: DATABASE_HOST
+          #   valueFrom:
+          #     configMapKeyRef:
+          #       name: variables
+          #       key: DATABASE_HOST
+          # - name: DATABASE_NAME
+          #   valueFrom:
+          #     configMapKeyRef:
+          #       name: variables
+          #       key: DATABASE_NAME
+
+          - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
-              configMapKeyRef:
-                name: variables
-                key: DATABASE_HOST
-          - name: DATABASE_NAME
+              secretKeyRef:
+                name: aws-secret       # reference from ExternalSecret
+                key: MONGO_INITDB_ROOT_USERNAME
+
+          - name: MONGO_INITDB_ROOT_PASSWORD
             valueFrom:
-              configMapKeyRef:
-                name: variables
-                key: DATABASE_NAME
+              secretKeyRef:
+                name: aws-secret      # reference from ExternalSecret
+                key: MONGO_INITDB_ROOT_PASSWORD      
 
         volumeMounts:
         - name: blackjack-storage
