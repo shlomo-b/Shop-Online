@@ -30,7 +30,7 @@ spec:
                   name: use-annotation # use the annotation
 
           - path: /
-            pathType: Prefix # allow only access to application
+            pathType: Prefix
             backend:
               service:
                 name: react-svc

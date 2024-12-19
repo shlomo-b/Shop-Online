@@ -33,20 +33,4 @@ spec:
               service:
                 name: lab4-backend-svc
                 port:
-                  number: 5050        
-
-          # - path: /api/
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: lab4-backend-svc
-          #       port:
-          #         number: 5050
-
-          # - path: /api/register/
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: lab4-backend-svc
-          #       port:
-          #         number: 5050
+                  number: 5050
