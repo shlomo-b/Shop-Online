@@ -41,3 +41,9 @@ output "dns_a_record_route53" {
 #   value       = { for k, v in module.sgs : k => v.security_group_id }
 #   description = "sgs"
 # }
+
+# output "db_credentials_secret" {
+#   # terraform output db_credentials_secre
+#   value = jsondecode(aws_secretsmanager_secret_version.db_credentials.secret_string)
+#   sensitive = true
+# }

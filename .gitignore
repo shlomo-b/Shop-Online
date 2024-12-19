@@ -51,4 +51,5 @@ main-infra/.terraform.lock.hcl
 # ignore secrets
 main-infra/secrets.tf
 main-infra/secrets.csv
-secrets/argo-token.txt
+secrets/mongo-password.txt
+secrets/mongo-username.txt
