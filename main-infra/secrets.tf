@@ -26,8 +26,8 @@ resource "aws_secretsmanager_secret" "secrets" {
 resource "aws_secretsmanager_secret_version" "db_credentials" {
   secret_id     = aws_secretsmanager_secret.secrets.id
   secret_string = jsonencode({
-    MONGO_INITDB_ROOT_USERNAME = file("../secrets/mongo-username.txt")
-    MONGO_INITDB_ROOT_PASSWORD = file("../secrets/mongo-password.txt")
+    MONGO_INITDB_ROOT_USERNAME = "root"
+    MONGO_INITDB_ROOT_PASSWORD = "example"
     recovery_window_in_days = 0
   })
   # depends_on = [ module.db ]
