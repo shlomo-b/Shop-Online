@@ -17,7 +17,7 @@ RUN apt-get update -y && \
     apt-get install -y curl && \
     apt-get install -y iputils-ping && \
     apt install net-tools -y 
-
+    
 # Copy the rest of the application files
 COPY app /app
  
