@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: aws-secret-store
+  name: external-secrets
   namespace: argo-cd
 spec:
   project: default
