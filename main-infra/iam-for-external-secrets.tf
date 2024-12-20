@@ -1,32 +1,28 @@
-# Create IAM user for external-secrets
-resource "aws_iam_user" "external_secrets" {
-  name = "external-secrets"
+# Create an IAM role for external-secrets
+resource "aws_iam_role" "external_secrets_role" {
+  name = "external-secrets-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action    = "sts:AssumeRole"
+        Effect    = "Allow"
+        Principal = {
+          Service = "ec2.amazonaws.com" # Adjust the service based on your use case
+        }
+      }
+    ]
+  })
 
   tags = {
     creator = "external-secrets"
   }
 }
 
-# Create access key for the external-secrets user
-resource "aws_iam_access_key" "external_secrets_access_key" {
-  user = aws_iam_user.external_secrets.name
-}
-
-# Attach the SecretsManagerReadWrite policy to the external-secrets user
-resource "aws_iam_user_policy_attachment" "external_secrets_policy" {  
-  user       = aws_iam_user.external_secrets.name
+# Attach the SecretsManagerReadWrite policy to the role
+resource "aws_iam_policy_attachment" "external_secrets_policy" {
+  name       = "external-secrets-policy"
   policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
-  
-}
-
-# Create CSV content with the access key and secret key
-locals {
-  external_secrets_keys_csv = "access_key,secret_key\n${aws_iam_access_key.external_secrets_access_key.id
-    },${aws_iam_access_key.external_secrets_access_key.secret}"
-}
-
-# Save the access keys into a CSV file
-resource "local_file" "external_secrets_keys" {
-  content  = local.external_secrets_keys_csv
-  filename = "secrets.csv"
+  roles      = [aws_iam_role.external_secrets_role.name]
 }

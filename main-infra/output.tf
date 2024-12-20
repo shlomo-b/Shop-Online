@@ -47,3 +47,8 @@ output "dns_a_record_route53" {
 #   value = jsondecode(aws_secretsmanager_secret_version.db_credentials.secret_string)
 #   sensitive = true
 # }
+
+output "role-external-secrets" {
+  value       = aws_iam_role.external_secrets_role.arn
+  description = "external-secrets"
+}
