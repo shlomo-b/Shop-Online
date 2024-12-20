@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: secrets
+  name: external-secrets
   namespace: argo-cd
 spec:
   project: default
   source:
     repoURL: https://github.com/shlomo-b/project-blackjack.git
-    path: app-of-apps/test
+    path: test
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
-    namespace: secrets
+  #  namespace: secrets
   syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
+    # syncOptions:
+    #   - CreateNamespace=true
       
     # track and sync all git changes the argo will check every 3 minutes
     automated:
