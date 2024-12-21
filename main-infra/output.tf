@@ -48,7 +48,19 @@ output "dns_a_record_route53" {
 #   sensitive = true
 # }
 
-output "role-external-secrets" {
-  value       = aws_iam_role.external_secrets_role.arn
-  description = "external-secrets"
+# output "role-external-secrets" {
+#   value       = aws_iam_role.external_secrets_role.arn
+#   description = "external-secrets"
+# }
+
+
+# output "cluster_oidc_issuer_url" {
+#   description = "The OIDC issuer URL of the EKS cluster"
+#   value       = module.eks.cluster_oidc_issuer_url
+# }
+
+# If you need the full OIDC provider ARN
+output "cluster_oidc_provider_arn" {
+  description = "The ARN of the OIDC Provider"
+  value       = module.eks.oidc_provider_arn
 }
