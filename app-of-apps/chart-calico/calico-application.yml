@@ -11,7 +11,7 @@ spec:
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
-    namespace: calico
+    namespace: tigera-operator
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
