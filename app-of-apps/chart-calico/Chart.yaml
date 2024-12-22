@@ -1,9 +1,9 @@
 apiVersion: v2
 name: tigera-operator
 description: A Helm chart for calico
-version: v3.29.1
+version: v3.28.2
 dependencies:
   - name: tigera-operator
-    version: 3.29.1
+    version: 3.28.2
     repository: https://docs.tigera.io/calico/charts
     condition: tigera-operator.enabled
