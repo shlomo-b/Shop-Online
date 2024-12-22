@@ -60,7 +60,8 @@ output "dns_a_record_route53" {
 # }
 
 # The full OIDC provider ARN
-output "cluster_oidc_provider_arn" {
-  description = "The ARN of the OIDC Provider"
-  value       = module.eks.oidc_provider_arn
-}
+
+# output "cluster_oidc_provider_arn" {
+#   description = "The ARN of the OIDC Provider"
+#   value       = module.eks.oidc_provider_arn
+# }
