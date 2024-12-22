@@ -59,7 +59,7 @@ output "dns_a_record_route53" {
 #   value       = module.eks.cluster_oidc_issuer_url
 # }
 
-# If you need the full OIDC provider ARN
+# The full OIDC provider ARN
 output "cluster_oidc_provider_arn" {
   description = "The ARN of the OIDC Provider"
   value       = module.eks.oidc_provider_arn
