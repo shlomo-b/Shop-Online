@@ -41,4 +41,7 @@ module "iam_eks_role" {
       namespace_service_accounts = ["external-secrets:external-secrets"]
     }
   }
+  depends_on = [ 
+    module.eks
+   ]
 }
