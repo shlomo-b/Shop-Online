@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongodb-deployment
-  namespace: React-Shop
+  namespace: react-shop
   labels:
     app: mongodb-lab4
 spec:

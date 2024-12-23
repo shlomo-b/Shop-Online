@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: react-front
-  namespace: React-Shop
+  namespace: react-shop
 spec:
   selector:
     matchLabels:
