@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  namespace: React-Shop
+  namespace: react-shop
 spec:
   selector:
     matchLabels:
