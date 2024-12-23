@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: node-exporter
-  namespace: node-exporter # the namespace that sperate the pods  between envroments.
+  namespace: node-exporter # the namespace that separates the pods between environments.
 spec:
   selector:
     matchLabels:
       app: node-exporter
-  replicas: 1  # the pods will be created and runing.
+  replicas: 1  # the pods will be created and running.
   template:
     metadata:
       labels:
@@ -37,7 +37,7 @@ metadata:
   namespace: blackjack
 spec:
   selector: 
-    node-exporter: node-exporter
+    app: node-exporter
   type: NodePort  
   ports:
     - name: node-exporter
@@ -45,5 +45,3 @@ spec:
       port: 9100
       targetPort: 9100
       nodePort: 30910
-	  
- 
