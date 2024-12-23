@@ -34,7 +34,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: svc-node-exporter
-  namespace: blackjack
+  namespace: node-exporter
 spec:
   selector: 
     app: node-exporter
