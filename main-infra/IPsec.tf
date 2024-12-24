@@ -52,3 +52,15 @@ resource "local_file" "vpn_output" {
   content  = local.vpn_outputs
   filename = "${path.module}/vpn_config_output.txt"
 }
+
+resource "aws_route" "lan-home" {
+  route_table_id         = module.vpc["vpc-one"].public_route_table_ids[0]
+  destination_cidr_block = "10.0.11.0/24"
+  gateway_id             = aws_vpn_gateway.main.id
+}
+
+resource "aws_route" "monitoring" {
+  route_table_id         = module.vpc["vpc-one"].public_route_table_ids[0]
+  destination_cidr_block = "10.90.100.0/24"
+  gateway_id             = aws_vpn_gateway.main.id
+}
