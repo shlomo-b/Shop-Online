@@ -10,13 +10,11 @@ external-secrets:
       # Annotate the role from AWS
       eks.amazonaws.com/role-arn: arn:aws:iam::148088962203:role/external-secrets-role
       # arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/external-secrets-role
+
   clusterSecretStore:
     enabled: true
     create: true
     name: aws-secret-store
-    serviceAccount:
-      name: external-secrets
-      namespace: external-secrets
     aws:
       region: us-east-1
       service: SecretsManager
