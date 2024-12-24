@@ -50,7 +50,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
-          file: ./app/Dockerfile # the route of the file Dockerfile
+          file: ./blackjack-ci/Dockerfile # the route of the file Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64 # build for amd and arm
        # sync the image with the latest version   
