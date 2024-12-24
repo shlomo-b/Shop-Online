@@ -10,7 +10,7 @@ spec:
     path: k8s
   destination:
     server: https://kubernetes.default.svc
-    namespace: react-shop
+    namespace: ./apps/react-shop
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
