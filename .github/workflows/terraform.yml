@@ -59,26 +59,26 @@ jobs:
           -backend-config="bucket=shlomo-project-ci-cd" \
           -backend-config="key=first-project-ci-cd/terraform.tfstate" \
           -backend-config="region=us-east-1" \
-          -input=false -no-color
-      working-directory: ./main-infra  # run the tf files from directory main-infra
+          -input=false  #-no-color
+      working-directory: ./main-infra  
 
     # Terraform Validate: Validate the Terraform configuration files of the tf 
     - name: Terraform Validate
       run: terraform validate
-      working-directory: ./main-infra  # run the tf files from directory main-infra
+      working-directory: ./main-infra  
       
     # Terraform Plan: Generate and show an execution plan
     - name: Terraform Plan
-      run: terraform plan -input=false -no-color
-      working-directory: ./main-infra  # run the tf files from directory main-infra
+      run: terraform plan -input=false # -no-color
+      working-directory: ./main-infra  
 
     # Terraform Apply: Apply the changes required to reach the desired state of the configuration
     - name: Terraform Apply
       # It's will be trigger when i push/merge to main branch
       
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false -no-color
-      working-directory: ./main-infra  # run the tf files from directory main-infra
+      run: terraform apply -auto-approve -input=false # -no-color
+      working-directory: ./main-infra  
 
     - name: Install Helm Chart argo-cd
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -87,25 +87,10 @@ jobs:
          helm repo add argo https://argoproj.github.io/argo-helm
          helm repo update
          helm install my-argo-cd argo/argo-cd --namespace argo-cd --create-namespace --version 7.6.12
-
-    - name: Login to ArgoCD
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: |
-        aws eks update-kubeconfig --name my-cluster --region us-east-1
-        argocd login <ARGOCD_SERVER> \
-          --username ${{ secrets.USER_ARGOCD }} \
-          --password ${{ secrets.ARGO_TOKEN }} \
-          --insecure
-      working-directory: ./app-of-apps
-
-    - name: apply secret to argocd
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'  
-      run: |
-        aws eks update-kubeconfig --name my-cluster --region us-east-1
-        kubectl apply -f secret-argo.yml
-      working-directory: ./app-of-apps # run the helm files from directory helm
+         kubectl apply -f secret-argo.yml
+      working-directory: ./app-of-apps  
 
       # Terraform Output: Show the outputs of the Terraform
     - name: Terraform Output
-      run: terraform output -no-color
-      working-directory: ./main-infra  # run the tf files from directory main-infra
+      run: terraform output # -no-color
+      working-directory: ./main-infra 
