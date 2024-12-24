@@ -11,23 +11,23 @@ external-secrets:
       # Annotate the role from AWS
       eks.amazonaws.com/role-arn: arn:aws:iam::148088962203:role/external-secrets-role
       # arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/external-secrets-role
-
-# Define the ClusterSecretStore as an extra object
-extraObjects:
-  - apiVersion: external-secrets.io/v1beta1   # API version for External Secrets
-    kind: ClusterSecretStore   # The kind needs to be specified
-    metadata:   # Start of metadata section
-      name: aws-secret-store   # Name of your SecretStore
-      namespace: external-secrets   # Namespace where it will be created
-      annotations:   # Annotations section
-        argocd.argoproj.io/sync-wave: "1"     # ArgoCD sync wave annotation
-    spec:
-      provider:
-        aws:
-          service: SecretsManager
-          region: us-east-1
-          auth:
-            jwt:
-              serviceAccountRef:
-                name: external-secrets
-                namespace: external-secrets
+  extraObjects:
+    - apiVersion: external-secrets.io/v1beta1
+      kind: ClusterSecretStore
+      # kind: SecretStore
+      metadata:
+        name: aws-secret-store
+        namespace: external-secrets
+        annotations:
+          argocd.argoproj.io/sync-wave: "1"
+        #  argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+      spec:
+        provider:
+          aws:
+            service: SecretsManager
+            region: us-east-1
+            auth:
+              jwt:
+                serviceAccountRef:
+                  name: external-secrets
+                  namespace: external-secrets # when serach the secrets
