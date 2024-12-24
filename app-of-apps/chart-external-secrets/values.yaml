@@ -8,7 +8,7 @@ external-secrets:
     name: external-secrets
     annotations:  # Annotate the role from AWS
       eks.amazonaws.com/role-arn: arn:aws:iam::148088962203:role/external-secrets-role
-      # arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/external-secrets-role 
+      # arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/external-secrets-role
 
   extraObjects:
     - apiVersion: external-secrets.io/v1beta1
