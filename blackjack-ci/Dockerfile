@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app 
 
 # Copy the requirements file first
-COPY app/requisites.txt /app/
+COPY blackjack-ci/requisites.txt /app/
 
 RUN pip install --upgrade pip
 
@@ -19,13 +19,13 @@ RUN apt-get update -y && \
     apt install net-tools -y 
     
 # Copy the rest of the application files
-COPY app /app
+COPY blackjack-ci /app
  
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
 # copy the file main.py
-COPY /app/main.py /app
+COPY /blackjack-ci/main.py /app
 
 # Run app.py when the container launches
 CMD ["python" , "main.py"]
