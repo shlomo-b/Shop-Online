@@ -11,22 +11,22 @@ external-secrets:
       # arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/external-secrets-role
 
   extraObjects:
-    - apiVersion: external-secrets.io/v1beta1
-      kind: ClusterSecretStore
+    apiVersion: external-secrets.io/v1beta1
+    kind: ClusterSecretStore
       # kind: SecretStore  # Uncomment if you're using SecretStore instead of ClusterSecretStore
-      metadata:
-        name: aws-secret-store
-        namespace: external-secrets
-        annotations:
-          argocd.argoproj.io/sync-wave: "1"
-          # argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-      spec:
-        provider:
-          aws:
-            service: SecretsManager
-            region: us-east-1
-            auth:
-              jwt:
-                serviceAccountRef:
-                  name: external-secrets
-                  namespace: external-secrets
+    metadata:
+      name: aws-secret-store
+      namespace: external-secrets
+      annotations:
+        argocd.argoproj.io/sync-wave: "1"
+        # argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    spec:
+      provider:
+        aws:
+          service: SecretsManager
+          region: us-east-1
+          auth:
+            jwt:
+              serviceAccountRef:
+                name: external-secrets
+                namespace: external-secrets
