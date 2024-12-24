@@ -4,11 +4,11 @@ on:
   push: 
     branches: [ "main" ]
     paths:
-      - 'app/**'
+      - 'blackjack-ci/**'
   pull_request:
       # when have changes to this folder it's will be triger.
     paths:
-      - 'app/**'
+      - 'blackjack-ci/**'
 
 jobs:
   docker:
