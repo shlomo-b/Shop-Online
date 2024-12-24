@@ -42,19 +42,26 @@ sgs = {
     }
    ingress_cidr_blocks = ["10.10.0.0/16"] # Use the CIDR of vpc-third
     ingress_with_cidr_blocks = {
-        all_traffic_my_home = {
+        all_traffic_vpc = {
           from_port   = 0
           to_port     = 0
           protocol    = "-1"
           description = "all"
           cidr_blocks = "10.10.0.0/16"
         },
-        all_traffic_vpc = {
+        access_from_home = {
           from_port   = 0
           to_port     = 0
           protocol    = "-1"
           description = "all"
           cidr_blocks = "84.228.161.67/32"
+        }
+        access_from_lan = {
+          from_port   = 0
+          to_port     = 0
+          protocol    = "-1"
+          description = "all"
+          cidr_blocks = "10.0.11.0/24"
         }
   }  
   }
