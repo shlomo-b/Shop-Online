@@ -83,10 +83,12 @@ variable "instance_types" {
 variable "db_username" {
   description = "Database root username"
   type        = string
+  default = "value"
 }
 
 variable "db_password" {
   description = "Database root password"
   type        = string
   sensitive   = true
+  default = "value"
 }
