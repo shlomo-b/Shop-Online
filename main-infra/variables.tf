@@ -79,6 +79,7 @@ variable "instance_types" {
   type = list(string)
 }
 
+#----------------DB CREDENTIALS------------------#
 
 variable "db_username" {
   description = "Database root username"
