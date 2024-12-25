@@ -1,5 +1,4 @@
 resource "aws_customer_gateway" "main" {
-  bgp_asn    = 65000
   ip_address = "84.228.161.67"
   type       = "ipsec.1"
 
@@ -14,22 +13,41 @@ resource "aws_vpn_gateway" "main" {
   }
 }
 
+resource "aws_vpn_connection" "main" {
+  vpn_gateway_id      = aws_vpn_gateway.main.id
+  customer_gateway_id = aws_customer_gateway.main.id
+  type                = "ipsec.1"
+
+  static_routes_only = true
+
+  tags = {
+    Name = "vpn-static-connection"
+  }
+}
+
+
 module "vpn_gateway" {
   source  = "terraform-aws-modules/vpn-gateway/aws"
   version = "~> 3.0"
-
   vpc_id                  = module.vpc["vpc-one"].vpc_id
   vpn_gateway_id          = aws_vpn_gateway.main.id
   customer_gateway_id     = aws_customer_gateway.main.id #aws_customer_gateway.main
-
+  vpn_connection_static_routes_only = true
+  create_vpn_connection = true
+  vpn_connection_static_routes_destinations = ["0.0.0.0/0"]
   # precalculated length of module variable vpc_subnet_route_table_ids
   vpc_subnet_route_table_count =  2
   vpc_subnet_route_table_ids   = [
     module.vpc["vpc-one"].private_route_table_ids[0],
     module.vpc["vpc-one"].private_route_table_ids[1]
   ]
+  #tunnel1_inside_cidr   = "169.254.33.88/30"
+  #tunnel2_inside_cidr   = "169.254.33.100/30"
+  # tunnel1_preshared_key = "1234567890abcdefghijklmn"
+  #tunnel2_preshared_key = "abcdefghijklmn1234567890"
 }
 
+# Extract VPN configuration
 locals {
   vpn_outputs = <<EOF
 {
@@ -53,7 +71,7 @@ resource "local_file" "vpn_output" {
   filename = "${path.module}/vpn_config_output.txt"
 }
 
-# add routing to IPsec
+# add those static routes to IPsec
 resource "aws_route" "lan-home" {
   route_table_id         = module.vpc["vpc-one"].public_route_table_ids[0]
   destination_cidr_block = "10.0.11.0/24"
