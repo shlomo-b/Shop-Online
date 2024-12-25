@@ -78,3 +78,15 @@ variable "instance_types" {
   default = ["m5.large"]
   type = list(string)
 }
+
+
+variable "db_username" {
+  description = "Database root username"
+  type        = string
+}
+
+variable "db_password" {
+  description = "Database root password"
+  type        = string
+  sensitive   = true
+}
