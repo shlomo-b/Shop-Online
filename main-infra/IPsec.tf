@@ -1,6 +1,7 @@
 resource "aws_customer_gateway" "main" {
   ip_address = "84.228.161.67"
   type       = "ipsec.1"
+  bgp_asn   = null
 
   tags = {
     Name = "main-customer-gateway"

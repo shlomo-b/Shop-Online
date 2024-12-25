@@ -12,7 +12,7 @@ spec:
   selector:
     matchLabels:
       app: blackjack
-  replicas: 1
+  replicas: 5
   template:
     metadata:
       labels:
