@@ -84,7 +84,7 @@ jobs:
         TF_VAR_db_username: ${{ secrets.DB_USERNAME }}
         TF_VAR_db_password: ${{ secrets.DB_PASSWORD }}
 
-    - name: Install Helm Chart argo-cd
+    - name: Install Helm Chart Argo-cd
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: |
         aws eks update-kubeconfig --name my-cluster --region us-east-1
