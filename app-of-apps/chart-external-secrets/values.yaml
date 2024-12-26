@@ -12,18 +12,15 @@ external-secrets:
       # arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/external-secrets-role
 
   clusterSecretStore:
-   enabled: true
-   name: aws-secret-store
-   namespace: external-secrets
-   serviceAccount:
-     name: external-secrets
-     namespace: external-secrets
-   provider:
-     aws:
-       service: SecretsManager
-       region: us-east-1
-       auth:
-         jwt:
-           serviceAccountRef:
-             name: external-secrets
-             namespace: external-secrets
+    enabled: true
+    name: aws-secret-store
+    namespace: external-secrets
+    provider:
+      aws:
+        service: SecretsManager
+        auth:
+          jwt:
+            serviceAccount:
+              name: external-secrets
+              namespace: external-secrets
+    region: us-east-1
