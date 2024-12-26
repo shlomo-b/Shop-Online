@@ -7,20 +7,21 @@ external-secrets:
     create: true
     name: external-secrets
     annotations:
-      # Annotate the role from AWS
       eks.amazonaws.com/role-arn: arn:aws:iam::148088962203:role/external-secrets-role
-      # arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/external-secrets-role
 
-  clusterSecretStore:
-    enabled: true
-    name: aws-secret-store
-    namespace: external-secrets
-    provider:
-      aws:
-        service: SecretsManager
-        auth:
-          jwt:
-            serviceAccount:
-              name: external-secrets
-              namespace: external-secrets
-    region: us-east-1
+  additionalResources:
+    - kind: ClusterSecretStore
+      apiVersion: external-secrets.io/v1beta1
+      metadata:
+        name: aws-secret-store
+        namespace: external-secrets
+      spec:
+        provider:
+          aws:
+            service: SecretsManager
+            region: us-east-1
+            auth:
+              jwt:
+                serviceAccountRef:
+                  name: external-secrets
+                  namespace: external-secrets
