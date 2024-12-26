@@ -27,20 +27,20 @@ output "dns_a_record_route53" {
 #   description = "rds"
 # }
 
-# output "vpc_public_subnets" {
-#   value = { for k, v in module.vpc : k => v.public_subnets }
-#   description = "vpcs"
-# }
+output "vpc_public_subnets" {
+  value = { for k, v in module.vpc : k => v.public_subnets }
+  description = "vpcs"
+}
 
-# output "acm" {
-#   value       = { for k, v in module.acm : k => v.acm_certificate_arn }
-#   description = "acms"
-# }
+output "acm" {
+  value       = { for k, v in module.acm : k => v.acm_certificate_arn }
+  description = "acms"
+}
 
-# output "sgs" {
-#   value       = { for k, v in module.sgs : k => v.security_group_id }
-#   description = "sgs"
-# }
+output "sgs" {
+  value       = { for k, v in module.sgs : k => v.security_group_id }
+  description = "sgs"
+}
 
 # output "db_credentials_secret" {
 #   # terraform output db_credentials_secre
