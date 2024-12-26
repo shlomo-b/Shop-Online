@@ -15,10 +15,10 @@
         alb.ingress.kubernetes.io/scheme: internet-facing
         alb.ingress.kubernetes.io/target-type: ip
         alb.ingress.kubernetes.io/backend-protocol: HTTP
-        alb.ingress.kubernetes.io/security-groups: sg-011ca41f253701b5f
-        alb.ingress.kubernetes.io/subnets: subnet-09672c6cc819efd39,subnet-0c40539995bbdbfff # Public subnetbs
+        alb.ingress.kubernetes.io/security-groups: sg-09b52735903593977
+        alb.ingress.kubernetes.io/subnets: subnet-06ecc8dce3939bc67,subnet-09e3ef8e74de1afaf # Public subnetbs
         alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":80}, {"HTTPS":443}]'
-        alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/8f5ab2d5-3865-4509-be23-6d81b5569f40
+        alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/19d27275-0e2a-4857-95e9-79dff8e8bbd3
         alb.ingress.kubernetes.io/ssl-redirect: '443'
       aws:
         serviceType: ClusterIP # <- Used with target-type: ip
