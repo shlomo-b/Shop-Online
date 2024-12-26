@@ -29,4 +29,5 @@ external-secrets:
   #             jwt:
   #               serviceAccountRef:
   #                 name: external-secrets
-  #                 namespace: external-secrets # when serach the secrets  
+  #                 namespace: external-secrets # when serach the secrets
+  # 
