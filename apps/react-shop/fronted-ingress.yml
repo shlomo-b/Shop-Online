@@ -9,7 +9,7 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip # the alb move the traffic directly to pods
     alb.ingress.kubernetes.io/security-groups: sg-09b52735903593977
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/0e2e8d4f-7e14-404d-bf95-64d51d31b4ff
-    alb.ingress.kubernetes.io/subnets: subnet-06ecc8dce3939bc67,subnet-09e3ef8e74de1afaff # Public subnetbs
+    alb.ingress.kubernetes.io/subnets: subnet-06ecc8dce3939bc67,subnet-0be509e0665de0adb # Public subnetbs
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}, {"HTTP": 3000}]' # listen ports
     alb.ingress.kubernetes.io/actions.ssl-redirect: > # redirect to https
       {"type": "redirect", "redirectConfig": { "protocol": "HTTPS", "port": "443", "statusCode": "HTTP_301"}}
