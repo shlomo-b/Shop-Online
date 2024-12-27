@@ -11,9 +11,15 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: blackjack
+  ignoreDifferences:
+    - group: "apps"
+      kind: "Deployment"
+      jsonPointers:
+      - /spec/replicas  
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
+      - RespectIgnoreDifferences=true
       
     # track and sync all git changes the argo will check every 3 minutes
     automated:
