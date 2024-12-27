@@ -19,15 +19,15 @@ spec:
         type: Utilization
         averageUtilization: 50
 
-  behvaior:
+  behavior:
     scaleUp:
-      stabilizationWindowSeconds: 60 # the time that the hpa will wait before scaling
-      policys:
-      - type: Percent
-        value: 50
+      stabilizationWindowSeconds: 60
+      policies:
+        - type: Percent
+          value: 50
     scaleDown:
-      stabilizationWindowSeconds: 10 # the time that the hpa will wait before scaling
-      policys:
-      - type: Percent
-        value: 90
-        preiiodSeconds: 15 # the time that the hpa will wait before scaling
+      stabilizationWindowSeconds: 10
+      policies:
+        - type: Percent
+          value: 50
+          periodSeconds: 15
