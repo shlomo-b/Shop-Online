@@ -8,7 +8,7 @@ spec:
   # after the deployment will run the hpa will control the number of pods
     apiVersion: apps/v1
     kind: Deployment
-    name: blackjack  # the name of the deployment from deployment file application
+    name: deployment-blackjack  # the name of the deployment from deployment file application
   minReplicas: 1
   maxReplicas: 6
   metrics:
