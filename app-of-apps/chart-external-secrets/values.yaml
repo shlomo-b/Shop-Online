@@ -1,4 +1,4 @@
-externalSecrets:
+external-secrets:
   enabled: true
   replicaCount: 1
   installCRDs: true
