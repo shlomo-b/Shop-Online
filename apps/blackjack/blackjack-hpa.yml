@@ -24,6 +24,7 @@ spec:
       policies:
         - type: Percent
           value: 50
+          periodSeconds: 15
     scaleDown:
       stabilizationWindowSeconds: 10 # the time that the HPA will wait before scaling
       policies:
