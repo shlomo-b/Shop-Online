@@ -8,7 +8,6 @@ metadata:
     keel.sh/policy: "all"
     keel.sh/trigger: "poll"
     keel.sh/pollSchedule: "@every 3m"
-    argocd.argoproj.io/sync-options: RespectIgnoreDifferences=true
 spec:
   selector:
     matchLabels:
