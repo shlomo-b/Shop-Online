@@ -8,6 +8,10 @@ metadata:
     keel.sh/policy: "all"
     keel.sh/trigger: "poll"
     keel.sh/pollSchedule: "@every 3m"
+    metrics.server/scrape: "true"
+    metrics.server/path: "/metrics"
+    metrics.server/port: "80"
+
 spec:
   selector:
     matchLabels:
