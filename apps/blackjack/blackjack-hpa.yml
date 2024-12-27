@@ -10,7 +10,7 @@ spec:
     kind: Deployment
     name: deployment-blackjack  # the name of the deployment from deployment file application
   minReplicas: 1
-  maxReplicas: 6
+  maxReplicas: 3
   metrics:
   - type: Resource
     resource:
