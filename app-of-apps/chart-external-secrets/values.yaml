@@ -1,9 +1,10 @@
-enabled: true
-replicaCount: 1
-installCRDs: true
-scopedRBAC: true
-serviceAccount:
-  create: true
-  name: external-secrets
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::148088962203:role/external-secrets-role
+externalSecrets:
+  enabled: true
+  replicaCount: 1
+  installCRDs: true
+  scopedRBAC: true
+  serviceAccount:
+    create: true
+    name: external-secrets
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::148088962203:role/external-secrets-role
