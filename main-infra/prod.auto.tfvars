@@ -63,9 +63,9 @@ sgs = {
           description = "all"
           cidr_blocks = "10.0.11.0/24"
         }
-          access_from_lan = {
-          from_port   = 443
-          to_port     = 443
+          access_from_https = {
+          from_port   = 0
+          to_port     = 0
           protocol    = "-1"
           description = "all"
           cidr_blocks = "0.0.0.0/0"
