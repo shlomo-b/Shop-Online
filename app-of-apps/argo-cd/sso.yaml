@@ -28,7 +28,7 @@ metadata:
   creationTimestamp: "2024-12-27T14:00:23+02:00"
   labels:
     app.kubernetes.io/name: argocd-cm
-    app.kubernetes.io/part-of: argocd
+    app.kubernetes.io/part-of: argocd-cm
   name: argocd-cm
   namespace: argo-cd
   resourceVersion: "2025170"
@@ -53,9 +53,9 @@ metadata:
       {"apiVersion":"v1","kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/name":"Argo CD-rbac-cm","app.kubernetes.io/part-of":"Argo CD"},"name":"Argo CD-rbac-cm","namespace":"Argo CD"}}
   creationTimestamp: "2024-07-08T00:15:02Z"
   labels:
-    app.kubernetes.io/name: Argo CD-rbac-cm
-    app.kubernetes.io/part-of: Argo CD
-  name: Argo CD-rbac-cm
+    app.kubernetes.io/name: argo-cd-rbac-cm
+    app.kubernetes.io/part-of: argo-cd
+  name: argo-cd-rbac-cm
   namespace: argo-cd
   resourceVersion: "2014680"
   uid: dca1d187-ba8f-4eea-ad41-55923de13e11
