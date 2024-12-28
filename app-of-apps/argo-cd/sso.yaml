@@ -19,7 +19,7 @@ data:
         groupsAttr: Group
         groupDisplayNameAttribute: name
         groupDisplayNameFormat: {.name}
-  url: https://argo-cd.spider-shlomo.com
+  url: https://localhost:8080
 kind: ConfigMap
 metadata:
   annotations:
