@@ -12,9 +12,9 @@ spec:
     server: https://kubernetes.default.svc
     namespace: blackjack
   ignoreDifferences:
-    - group: "apps"
+    - group: "apps" # the group of the resource including the kind deployment
       kind: "Deployment"
-      jsonPointers:
+      jsonPointers: # the json pointers to ignore, its deployment.
       - /spec/replicas  
   syncPolicy:
     syncOptions:
