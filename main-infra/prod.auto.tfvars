@@ -68,7 +68,7 @@ sgs = {
           to_port     = 0
           protocol    = "-1"
           description = "all"
-          cidr_blocks = "0.0.0.0/0"
+          cidr_blocks = "10.90.100.0/24"
         }
   }  
   }
