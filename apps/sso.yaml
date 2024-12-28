@@ -9,7 +9,7 @@ data:
       id: saml
       name: saml
       config:
-        entityIssuer: https://argo-cd.spider-shlomo.com/api/dex/callback
+        entityIssuer: https://argo-cd.spider-shlomo.com
         ssoURL: https://login.microsoftonline.com/a2724ae3-73eb-4b45-ba62-f432da279e2c/saml2
         redirectURI: https://argo-cd.spider-shlomo.com/api/dex/callback
         usernameAttr: email
@@ -19,13 +19,13 @@ data:
         groupDisplayNameFormat: {.name}
         caData: |
           LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tDQpNSUlDOERDQ0FkaWdBd0lCQWdJUVkrSU43TXQ2U1lsRzA2a1ZtL2ptb0RBTkJna3Foa2lHOXcwQkFRc0ZBREEwTVRJd01BWURWUVFEDQpFeWxOYVdOeWIzTnZablFnUVhwMWNtVWdSbVZrWlhKaGRHVmtJRk5UVHlCRFpYSjBhV1pwWTJGMFpUQWVGdzB5TkRFeU1qY3hNVE0zDQpNVFphRncweU56RXlNamN4TVRNM01UWmFNRFF4TWpBd0JnTlZCQU1US1UxcFkzSnZjMjltZENCQmVuVnlaU0JHWldSbGNtRjBaV1FnDQpVMU5QSUVObGNuUnBabWxqWVhSbE1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBNzdMbmovcEdzUXhPDQp1WW9pYlg1aDJpeCtxc1hPMC9OQTNiTEU1b0pWRWZWYk8vMDNYRDJ5UFJveG02VW5LZlIrVkR1UXBieXNmekdsaEoycENsMmYwaHhiDQpnbXVSMk91TTMvTEVpMlFkQ1pkMFM4V09OQTBCRTUxWm1pWUtCZzZMbGwyY1RGcU0vSGZ3OGhsSnN3OG4xWGF1VjQ5eXZmMUdUTWxODQpXMjhxa1RGSHZudlNKa256K0JacjNSM3N5ZXBYblorUVdWRXArQkRrQlc4dHY2QkZDckY0Qi9heVpWK05jRWRwYmJUZVVBbGhWT2JCDQpYaDc0RExReTdYYmZMMlRwU28yeVh6aGVRRkdjN1FMNG5YS3FQNHU4enIvTkFQMGNTcVZyOFkyZzlwcG1xb2xZUGNWZWFXMUV1aWZ5DQpQcUQvOUxoWDYzT3paRm1aUDNwNStBTFZzUUlEQVFBQk1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQVRRM3pkekh2MUlJOFJIejRLDQpQNVFJaFhZWUczWkRMRkRRa3NtQjROTHdnSFVSUVVWOGYzR0xaKzFmWWR4bU9jQm54TllNbzYvdkxJVjlKTWc2QXNSYzNoclR6TjZNDQp6RVhqNTlydjF0VHdDdGlHREJ5MUdKUEdqbmJiZWNKeTJSZEJzaTVuQXhVWHJJVys1RkM2SGZ0RnEwNVJtbm1YUTdWb1lYK0JsTC9HDQpyNW5HZm5COUo0Nlp0N0RwdEc2Rkl2bVdJa1cwM1NFNWpmemQ2MVdaL05vSWkyQ0hseDZ4L2xYbnNML0ZhMVpROEhaVWdWWFVMVjYvDQptOHpYUEdQb1AxVXBDU3dwSHR4MWQrYk5UN3JwN3ltNWtkaCszZSsxNXRqQVM4SlNMUVgvam5SajFETEF3RFA3WG9PODV2eVA2VDBTDQpicVREWEtXTWZtL0RIZWxtR21uUw0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ0K
-  url: https://localhost:8080
+  url: https://argo-cd.spider-shlomo.com
+  dexserver: https://argocd-dex-server.argo-cd.svc.cluster.local:5556
 kind: ConfigMap
 metadata:
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
       {"apiVersion":"v1","kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/name":"argo-cd-cm","app.kubernetes.io/part-of":"Argo-CD"},"name":"argo-cd-cm","namespace":"argo-cd"}}
-  creationTimestamp: "2024-12-27T14:00:23+02:00"
   labels:
     app.kubernetes.io/name: argo-cd-cm
     app.kubernetes.io/part-of: argo-cd-cm
