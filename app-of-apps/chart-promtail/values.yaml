@@ -7,6 +7,7 @@ promtail:
     enabled: true
     logFormat: logfm
     logLevel: info
+    serverPort: 3101
     clients:
       - url: http://10.90.100.251:3100/loki/api/v1/push # my loki server on on-premises
   sidecar:
@@ -19,13 +20,7 @@ promtail:
         requests:
           cpu: 100m
           memory: 128Mi
-
-  extraPorts:
-    syslog:
-      name: tcp-syslog
-      containerPort: 1514
-      protocol: TCP
-      service:
-        type: ClusterIP
-        port: 1514
-      
+  service:
+    enabled: true
+    type: ClusterIP
+    port: 3101 # the port svc that expose and use for helthcheck
