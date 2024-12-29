@@ -1,0 +1,14 @@
+promtail:
+  serviceAccount:
+    create: true
+  deployment:
+    replicas: 1  
+  clients:
+    - url: http://10.90.100.251:3100/loki/api/v1/push # my loki server on on-premises
+  resources:
+  limits:
+    cpu: 200m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
