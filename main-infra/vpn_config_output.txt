@@ -1,0 +1,12 @@
+{
+  "tunnel1_preshared_key": "idpF_6zqgikkaMB1AkX0xoJXK2dhwhXv",
+  "tunnel2_preshared_key": "4AGzKTNf.t2DppibRCmLY7t_LKNFX8Db",
+  "vpn_connection_id": "vpn-022cd9bc01deb394b",
+  "vpn_connection_transit_gateway_attachment_id": "",
+  "vpn_connection_tunnel1_address": "18.214.248.68",
+  "vpn_connection_tunnel1_cgw_inside_address": "169.254.84.194",
+  "vpn_connection_tunnel1_vgw_inside_address": "169.254.84.193",
+  "vpn_connection_tunnel2_address": "34.235.25.69",
+  "vpn_connection_tunnel2_cgw_inside_address": "169.254.55.246",
+  "vpn_connection_tunnel2_vgw_inside_address": "169.254.55.245"
+}
