@@ -84,15 +84,15 @@ jobs:
         TF_VAR_db_username: ${{ secrets.DB_USERNAME }}
         TF_VAR_db_password: ${{ secrets.DB_PASSWORD }}
 
-    # - name: Install Helm Chart Argo-cd
-    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    #   run: |
-    #     aws eks update-kubeconfig --name my-cluster --region us-east-1
-    #      helm repo add argo https://argoproj.github.io/argo-helm
-    #      helm repo update
-    #      helm install my-argo-cd argo/argo-cd --namespace argo-cd --create-namespace --version 7.6.12
-    #      kubectl apply -f secret-argo.yml
-    #   working-directory: ./app-of-apps  
+    - name: Install Helm Chart Argo-cd
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        aws eks update-kubeconfig --name my-cluster --region us-east-1
+         helm repo add argo https://argoproj.github.io/argo-helm
+         helm repo update
+         helm install my-argo-cd argo/argo-cd --namespace argo-cd --create-namespace --version 7.6.12
+         kubectl apply -f secret-argo.yml
+      working-directory: ./app-of-apps  
 
       # Terraform Output: Show the outputs of the Terraform
     - name: Terraform Output
