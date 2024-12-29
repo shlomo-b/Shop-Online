@@ -12,6 +12,7 @@ resource "aws_vpn_gateway" "main" {
   tags = {
     Name = "main-vpn-gateway"
   }
+ # depends_on = [ module.vpn_gateway ]
 }
 
 resource "aws_vpn_connection" "main" {

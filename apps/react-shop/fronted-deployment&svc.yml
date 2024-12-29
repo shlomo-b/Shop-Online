@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: lab4
-        image: shlomobarzili/lab4-react-pronted:latest
+        image: shlomobarzili/react-fronted:latest
         imagePullPolicy: Always
         ports:
         - name: http
