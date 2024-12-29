@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: mongodb
-        image: shlomobarzili/lab4-mongo:latest
+        image: shlomobarzili/shlomobarzili/mongodb:latest
         ports:
         - containerPort: 27017
 
