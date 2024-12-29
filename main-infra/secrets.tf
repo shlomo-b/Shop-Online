@@ -33,5 +33,5 @@ resource "aws_secretsmanager_secret_version" "db_credentials" {
       name = "my-secrets"
     }
   })
-  # depends_on = [ module.db ]
+   depends_on = [ module.eks ]
 }
