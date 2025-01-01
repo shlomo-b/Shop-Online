@@ -4,11 +4,11 @@ on:
   push: 
     branches: [ "main" ]
     paths:
-      - 'react-shop-ci/backend/**'
+      - 'react-shop-app/backend/**'
   pull_request:
       # when have changes to this folder it's will be triger.
     paths:
-      - 'react-shop-ci/backend/**'
+      - 'react-shop-app/backend/**'
 
 jobs:
   docker:
@@ -42,7 +42,7 @@ jobs:
         name: Scan Docker Image for Vulnerabilities
         uses: aquasecurity/trivy-action@0.28.0 
         with:
-          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/blackjack:latest  
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/flask-backend:latest  
       -
         # Build the image and push it to dockerhub.
         name: Build and push
@@ -50,7 +50,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
-          file: ./react-shop-ci/backend/Dockerfile # the route of the file Dockerfile
+          file: ./react-shop-app/backend/Dockerfile # the route of the file Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64 # build for amd and arm
        # sync the image with the latest version   
