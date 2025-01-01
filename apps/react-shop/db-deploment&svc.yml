@@ -50,7 +50,7 @@ spec:
 
         volumeMounts:
         - name: react-shop-storage
-          mountPath: /storage-data
+          mountPath: /data/db
       volumes:
         - name: react-shop-storage
           persistentVolumeClaim:

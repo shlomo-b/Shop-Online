@@ -1,7 +1,7 @@
 resource "aws_customer_gateway" "main" {
   ip_address = "84.228.161.67"
   type       = "ipsec.1"
-  bgp_asn   = null
+  bgp_asn    = "65000"
 
   tags = {
     Name = "main-customer-gateway"
@@ -22,9 +22,9 @@ resource "aws_vpn_connection" "main" {
 
   static_routes_only = true
 
-  tags = {
-    Name = "vpn-static-connection"
-  }
+ lifecycle {
+    ignore_changes = [tags]
+ }
 }
 
 
@@ -65,6 +65,7 @@ locals {
   "vpn_connection_tunnel2_vgw_inside_address": "${module.vpn_gateway.vpn_connection_tunnel2_vgw_inside_address}"
 }
 EOF
+
 }
 
 # Save VPN configuration to a text file
