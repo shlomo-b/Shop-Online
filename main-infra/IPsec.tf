@@ -7,7 +7,7 @@ resource "aws_customer_gateway" "main" {
     Name = "main-customer-gateway"
   }
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
