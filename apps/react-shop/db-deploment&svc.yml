@@ -48,6 +48,14 @@ spec:
             cpu: 200m
             memory: 256Mi
 
+        volumeMounts:
+        - name: react-shop-storage
+          mountPath: /storage-data
+      volumes:
+        - name: react-shop-storage
+          persistentVolumeClaim:
+            claimName: react-shop-pvc      
+
 ---
 apiVersion: v1
 kind: Service
