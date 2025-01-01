@@ -47,7 +47,7 @@ def track_request_start():
 
 @app.after_request
 def track_request_end(response):
-    # Measure request duration
+    # Measure request duration ##
     if hasattr(g, 'start_time'):
         request_duration = time.time() - g.start_time
         HTTP_REQUEST_DURATION.labels(method=request.method, endpoint=request.path).observe(request_duration)
