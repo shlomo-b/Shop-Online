@@ -4,11 +4,11 @@ on:
   push: 
     branches: [ "main" ]
     paths:
-      - 'blackjack-ci/**'
+      - 'react-shop-ci/backend/**'
   pull_request:
       # when have changes to this folder it's will be triger.
     paths:
-      - 'blackjack-ci/**'
+      - 'react-shop-ci/backend/**'
 
 jobs:
   docker:
@@ -50,10 +50,10 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
-          file: ./blackjack-ci/Dockerfile # the route of the file Dockerfile
+          file: ./react-shop-ci/backend/Dockerfile # the route of the file Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64 # build for amd and arm
        # sync the image with the latest version   
           tags: | 
-            ${{ secrets.DOCKERHUB_USERNAME }}/blackjack:${{ github.run_id }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/blackjack:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/flask-backend:${{ github.run_id }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/flask-backend:latest
