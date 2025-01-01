@@ -66,6 +66,15 @@ jobs:
     - name: Terraform Validate
       run: terraform validate
       working-directory: ./main-infra  
+    
+    - name: Debug Environment Variables
+      run: |
+        echo "DB Username: $TF_VAR_db_username"
+        echo "DB Password: $TF_VAR_db_password"
+      env:
+        TF_VAR_db_username: ${{ secrets.DB_USERNAME }}
+        TF_VAR_db_password: ${{ secrets.DB_PASSWORD }}
+      
       
     # Terraform Plan: Generate and show an execution plan
     - name: Terraform Plan
