@@ -12,7 +12,7 @@ ENV WDS_SOCKET_PORT=0
 ENV CHOKIDAR_USEPOLLING=true
 
 # Environment variable for backend URL
-# Note: This will be overridden by docker-compose environment settings
+# Note: This will be overridden by docker-compose environment settings (see docker-compose.override.yml)
 ENV REACT_APP_API_URL=http://localhost:5050
 
 # Install development tools

@@ -1,14 +1,14 @@
-name: Docker Image CI Blackjack
+name: Docker Image CI Frontend
 
 on:
   push: 
     branches: [ "main" ]
     paths:
-      - 'blackjack-ci/**'
+      - 'react-shop-app/frontend/**'
   pull_request:
       # when have changes to this folder it's will be triger.
     paths:
-      - 'blackjack-ci/**'
+      - 'react-shop-app/frontend/**'
 
 jobs:
   docker:
@@ -42,7 +42,7 @@ jobs:
         name: Scan Docker Image for Vulnerabilities
         uses: aquasecurity/trivy-action@0.28.0 
         with:
-          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/blackjack:latest  
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:latest  
       -
         # Build the image and push it to dockerhub.
         name: Build and push
@@ -50,10 +50,10 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
-          file: ./blackjack-ci/Dockerfile # the route of the file Dockerfile
+          file: ./react-shop-app/frontend/Dockerfile # the route of the file Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64 # build for amd and arm
        # sync the image with the latest version   
           tags: | 
-            ${{ secrets.DOCKERHUB_USERNAME }}/blackjack:${{ github.run_id }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/blackjack:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ github.run_id }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:latest
