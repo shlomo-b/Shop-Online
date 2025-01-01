@@ -85,7 +85,7 @@ variable "db_username" {
   description = "Database root username"
   type        = string
   default = "value"
-  sensitive   = true
+  sensitive = true
 }
 
 variable "db_password" {

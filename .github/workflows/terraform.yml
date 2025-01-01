@@ -66,7 +66,7 @@ jobs:
     - name: Terraform Validate
       run: terraform validate
       working-directory: ./main-infra  
-      
+       
     # Terraform Plan: Generate and show an execution plan
     - name: Terraform Plan
       run: terraform plan -input=false # -no-color
@@ -77,13 +77,17 @@ jobs:
       # It's will be trigger when i push/merge to main branch
       
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false # -no-color
+      # run: terraform apply -auto-approve -input=false # -no-color
       working-directory: ./main-infra
       env:
          # environment variables for DB
         TF_VAR_db_username: ${{ secrets.DB_USERNAME }}
         TF_VAR_db_password: ${{ secrets.DB_PASSWORD }}
-
+      run: |
+        terraform apply -auto-approve -input=false \
+        -var="db_username=${TF_VAR_db_username}" \
+        -var="db_password=${TF_VAR_db_password}"  
+        
     - name: Install Helm Chart Argo-cd
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: |
