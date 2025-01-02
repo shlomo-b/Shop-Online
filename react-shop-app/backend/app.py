@@ -12,8 +12,8 @@ from flask import Flask, Response, render_template, request, g
 
 app = Flask(__name__)
 
-GAMES_PLAYED = Counter('games_played', 'Number of Blackjack games played')
-SITE_VISITS = Counter('site_visits', 'Number of visits to the Blackjack site')
+GAMES_PLAYED = Counter('react_online_shop', 'Number of sales made')
+SITE_VISITS = Counter('site_visits', 'Number of visits to the shop site')
 
 # System metrics
 CPU_USAGE = Gauge('cpu_usage_percent', 'Current CPU usage in percent')
