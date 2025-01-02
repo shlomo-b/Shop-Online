@@ -8,10 +8,10 @@ spec:
     # after the deployment runs, the HPA will control the number of pods
     apiVersion: apps/v1
     kind: Deployment
-    name: 
-      - react-fronted
-      - backend
-      - mongodb-deployment  # the name of the deployment from deployment file application
+    name: react-fronted
+    #  - react-fronted
+    #  - backend
+    #  - mongodb-deployment  # the name of the deployment from deployment file application
   minReplicas: 1
   maxReplicas: 3
   metrics:
