@@ -7,6 +7,10 @@ keel:
   images:
     - repository: shlomobarzili/blackjack # Docker Hub repository name
       tag: latest # Track the 'latest' tag, or you can use dynamic tags like commit hash
+    - repository: shlomobarzili/react-fronted
+      tag: latest
+    - repository: shlomobarzili/flask-backend
+      tag: latest
 
   aws:
     region: us-east-1
