@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-front
+  name: react-fronted  # react-front
   namespace: react-shop
 spec:
   selector:
