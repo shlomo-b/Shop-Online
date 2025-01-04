@@ -6,6 +6,7 @@
     params:
       server.insecure: true
     cm:
+      # SSO Configuration via AzureAd
       url: https://argo-cd.spider-shlomo.com
       dex.config: |
           logger:
@@ -24,6 +25,7 @@
               usernameAttr: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
               emailAttr: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
 
+    # RBAC for application argo cd
     rbac:
       policy.default: role:readonly
       policy.csv: |
@@ -31,7 +33,8 @@
         p, role:org-admin, clusters, get, *, allow
         g, "Shlomo_lab@spider-shlomo.com", role:org-admin
         g, "shlomobarzili@gmail.com", role:org-admin   
-
+  
+  # alb for argo cd
   server:
     ingress:
       enabled: true
