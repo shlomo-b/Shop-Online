@@ -11,15 +11,15 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: react-shop
-  ignoreDifferences:
-    - group: "apps" # the group of the resource including the kind deployment
-      kind: "Deployment"
-      jsonPointers: # the json pointers to ignore, its deployment.
-      - /spec/replicas    
+  # ignoreDifferences:
+  #   - group: "apps" # the group of the resource including the kind deployment
+  #     kind: "Deployment"
+  #     jsonPointers: # the json pointers to ignore, its deployment.
+  #     - /spec/replicas    
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-      - RespectIgnoreDifferences=true
+    #  - RespectIgnoreDifferences=true
       
     # track and sync all git changes the argo will check every 3 minutes
     automated:

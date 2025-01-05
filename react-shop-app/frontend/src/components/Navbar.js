@@ -15,7 +15,7 @@ function Navbar({ isAuthenticated, username, setIsAuthenticated }) {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <ShoppingBag className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
-              <span className="text-xl font-bold text-gray-900 dark:text-white">React Shop</span>
+              <span className="text-xl font-bold text-gray-900 dark:text-white">Shop Online</span>
             </Link>
           </div>
 
