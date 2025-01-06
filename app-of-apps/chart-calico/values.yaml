@@ -1,11 +1,11 @@
-# tigera-operator:
-#   installation:
-#     enabled: true
-#     kubernetesProvider: EKS  # Specify EKS as the provider
-#     name: tigera-operator  
-#     calicoNetwork:
-#       # Explicitly enable VPC-CNI integration
-#       vpcCni:
-#         enabled: true
-#       # Empty ipPools to ensure Calico doesn't try to manage IP allocation
-#       ipPools: []
+tigera-operator:
+  installation:
+    enabled: true
+    kubernetesProvider: EKS  # Specify EKS as the provider
+    name: tigera-operator  
+    calicoNetwork:
+      # Explicitly enable VPC-CNI integration
+      vpcCni:
+        enabled: true
+      # Empty ipPools to ensure Calico doesn't try to manage IP allocation
+      ipPools: []
