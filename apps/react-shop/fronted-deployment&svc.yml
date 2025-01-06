@@ -32,7 +32,7 @@ spec:
             cpu: 100m
             memory: 512Mi
           limits:
-            cpu: 200m
+            cpu: 500m
             memory: 1Gi
         env:
           - name: REACT_APP_API_URL
