@@ -27,7 +27,7 @@
 
     # RBAC for application argo cd
     rbac:
-      policy.default: role:readonly
+      policy.default: role:admin
       policy.csv: |
         p, role:role:admin, *, *, *, allow
         g, "Shlomo_lab@spider-shlomo.com", role:admin
