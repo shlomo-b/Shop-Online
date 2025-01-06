@@ -29,11 +29,9 @@
     rbac:
       policy.default: role:readonly
       policy.csv: |
-        p, role:org-admin, applications, *, */*, allow
-        p, role:org-admin, clusters, get, *, allow
-        g, "Shlomo_lab@spider-shlomo.com", role:org-admin
-        g, "shlomobarzili@gmail.com", role:org-admin   
-  
+        p, role:role:admin, *, *, *, allow
+        g, "Shlomo_lab@spider-shlomo.com", role:admin
+        g, "shlomobarzili@gmail.com", role:admin
   # alb for argo cd
   server:
     ingress:
