@@ -1,4 +1,5 @@
 tigera-operator:
+  installCRDs: true
   installation:
     enabled: true
     kubernetesProvider: "EKS"
