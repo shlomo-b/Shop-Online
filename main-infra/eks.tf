@@ -46,9 +46,9 @@ module "eks" {
       ami_type       = "AL2023_x86_64_STANDARD"
       instance_types = var.instance_types
 
-      min_size     = 1
-      max_size     = 5
-      desired_size = 1
+      min_size     = var.min_size
+      max_size     = var.max_size
+      desired_size = var.desired_size
       vpc_security_group_ids = [module.sgs["vpc-one"].security_group_id]
     }
   }

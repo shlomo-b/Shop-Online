@@ -79,6 +79,20 @@ variable "instance_types" {
   type = list(string)
 }
 
+variable "min_size" {
+  default = 1
+  type = number
+}
+
+variable "max_size" {
+  default = 5
+  type = number
+}
+variable "desired_size" {
+  default = 1
+  type = number
+  
+}
 #----------------DB CREDENTIALS------------------#
 
 variable "db_username" {
