@@ -1,7 +1,7 @@
 #---------------region-------------------#
 
 variable "aws_region" {
-  default = ["eu-central-1", "us-east-1"] # first: frankfurt , secound: virginia
+  default = ["eu-central-1", "us-east-1"]
   type    = list(string)
 }
 
@@ -88,6 +88,7 @@ variable "max_size" {
   default = 5
   type = number
 }
+
 variable "desired_size" {
   default = 1
   type = number
