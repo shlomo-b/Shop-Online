@@ -116,7 +116,7 @@ acm = {
       name = "acm-argo-cd"
     }
   }
-   "fronted-cd.spider-shlomo.com" = {
+   "fronted.spider-shlomo.com" = {
     domain_name   =  ["fronted-cd.spider-shlomo.com"]
     tags = {
       name = "acm-fronted"
