@@ -37,7 +37,7 @@
       - configMapRef:
           name: Azure-AD-SSO      
 
-  extraObjects:
+  extraObjects: |
       - apiVersion: external-secrets.io/v1beta1
         kind: ExternalSecret
         metadata:
