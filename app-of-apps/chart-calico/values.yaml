@@ -2,10 +2,10 @@ tigera-operator:
   installCRDs: true
   installation:
     enabled: true
-    kubernetesProvider: "EKS"
-  apiServer:
-    enabled: true
-    namespace: default
+    kubernetesProvider: EKS
+  # apiServer:
+  #   enabled: true
+  #   namespace: default
 
     # calicoNetwork:
     #   # Explicitly enable VPC-CNI integration
