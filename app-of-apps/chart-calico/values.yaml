@@ -2,7 +2,7 @@ tigera-operator:
   installCRDs: true
   installation:
     enabled: true
-    kubernetesProvider: " "
+    kubernetesProvider: "EKS"
   apiServer:
     enabled: true  
     # calicoNetwork:
