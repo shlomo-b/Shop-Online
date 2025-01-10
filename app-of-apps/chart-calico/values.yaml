@@ -5,7 +5,7 @@ tigera-operator:
     kubernetesProvider: "EKS"
   apiServer:
     enabled: true
-    namespace: tigera-operator
+    namespace: default
 
     # calicoNetwork:
     #   # Explicitly enable VPC-CNI integration
