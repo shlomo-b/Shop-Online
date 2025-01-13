@@ -24,7 +24,7 @@ RUN pip install --no-cache-dir -r requirements.txt && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy application code
-COPY react-shop-app/backend/app.py .
+COPY shop-online-app/backend/app.py .
 
 # Expose port
 EXPOSE 5050
