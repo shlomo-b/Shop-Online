@@ -23,7 +23,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy application files
-COPY react-shop-app/frontend .
+COPY shop-online-app/frontend .
 
 # Expose port
 EXPOSE 3000
