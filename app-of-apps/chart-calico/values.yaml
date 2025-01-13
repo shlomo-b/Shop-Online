@@ -4,7 +4,7 @@ tigera-operator:
     enabled: true
     kubernetesProvider: "EKS"
   kubernetesServiceEndpoint:
-    host: "my-cluster.eks.us-east-1.amazonaws.com"
+    host: "22AC5C0E0E7038B0E23204AD614607BA.gr7.us-east-1.eks.amazonaws.com"
     port: "6443"  
 
   # apiServer:
