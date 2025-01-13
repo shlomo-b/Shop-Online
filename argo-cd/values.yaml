@@ -19,7 +19,7 @@
             config: 
               entityIssuer: https://argo-cd.spider-shlomo.com/api/dex/callback
               ssoURL: https://login.microsoftonline.com/a2724ae3-73eb-4b45-ba62-f432da279e2c/saml2
-              caData: $aws-secret
+              caData: $Cert-SSO
               redirectURI: https://argo-cd.spider-shlomo.com/api/dex/callback
               usernameAttr: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
               emailAttr: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
