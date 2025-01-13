@@ -3,9 +3,7 @@ tigera-operator:
   installation:
     enabled: true
     kubernetesProvider: "EKS"
-  serviceAccount:
-    create: true
-    name: calico-service-account  
+    registry: "quay.io/tigera"
 
   # apiServer:
   #   enabled: true
