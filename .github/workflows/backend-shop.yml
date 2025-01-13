@@ -4,11 +4,11 @@ on:
   push: 
     branches: [ "main" ]
     paths:
-      - 'react-shop-app/backend/**'
+      - 'shop-online-app/backend/**'
   pull_request:
       # when have changes to this folder it's will be triger.
     paths:
-      - 'react-shop-app/backend/**'
+      - 'shop-online-app/backend/**'
 
 jobs:
   docker:
@@ -50,7 +50,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
-          file: ./react-shop-app/backend/Dockerfile # the route of the file Dockerfile
+          file: ./shop-online-app/backend/Dockerfile # the route of the file Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64 # build for amd and arm
        # sync the image with the latest version   
