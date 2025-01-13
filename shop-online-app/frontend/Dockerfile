@@ -3,7 +3,7 @@ FROM node
 WORKDIR /app
 
 # Install dependencies first (better caching)
-COPY react-shop-app/frontend/package*.json ./
+COPY shop-online-app/frontend/package*.json ./
 RUN npm ci --silent
 
 # Required for Create React App's development mode in container
