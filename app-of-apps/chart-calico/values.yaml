@@ -3,7 +3,9 @@ tigera-operator:
   installation:
     enabled: true
     kubernetesProvider: "EKS"
-    registry: "quay.io/tigera"
+  kubernetesServiceEndpoint:
+    host: "my-cluster.eks.us-east-1.amazonaws.com"
+    port: "6443"  
 
   # apiServer:
   #   enabled: true
