@@ -99,8 +99,15 @@ jobs:
          sleep 45
          kubectl apply -f root-application.yaml
       working-directory: ./app-of-apps  
+    
+    - name: Install ClusterSecretStore
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        aws eks update-kubeconfig --name my-cluster --region us-east-1
+         sleep 45
+         kubectl apply -f ClusterSecretStore-application.yml
+      working-directory: ./apps/ClusterSecretStore
 
-      # Terraform Output: Show the outputs of the Terraform
     - name: Terraform Output
       run: terraform output
-      working-directory: ./main-infra 
+      working-directory: ./main-infra
