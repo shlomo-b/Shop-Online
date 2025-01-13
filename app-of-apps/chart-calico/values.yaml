@@ -1,8 +1,8 @@
 tigera-operator:
-  installCRDs: true
+ # installCRDs: true
   installation:
     enabled: true
-    kubernetesProvider: ""
+    kubernetesProvider: "EKS"
   # apiServer:
   #   enabled: true
   #   namespace: default
