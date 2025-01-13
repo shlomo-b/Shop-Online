@@ -1,8 +1,12 @@
 tigera-operator:
- # installCRDs: true
+  installCRDs: true
   installation:
     enabled: true
     kubernetesProvider: "EKS"
+  serviceAccount:
+    create: true
+    name: calico-service-account  
+
   # apiServer:
   #   enabled: true
   #   namespace: default
