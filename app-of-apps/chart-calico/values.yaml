@@ -1,11 +1,11 @@
 tigera-operator:
-  installCRDs: true
+ # installCRDs: true
   installation:
     enabled: true
     kubernetesProvider: "EKS"
-  kubernetesServiceEndpoint:
-    host: "22AC5C0E0E7038B0E23204AD614607BA.gr7.us-east-1.eks.amazonaws.com"
-    port: "6443"  
+  # kubernetesServiceEndpoint:
+  #   host: "22AC5C0E0E7038B0E23204AD614607BA.gr7.us-east-1.eks.amazonaws.com"
+  #   port: "6443"  
 
   # apiServer:
   #   enabled: true
