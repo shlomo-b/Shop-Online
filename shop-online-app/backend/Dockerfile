@@ -10,7 +10,7 @@ ENV MONGO_DB_USERNAME=root \
     MONGO_DB_HOST=mongo
 
 # Copy requirements first to leverage Docker cache
-COPY react-shop-app/backend/requirements.txt .
+COPY shop-online-app/backend/requirements.txt .
 
 # Install dependencies in a single RUN command to reduce layers
 # Clean up apt cache to reduce image size
