@@ -19,7 +19,7 @@
             config: 
               entityIssuer: https://argo-cd.spider-shlomo.com/api/dex/callback
               ssoURL: https://login.microsoftonline.com/a2724ae3-73eb-4b45-ba62-f432da279e2c/saml2
-              caData: ${Azure-AD-SSO}
+              caData: $aws-secret
               redirectURI: https://argo-cd.spider-shlomo.com/api/dex/callback
               usernameAttr: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
               emailAttr: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
@@ -33,10 +33,11 @@
         g, "Shlomo_lab@spider-shlomo.com", role:admin
         g, "shlomobarzili@gmail.com", role:admin
 
-  dex:
-    envFrom:
-      - secretRef:
-          name: aws-secret   
+  controller:
+      envFrom:
+        - secretRef:
+            name: aws-secret
+            
 
   # Ingress for argo cd  
   server:
@@ -56,5 +57,3 @@
       aws:
         serviceType: ClusterIP # <- Used with target-type: ip
         backendProtocolVersion: GRPC
-
-        
