@@ -59,7 +59,7 @@ jobs:
           -backend-config="bucket=shlomo-project-ci-cd" \
           -backend-config="key=first-project-ci-cd/terraform.tfstate" \
           -backend-config="region=us-east-1" \
-          -input=false  #-no-color
+          -input=false
       working-directory: ./main-infra  
 
     # Terraform Validate: Validate the Terraform configuration files of the tf 
@@ -96,9 +96,10 @@ jobs:
          helm repo update
          helm install my-argo-cd argo/argo-cd --namespace argo-cd --create-namespace --version 7.6.12
          kubectl apply -f secret-argo.yml
+         kubectl apply -f root-application.yaml
       working-directory: ./app-of-apps  
 
       # Terraform Output: Show the outputs of the Terraform
     - name: Terraform Output
-      run: terraform output # -no-color
+      run: terraform output
       working-directory: ./main-infra 
