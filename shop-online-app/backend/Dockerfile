@@ -11,9 +11,9 @@ ARG MONGO_DB_HOST
 WORKDIR /app
 
 # Set environment variables for MongoDB connection
-ENV MONGO_DB_USERNAME=$MONGO_DB_USERNAME
-ENV MONGO_DB_PASSWORD=$MONGO_DB_PASSWORD
-ENV MONGO_DB_HOST=$MONGO_DB_HOST
+ENV MONGO_DB_USERNAME=${MONGO_DB_USERNAME}
+ENV MONGO_DB_PASSWORD=${MONGO_DB_PASSWORD}
+ENV MONGO_DB_HOST=${MONGO_DB_HOST}
 
 # Copy requirements first to leverage Docker cache
 COPY shop-online-app/backend/requirements.txt .
