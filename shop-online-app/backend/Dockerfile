@@ -5,6 +5,11 @@ FROM python:3.12.0-slim
 WORKDIR /app
 
 
+# Accept build arguments
+ARG MONGO_DB_USERNAME
+ARG MONGO_DB_PASSWORD
+ARG MONGO_DB_HOST
+
 # Set environment variables for MongoDB connection
 ENV MONGO_DB_USERNAME=$MONGO_DB_USERNAME
 ENV MONGO_DB_PASSWORD=$MONGO_DB_PASSWORD
