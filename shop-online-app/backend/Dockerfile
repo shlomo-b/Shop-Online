@@ -1,12 +1,6 @@
 # Use slim variant for smaller image size
 FROM python:3.12.0-slim
 
-
-# Accept build arguments first
-ARG MONGO_DB_USERNAME
-ARG MONGO_DB_PASSWORD
-ARG MONGO_DB_HOST
-
 # Set environment variables for MongoDB connection
 ENV MONGO_DB_USERNAME=root \
     MONGO_DB_PASSWORD=example \
