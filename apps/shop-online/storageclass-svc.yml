@@ -30,7 +30,8 @@ metadata:
     argocd.argoproj.io/sync-warn: "1"
 spec:
   accessModes:
-    - ReadWriteOnce
+   # - ReadWriteOnce
+    - ReadWriteMany 
   storageClassName: ebs-sc # the name of the StorageClass
   resources:
     requests:
