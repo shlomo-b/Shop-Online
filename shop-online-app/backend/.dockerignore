@@ -1,0 +1,12 @@
+# Environment files
+.env
+.env.*
+*.env
+
+# Other common files to ignore
+node_modules/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+README.md

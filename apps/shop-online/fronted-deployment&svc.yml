@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: react-fronted  # react-front
-  namespace: react-shop
+  namespace: shop-online
   annotations:
     # annotations for keel to update the image
     keel.sh/policy: "all"
