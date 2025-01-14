@@ -59,7 +59,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: lab4-backend-svc
-  namespace: react-shop # the namespace that sperate the pods between envroments.
+  namespace: shop-online # the namespace that sperate the pods between envroments.
 spec:
   selector:
     app: backend-lab4
