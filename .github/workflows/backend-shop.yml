@@ -51,7 +51,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
-         # context: ./shop-online-app/backend
+          context: ./
           file: ./shop-online-app/backend/Dockerfile # the route of the file Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64 # build for amd and arm

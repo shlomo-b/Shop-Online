@@ -2,7 +2,7 @@
 FROM python:3.12.0-slim
 
 
-# Accept build arguments firstf
+# Accept build arguments first
 ARG MONGO_DB_USERNAME
 ARG MONGO_DB_PASSWORD
 ARG MONGO_DB_HOST
