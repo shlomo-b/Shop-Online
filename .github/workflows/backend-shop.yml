@@ -5,20 +5,20 @@ on:
     branches: [ "main" ]
     paths:
       - 'shop-online-app/backend/**'
-  pull_request:
       # when have changes to this folder it's will be triger.
+  pull_request:
     paths:
       - 'shop-online-app/backend/**'
 
 jobs:
   docker:
     # if the event only will be true pull_request.merged 
-  #  if: github.event.pull_request.merged == true
+    #  if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     # Checkout: Access to my code, which can actually work with it.
     
-  # docker_build_2:
-  #   runs-on: ubuntu-latest
+    # docker_build_2:
+    #   runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,7 +38,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}    
 
-      - # Scan Docker Image for Vulnerabilities before build and merge
+      - 
+        # Scan Docker Image for Vulnerabilities before build and merge
         name: Scan Docker Image for Vulnerabilities
         uses: aquasecurity/trivy-action@0.28.0 
         with:
@@ -53,7 +54,7 @@ jobs:
           file: ./shop-online-app/backend/Dockerfile # the route of the file Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64 # build for amd and arm
-       # sync the image with the latest version   
+          # sync the image with the latest version   
           tags: | 
             ${{ secrets.DOCKERHUB_USERNAME }}/flask-backend:${{ github.run_id }}
             ${{ secrets.DOCKERHUB_USERNAME }}/flask-backend:latest
@@ -61,4 +62,4 @@ jobs:
           build-args: |
             MONGO_DB_USERNAME=${{ secrets.MONGO_DB_USERNAME }}
             MONGO_DB_PASSWORD=${{ secrets.MONGO_DB_PASSWORD }}
-            MONGO_DB_HOST=${{ secrets.MONGO_DB_HOST }}  
+            MONGO_DB_HOST=${{ secrets.MONGO_DB_HOST }}
