@@ -2,7 +2,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: ebs-sc
-  namespace: react-shop
+  namespace: shop-online
   annotations:
     argocd.argoproj.io/sync-warn: "0"
 provisioner: ebs.csi.aws.com
@@ -25,7 +25,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: react-shop-pvc
-  namespace: react-shop
+  namespace: shop-online
   annotations:
     argocd.argoproj.io/sync-warn: "1"
 spec:

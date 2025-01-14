@@ -2,7 +2,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler # the kind of the horizontal pod autoscaler
 metadata:
   name: react-shop-fronted-hpa # the name of the hpa
-  namespace: react-shop # the namespace that separate the pods between environments.
+  namespace: shop-online # the namespace that separate the pods between environments.
 spec:
   scaleTargetRef:
     # after the deployment runs, the HPA will control the number of pods
@@ -37,7 +37,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler # the kind of the horizontal pod autoscaler
 metadata:
   name: backend-hpa # the name of the hpa
-  namespace: react-shop # the namespace that separate the pods between environments.
+  namespace: shop-online # the namespace that separate the pods between environments.
 spec:
   scaleTargetRef:
     # after the deployment runs, the HPA will control the number of pods
@@ -71,7 +71,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler # the kind of the horizontal pod autoscaler
 metadata:
   name: mongodb-hpa # the name of the hpa
-  namespace: react-shop # the namespace that separate the pods between environments.
+  namespace: shop-online # the namespace that separate the pods between environments.
 spec:
   scaleTargetRef:
     # after the deployment runs, the HPA will control the number of pods

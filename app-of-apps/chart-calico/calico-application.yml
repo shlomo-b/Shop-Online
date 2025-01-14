@@ -1,22 +1,22 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: tigera-operator
-  namespace: argo-cd
-  annotations:
-    argocd.argoproj.io/sync-options: Replace=true,SkipDryRunOnMissingResource=true
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/shlomo-b/project-blackjack.git
-    path: app-of-apps/chart-calico
-    targetRevision: HEAD
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: tigera-operator
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true 
-    automated:
-      selfHeal: true
-      prune: true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: tigera-operator
+#   namespace: argo-cd
+#   annotations:
+#     argocd.argoproj.io/sync-options: Replace=true,SkipDryRunOnMissingResource=true
+# spec:
+#   project: default
+#   source:
+#     repoURL: https://github.com/shlomo-b/project-blackjack.git
+#     path: app-of-apps/chart-calico
+#     targetRevision: HEAD
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: tigera-operator
+#   syncPolicy:
+#     syncOptions:
+#       - CreateNamespace=true 
+#     automated:
+#       selfHeal: true
+#       prune: true

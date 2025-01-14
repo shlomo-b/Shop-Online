@@ -7,10 +7,10 @@ spec:
   project: default
   source:
     repoURL: https://github.com/shlomo-b/project-blackjack.git
-    path: ./apps/react-shop
+    path: ./apps/shop-online
   destination:
     server: https://kubernetes.default.svc
-    namespace: react-shop
+    namespace: shop-online
   # ignoreDifferences:
   #   - group: "apps" # the group of the resource including the kind deployment
   #     kind: "Deployment"

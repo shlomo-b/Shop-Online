@@ -1,50 +1,50 @@
-tigera-operator:
-  installCRDs: true
-  imagePullSecrets: {}
+# tigera-operator:
+#   installCRDs: true
+#   imagePullSecrets: {}
 
-  installation:
-    enabled: true
-    kubernetesProvider: "EKS"
-    imagePullSecrets: []
+#   installation:
+#     enabled: true
+#     kubernetesProvider: "EKS"
+#     imagePullSecrets: []
 
-  apiServer:
-    enabled: true
+#   apiServer:
+#     enabled: true
 
-  certs:
-    node:
-      key:
-      cert:
-      commonName:
-    typha:
-      key:
-      cert:
-      commonName:
-      caBundle:
+#   certs:
+#     node:
+#       key:
+#       cert:
+#       commonName:
+#     typha:
+#       key:
+#       cert:
+#       commonName:
+#       caBundle:
 
-  resources: {}
+#   resources: {}
 
-  tolerations:
-  - effect: NoExecute
-    operator: Exists
-  - effect: NoSchedule
-    operator: Exists
+#   tolerations:
+#   - effect: NoExecute
+#     operator: Exists
+#   - effect: NoSchedule
+#     operator: Exists
 
-  nodeSelector:
-    kubernetes.io/os: linux
+#   nodeSelector:
+#     kubernetes.io/os: linux
 
-  podAnnotations: {}
+#   podAnnotations: {}
 
-  podLabels: {}
+#   podLabels: {}
 
-  tigeraOperator:
-    image: tigera/operator
-    registry: quay.io
+#   tigeraOperator:
+#     image: tigera/operator
+#     registry: quay.io
   
-  calicoctl:
-    image: docker.io/calico/ctl
+#   calicoctl:
+#     image: docker.io/calico/ctl
 
-  kubeletVolumePluginPath: None   
+#   kubeletVolumePluginPath: None   
 
-  kubernetesServiceEndpoint:
-    host: ""
-    port: "6443"
+#   kubernetesServiceEndpoint:
+#     host: ""
+#     port: "6443"
