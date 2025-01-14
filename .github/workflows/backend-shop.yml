@@ -51,6 +51,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
+          context: ./shop-online-app/backend
           file: ./shop-online-app/backend/Dockerfile # the route of the file Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64 # build for amd and arm
@@ -58,3 +59,8 @@ jobs:
           tags: | 
             ${{ secrets.DOCKERHUB_USERNAME }}/flask-backend:${{ github.run_id }}
             ${{ secrets.DOCKERHUB_USERNAME }}/flask-backend:latest
+          
+          build-args: |
+            MONGO_DB_USERNAME=${{ secrets.MONGO_DB_USERNAME }}
+            MONGO_DB_PASSWORD=${{ secrets.MONGO_DB_PASSWORD }}
+            MONGO_DB_HOST=${{ secrets.MONGO_DB_HOST }}

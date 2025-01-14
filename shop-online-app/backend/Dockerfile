@@ -1,13 +1,19 @@
 # Use slim variant for smaller image size
 FROM python:3.12.0-slim
 
+
+# Accept build arguments first
+ARG MONGO_DB_USERNAME
+ARG MONGO_DB_PASSWORD
+ARG MONGO_DB_HOST
+
 # Set working directory
 WORKDIR /app
 
 # Set environment variables for MongoDB connection
-ENV MONGO_DB_USERNAME=root \
-    MONGO_DB_PASSWORD=example \
-    MONGO_DB_HOST=mongo
+ENV MONGO_DB_USERNAME=${MONGO_DB_USERNAME}
+ENV MONGO_DB_PASSWORD=${MONGO_DB_PASSWORD}
+ENV MONGO_DB_HOST=${MONGO_DB_HOST}
 
 # Copy requirements first to leverage Docker cache
 COPY shop-online-app/backend/requirements.txt .
