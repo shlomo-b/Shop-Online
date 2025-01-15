@@ -59,15 +59,8 @@ jobs:
           tags: | 
             ${{ secrets.DOCKERHUB_USERNAME }}/flask-backend:${{ github.run_id }}
             ${{ secrets.DOCKERHUB_USERNAME }}/flask-backend:latest
-          
-          build-args: |
-              MONGO_DB_USERNAME=${{ secrets.MONGO_DB_USERNAME }}
-              MONGO_DB_PASSWORD=${{ secrets.MONGO_DB_PASSWORD }}
-              MONGO_DB_HOST=${{ secrets.MONGO_DB_HOST }}
-      -
-        # Build the image and push it to dockerhub.        
-        name: Clean up secrets
-        run: |
-          unset MONGO_DB_USERNAME
-          unset MONGO_DB_PASSWORD
-          unset MONGO_DB_HOST
+
+        env:
+          MONGO_DB_USERNAME: ${{ secrets.MONGO_DB_USERNAME }}
+          MONGO_DB_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
+          MONGO_DB_HOST: ${{ secrets.MONGO_DB_HOST }}
