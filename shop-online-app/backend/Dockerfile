@@ -4,6 +4,11 @@ FROM python:3.12.0-slim
 # Set working directory
 WORKDIR /app
 
+# Set environment variables for MongoDB connection
+ENV MONGO_DB_USERNAME=root \
+    MONGO_DB_PASSWORD=example \
+    MONGO_DB_HOST=mongo
+
 # Copy requirements first to leverage Docker cache
 COPY shop-online-app/backend/requirements.txt .
 
@@ -20,7 +25,7 @@ RUN pip install --no-cache-dir -r requirements.txt && \
 
 # Copy application code
 COPY shop-online-app/backend/app.py .
-
+RUN rm MONGO_DB_HOST MONGO_DB_PASSWORD MONGO_DB_USERNAME 
 
 # Expose port
 EXPOSE 5050
