@@ -2,7 +2,7 @@
 FROM python:3.12.0-slim
 
 
-# Build arguments for MongoDB credentialsD
+# Build arguments for MongoDB credentials
 ARG MONGO_DB_USERNAME
 ARG MONGO_DB_PASSWORD
 ARG MONGO_DB_HOST
