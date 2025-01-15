@@ -21,6 +21,9 @@ RUN pip install --no-cache-dir -r requirements.txt && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Clean up ARG variables (not stored in ENV)
+RUN unset MONGO_DB_USERNAME MONGO_DB_PASSWORD MONGO_DB_HOST
+
 # Copy application code
 COPY shop-online-app/backend/app.py .
 
