@@ -1,12 +1,10 @@
 # Use slim variant for smaller image size
 FROM python:3.12.0-slim
 
-COPY shop-online-app/backend/.env .
-
-# Set environment variables for MongoDB connection
-ENV MONGO_DB_USERNAME=${MONGO_DB_USERNAME} \
-    MONGO_DB_PASSWORD=${MONGO_DB_PASSWORD} \
-    MONGO_DB_HOST=${MONGO_DB_HOST}
+# Set environment variables for MongoDB
+ENV MONGO_DB_USERNAME=${MONGO_DB_USERNAME}
+ENV MONGO_DB_PASSWORD=${MONGO_DB_PASSWORD}
+ENV MONGO_DB_HOST=${MONGO_DB_HOST}
 
 # Copy requirements first to leverage Docker cache
 COPY shop-online-app/backend/requirements.txt .
@@ -24,9 +22,6 @@ RUN pip install --no-cache-dir -r requirements.txt && \
 
 # Copy application code
 COPY shop-online-app/backend/app.py .
-
-# Remove .env file
-RUN rm .env
 
 # Expose port
 EXPOSE 5050
