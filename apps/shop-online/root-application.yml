@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: fronted-backend-db
+  name: shop-online-app
   namespace: argo-cd
 spec:
   project: default
