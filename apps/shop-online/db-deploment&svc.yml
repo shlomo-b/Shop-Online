@@ -6,7 +6,6 @@ metadata:
   labels:
     app: mongodb-lab4
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: mongodb-lab4
