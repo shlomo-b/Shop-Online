@@ -7,6 +7,5 @@ external-secrets:
     create: true
     name: external-secrets
     annotations:
-     # eks.amazonaws.com/role-arn: arn:aws:iam::148088962203:role/external-secrets-role
-      eks.amazonaws.com/role-arn: arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/external-secrets-role
+      eks.amazonaws.com/role-arn: arn:aws:iam::148088962203:role/external-secrets-role
 
