@@ -80,7 +80,7 @@ variable "instance_types" {
 }
 
 variable "min_size" {
-  default = 1
+  default = 2
   type = number
 }
 

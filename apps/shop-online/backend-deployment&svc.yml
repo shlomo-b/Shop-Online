@@ -18,6 +18,16 @@ spec:
       labels:
         app: backend-lab4
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - backend-lab4
+              topologyKey: "kubernetes.io/hostname"
       containers:
       - name: lab4-backend
         image: shlomobarzili/flask-backend:latest
