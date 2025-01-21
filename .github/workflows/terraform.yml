@@ -106,7 +106,7 @@ jobs:
         aws eks update-kubeconfig --name my-cluster --region us-east-1
          sleep 45
          kubectl apply -f ClusterSecretStore-application.yml
-      working-directory: ./app-of-apps/ClusterSecretStore
+      working-directory: ./apps/ClusterSecretStore
 
     - name: Terraform Output
       run: terraform output
