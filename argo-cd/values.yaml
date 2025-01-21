@@ -4,7 +4,7 @@
 
   configs:
     params:
-      server.insecure: true
+      server.insecure: false
     cm:
       # SSO Configuration via AzureAd
       url: https://argo-cd.spider-shlomo.com
@@ -34,10 +34,9 @@
         g, "Shlomo_lab@spider-shlomo.com", role:admin
         g, "shlomobarzili@gmail.com", role:admin
 
-  controller:
-      extraEnvFrom:
-        - secretRef:
-            name: aws-secret
+  envFrom:
+    - secretRef:
+      name: aws-secret
             
 
   # Ingress for argo cd  

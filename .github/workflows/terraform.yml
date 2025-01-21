@@ -98,7 +98,7 @@ jobs:
          kubectl apply -f secret-argo.yml
          sleep 45
          kubectl apply -f root-application.yaml
-      working-directory: ./app-of-apps  
+      working-directory: ./app-of-apps
     
     # - name: Install ClusterSecretStore
     #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -106,7 +106,7 @@ jobs:
     #     aws eks update-kubeconfig --name my-cluster --region us-east-1
     #      sleep 45
     #      kubectl apply -f ClusterSecretStore-application.yml
-    #   working-directory: ./apps/ClusterSecretStore
+    #   working-directory: ./app-of-apps/ClusterSecretStore
 
     - name: Terraform Output
       run: terraform output
