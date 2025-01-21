@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: argo-cd
   namespace: argo-cd
-  annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   project: default
   source:
