@@ -90,7 +90,7 @@ variable "max_size" {
 }
 
 variable "desired_size" {
-  default = 1
+  default = 2
   type = number
   
 }
