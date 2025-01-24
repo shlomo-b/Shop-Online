@@ -37,7 +37,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}    
-
       - 
         # Scan Docker Image for Vulnerabilities before build and merge
         name: Scan Docker Image for Vulnerabilities
