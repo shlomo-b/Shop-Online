@@ -55,5 +55,5 @@
         alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/19d27275-0e2a-4857-95e9-79dff8e8bbd3
         alb.ingress.kubernetes.io/ssl-redirect: '443'
       aws:
-        serviceType: ClusterIP # <- Used with target-type: ip
+        serviceType: ClusterIP
         backendProtocolVersion: GRPC
