@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/shlomo-b/project-blackjack.git # the repo
+    repoURL: https://github.com/shlomo-b/Shop-Online.git # the repo
     path: app-of-apps # the path of the helm charts
     targetRevision: HEAD
     directory:

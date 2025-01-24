@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/shlomo-b/project-blackjack.git
+    repoURL: https://github.com/shlomo-b/Shop-Online.git
     path: ./apps/shop-online
   destination:
     server: https://kubernetes.default.svc
