@@ -4,7 +4,7 @@
 
   configs:
     params:
-      server.insecure: false
+      server.insecure: true
     cm:
       # SSO Configuration via AzureAd
       url: https://argo-cd.spider-shlomo.com
@@ -20,7 +20,7 @@
               entityIssuer: https://argo-cd.spider-shlomo.com/api/dex/callback
               ssoURL: https://login.microsoftonline.com/a2724ae3-73eb-4b45-ba62-f432da279e2c/saml2
               caData: |
-                  ${Azure-AD-SSO}
+                ${Azure-AD-SSO}
               redirectURI: https://argo-cd.spider-shlomo.com/api/dex/callback
               usernameAttr: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
               emailAttr: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
@@ -32,7 +32,7 @@
       policy.csv: |
         p, role:role:admin, *, *, *, allow
         g, "Shlomo_lab@spider-shlomo.com", role:admin
-        g, "shlomobarzili@gmail.com", role:admin
+        g, "AlinaB@spider-shlomo.com", role:admin
 
   envFrom:
     - secretRef:
