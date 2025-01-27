@@ -34,11 +34,10 @@
         g, "Shlomo_lab@spider-shlomo.com", role:admin
         g, "AlinaB@spider-shlomo.com", role:admin
 
-  envFrom:
-    - secretRef:
-      name: aws-secret
+    envFrom:
+      - secretRef:
+        name: aws-secret
             
-
   # Ingress for argo cd  
   server:
     ingress:
