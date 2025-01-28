@@ -18,6 +18,17 @@ spec:
       labels:
         app: fronted
     spec:
+         # podAntiAffinity the pods will be runing on different nodes
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - fronted
+              topologyKey: "kubernetes.io/hostname"
       containers:
       - name: lab4
         image: shlomobarzili/react-fronted:latest
