@@ -32,6 +32,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: lab4-backend-svc
+                name: backend-svc
                 port:
                   number: 5050

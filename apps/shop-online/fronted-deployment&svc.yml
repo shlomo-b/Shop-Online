@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-fronted  # react-front
+  name: fronted  # react-front
   namespace: shop-online
   annotations:
     # annotations for keel to update the image
@@ -11,12 +11,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: react-app
+      app: fronted
  # replicas: 1
   template:
     metadata:
       labels:
-        app: react-app
+        app: fronted
     spec:
       containers:
       - name: lab4
@@ -38,18 +38,18 @@ spec:
           - name: REACT_APP_API_URL
             valueFrom:
               configMapKeyRef:
-                name: variables-lab4
+                name: shop-online-config
                 key: REACT_APP_API_URL
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: react-svc
+  name: fronted-svc
   namespace: shop-online # the namespace that sperate the pods between envroments.
 spec:
   selector:
-    app: react-app
+    app: fronted
   type: ClusterIP # the type of the service
   ports:
     - protocol: TCP

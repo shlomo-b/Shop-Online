@@ -11,12 +11,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: backend-lab4
+      app: backend
  # replicas: 1
   template:
     metadata:
       labels:
-        app: backend-lab4
+        app: backend
     spec:
       # podAntiAffinity the pods will be runing on different nodes
       affinity:
@@ -27,10 +27,10 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - backend-lab4
+                      - backend
               topologyKey: "kubernetes.io/hostname"
       containers:
-      - name: lab4-backend
+      - name: backend
         image: shlomobarzili/flask-backend:latest
         imagePullPolicy: Always
         ports:
@@ -50,7 +50,7 @@ spec:
           - name: MONGO_DB_HOST
             valueFrom:
               configMapKeyRef:
-                name: variables-lab4
+                name: shop-online-config
                 key: MONGO_DB_HOST
 
           - name: MONGO_INITDB_ROOT_USERNAME
@@ -69,11 +69,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: lab4-backend-svc
+  name: backend-svc
   namespace: shop-online # the namespace that sperate the pods between envroments.
 spec:
   selector:
-    app: backend-lab4
+    app: backend-svc
   type: ClusterIP # the type of the service
   ports:
     - protocol: TCP

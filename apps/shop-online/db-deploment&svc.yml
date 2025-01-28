@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb-deployment
+  name: mongodb
   namespace: shop-online
   labels:
-    app: mongodb-lab4
+    app: mongodb
 spec:
   selector:
     matchLabels:
-      app: mongodb-lab4
+      app: mongodb
   template:
     metadata:
       labels:
-        app: mongodb-lab4
+        app: mongodb
     spec:
       containers:
       - name: mongodb
@@ -36,7 +36,7 @@ spec:
           - name: MONGO_DB_HOST
             valueFrom:
               configMapKeyRef:
-                name: variables-lab4
+                name: shop-online-config
                 key: MONGO_DB_HOST
 
         resources:
@@ -59,11 +59,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodb-service
+  name: mongodb-svc
   namespace: shop-online
 spec:
   selector:
-    app: mongodb-lab4
+    app: mongodb
   type: ClusterIP
   ports:
     - protocol: TCP
