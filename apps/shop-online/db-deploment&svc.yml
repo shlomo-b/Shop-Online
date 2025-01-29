@@ -47,13 +47,13 @@ spec:
             cpu: 200m
             memory: 256Mi
 
-        volumeMounts:
-        - name: react-shop-storage
-          mountPath: /data/db # default path should be /data/db its for mongodb
-      volumes:
-        - name: react-shop-storage
-          persistentVolumeClaim:
-            claimName: react-shop-pvc      
+      #   volumeMounts:
+      #   - name: react-shop-storage
+      #     mountPath: /data/db # default path should be /data/db its for mongodb
+      # volumes:
+      #   - name: react-shop-storage
+      #     persistentVolumeClaim:
+      #       claimName: react-shop-pvc      
 
 ---
 apiVersion: v1
