@@ -1,11 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mongodb
   namespace: shop-online
-  labels:
-    app: mongodb
 spec:
+  serviceName: mongodb-svc  # applies only to StatefulSet
   selector:
     matchLabels:
       app: mongodb
@@ -17,43 +16,53 @@ spec:
       containers:
       - name: mongodb
         image: shlomobarzili/mongodb:latest
+        args:
+          - "--replSet"
+          - "rs0"  # Configures Replica Set for synchronization between pods
         ports:
-        - containerPort: 27017
+        - containerPort: 27017  # Default MongoDB port
 
         env:
           - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
               secretKeyRef:
-                name: aws-secret # reference from ExternalSecret
+                name: aws-secret  # reference from ExternalSecret
                 key: MONGO_INITDB_ROOT_USERNAME
                 
           - name: MONGO_INITDB_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: aws-secret # reference from ExternalSecret
+                name: aws-secret  # reference from ExternalSecret
                 key: MONGO_INITDB_ROOT_PASSWORD
 
           - name: MONGO_DB_HOST
             valueFrom:
               configMapKeyRef:
-                name: shop-online-config
+                name: shop-online-config  # reference from ExternalSecret
                 key: MONGO_DB_HOST
 
         resources:
           requests:
-            cpu: 100m
-            memory: 128Mi
+            cpu: 100m  # Minimum CPU request
+            memory: 128Mi  # Minimum memory request
           limits:
-            cpu: 200m
-            memory: 256Mi
+            cpu: 200m  # Maximum CPU limit
+            memory: 256Mi  # Maximum memory limit
 
         volumeMounts:
-        - name: react-shop-storage
-          mountPath: /data/db # default path should be /data/db its for mongodb
-      volumes:
-        - name: react-shop-storage
-          persistentVolumeClaim:
-            claimName: react-shop-pvc      
+        - name: mongo-data
+          mountPath: /data/db  # Default path for MongoDB data
+
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-data  # Each pod gets a uniquely named PVC (e.g., mongo-data-mongodb-0, mongo-data-mongodb-1)
+    spec:
+      accessModes:
+        - ReadWriteOnce  # Each volume can be mounted by only one pod at a time
+      storageClassName: ebs-sc  # Uses AWS EBS StorageClass
+      resources:
+        requests:
+          storage: 33Gi  # Allocates 33Gi of storage per MongoDB pod
 
 ---
 apiVersion: v1
@@ -64,8 +73,8 @@ metadata:
 spec:
   selector:
     app: mongodb
-  type: ClusterIP
+  clusterIP: None  # applies only to StatefulSet
   ports:
     - protocol: TCP
-      port: 27017
+      port: 27017  # Default MongoDB port
       targetPort: 27017
