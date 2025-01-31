@@ -20,10 +20,7 @@ spec:
     - host: backend.spider-shlomo.com
       http:
         paths:
-          - paths:
-              - /api/users
-              - /api/products
-              - /api/login
+          - path: /api/users
             pathType: Prefix
             backend:
               service:
@@ -31,10 +28,39 @@ spec:
                 port:
                   name: use-annotation
 
-          - paths: 
-              - /api/users
-              - /api/products
-              - /api/login
+          - path: /api/products
+            pathType: Prefix
+            backend:
+              service:
+                name: ssl-redirect
+                port:
+                  name: use-annotation
+
+          - path: /api/login
+            pathType: Prefix
+            backend:
+              service:
+                name: ssl-redirect
+                port:
+                  name: use-annotation
+
+          - path: /api/users
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-svc
+                port:
+                  number: 5050
+
+          - path: /api/products
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-svc
+                port:
+                  number: 5050
+
+          - path: /api/login
             pathType: Prefix
             backend:
               service:
