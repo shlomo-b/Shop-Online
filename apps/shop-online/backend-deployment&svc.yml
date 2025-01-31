@@ -73,7 +73,7 @@ metadata:
   namespace: shop-online # the namespace that sperate the pods between envroments.
 spec:
   selector:
-    app: backend-svc
+    app: backend
   type: ClusterIP # the type of the service
   ports:
     - protocol: TCP
