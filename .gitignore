@@ -52,3 +52,7 @@ main-infra/.terraform.lock.hcl
 # main-infra/secrets.tf
 main-infra/secrets.csv
 #secrets/
+
+
+# ignore files argo-cd
+argo-cd/secret-sso.yml
