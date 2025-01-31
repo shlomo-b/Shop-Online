@@ -36,7 +36,15 @@ spec:
                 port:
                   name: use-annotation
 
-          - path: /api/login
+          - path: /api/products
+            pathType: Prefix
+            backend:
+              service:
+                name: ssl-redirect
+                port:
+                  name: use-annotation        
+
+          - path: /metrics
             pathType: Prefix
             backend:
               service:
@@ -67,3 +75,11 @@ spec:
                 name: backend-svc
                 port:
                   number: 5050
+
+          - path: /metrics
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-svc
+                port:
+                  number: 5050        
