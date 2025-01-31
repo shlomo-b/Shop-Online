@@ -5,7 +5,8 @@ metadata:
   namespace: shop-online
   annotations:
     argocd.argoproj.io/sync-warn: "0"
-provisioner: ebs.csi.aws.com
+#provisioner: ebs.csi.aws.com
+provisioner: efs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer # like pod affinity
 parameters:
   csi.storage.k8s.io/fstype: xfs
