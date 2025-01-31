@@ -12,7 +12,7 @@ parameters:
   type: io1
   iopsPerGB: "33"
   encrypted: "true"
-  tagSpecification_1: "key1=value1"
+ # tagSpecification_1: "key1=value1"
 allowedTopologies:
 - matchLabelExpressions:
   - key: topology.ebs.csi.aws.com/zone
