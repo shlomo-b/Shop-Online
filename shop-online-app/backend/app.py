@@ -185,7 +185,7 @@ def get_users():
     except Exception as e:
         return jsonify({'message': f'Error fetching users: {str(e)}'}), 500
 
-@app.route('/api/login', methods=['POST'])
+@app.route('/api/login', methods=['POST', 'GET'])
 def login():
     try:
         data = request.get_json()
