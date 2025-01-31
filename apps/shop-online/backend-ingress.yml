@@ -20,7 +20,7 @@ spec:
     - host: backend.spider-shlomo.com
       http:
         paths:
-          - path:
+          - paths:
               - /api/users
               - /api/products
               - /api/login
@@ -31,7 +31,7 @@ spec:
                 port:
                   name: use-annotation
 
-          - path: 
+          - paths: 
               - /api/users
               - /api/products
               - /api/login
