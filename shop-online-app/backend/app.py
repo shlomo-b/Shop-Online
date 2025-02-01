@@ -185,32 +185,24 @@ def get_users():
     except Exception as e:
         return jsonify({'message': f'Error fetching users: {str(e)}'}), 500
 
-@app.route('/api/login', methods=['GET'])
+@app.route('/api/login', methods=['POST', 'GET'])
 def login():
     try:
-        if request.method == 'GET':
-            return jsonify({'message': 'Please use POST to login'}), 200
-
-        # Handle POST request
         data = request.get_json()
-        if not data:
-            return jsonify({'message': 'Missing JSON data'}), 400
-
         username = data.get('username')
         password = data.get('password')
-
+        
         user = users_collection.find_one({'username': username})
-
+        
         if user and check_password_hash(user['password'], password):
             return jsonify({
                 'message': 'Login successful',
                 'username': username
             }), 200
-
+        
         return jsonify({'message': 'Invalid credentials'}), 401
     except Exception as e:
         return jsonify({'message': f'Login error: {str(e)}'}), 500
-
 
 @app.route('/api/products', methods=['GET'])
 def get_products():
