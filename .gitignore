@@ -55,4 +55,4 @@ main-infra/secrets.csv
 
 
 # ignore files argo-cd
-argo-cd/secret-sso.yml
+argocd/secret-sso.yml
