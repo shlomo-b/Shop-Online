@@ -43,18 +43,62 @@ This project implements a production-grade Kubernetes infrastructure on AWS, fea
 ## Features
 
 ### CI/CD Pipeline
-- GitHub Actions automation for:
-  - Terraform deployments
-  - Docker image builds (frontend and backend)
-  - Security scanning with Aqua Trivy
-  - Automated testing and deployment
 
-### Kubernetes Management
-- App of Apps pattern with Argo CD
-- Helm charts for all components
-- AWS Load Balancer Controller integration
-- External DNS configuration
-- ClusterSecretStore implementation
+#### Overview
+The project implements separate CI/CD pipelines for frontend and backend components using GitHub Actions. Each pipeline includes security scanning, multi-architecture builds, and automated deployments.
+
+#### Frontend Pipeline
+The frontend CI/CD pipeline automates the build and deployment of the React application:
+
+- **Trigger Conditions**:
+  - Push to main branch in `shop-online-app/frontend/**`
+  - Pull requests affecting frontend code
+  
+- **Key Features**:
+  - Multi-architecture Docker builds (AMD64/ARM64)
+  - Automated vulnerability scanning with Trivy
+  - Docker Hub integration with versioned tags
+  - Conditional builds based on branch and event type
+
+#### Backend Pipeline
+The backend CI/CD pipeline handles the Flask application deployment:
+
+- **Trigger Conditions**:
+  - Push to main branch in `shop-online-app/backend/**`
+  - Pull requests affecting backend code
+
+- **Key Features**:
+  - Cross-platform container builds
+  - Security scanning integration
+  - Automated Docker Hub publishing
+  - Unique versioning using GitHub run IDs
+
+#### Security Features
+
+##### Vulnerability Scanning
+- Pre-build security assessment with Trivy
+- Automated scanning of base images
+- Vulnerability reporting and tracking
+- Integration with existing security tools
+
+##### Access Control
+- Secure Docker Hub authentication
+- Repository-level access management
+- Secret handling for sensitive data
+
+#### Build Architecture
+
+##### Multi-Platform Support
+- Simultaneous AMD64 and ARM64 builds
+- QEMU emulation for cross-platform compatibility
+- Docker Buildx optimization
+- Platform-specific testing and validation
+
+##### Image Management
+- Unique tags for each build (`github.run_id`)
+- Latest tag synchronization
+- Automated cleanup of old images
+- Version tracking and rollback capability
 
 ### Security Features
 - AWS WAF protection
@@ -62,6 +106,13 @@ This project implements a production-grade Kubernetes infrastructure on AWS, fea
 - Secure secret management
 - Azure AD SSO integration
 - IAM role-based access control
+
+### Kubernetes Integration
+- App of Apps pattern with Argo CD
+- Helm charts for all components
+- AWS Load Balancer Controller integration
+- External DNS configuration
+- ClusterSecretStore implementation
 
 ### Monitoring and Logging
 - Real-time metrics with Prometheus
@@ -78,9 +129,8 @@ This project implements a production-grade Kubernetes infrastructure on AWS, fea
 - Terraform installed locally
 
 ## Getting Started
-
+<details><summary>Click to infrastructure deployment</summary>
 ### Infrastructure Deployment
-<details><summary>Click to expand Mermaid diagram</summary>
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/project-name.git
@@ -124,6 +174,18 @@ This project implements a production-grade Kubernetes infrastructure on AWS, fea
 
 ## Security Configuration
 
+### Required Configuration
+
+#### GitHub Secrets
+- `DOCKERHUB_USERNAME`: Docker Hub account name
+- `DOCKERHUB_TOKEN`: Access token for Docker Hub
+
+#### Repository Settings
+- Branch protection rules
+- Required status checks
+- Automated cleanup workflows
+- Build trigger configurations
+
 ### External Secrets
 1. Configure AWS Secrets Manager:
    ```bash
@@ -135,6 +197,7 @@ This project implements a production-grade Kubernetes infrastructure on AWS, fea
    kubectl apply -f external-secrets/secrets/
    ```
 </details>
+
 ### SSL/TLS Setup
 1. Request certificates in ACM
 2. Configure DNS in Route 53
@@ -163,6 +226,34 @@ This project implements a production-grade Kubernetes infrastructure on AWS, fea
    ```bash
    kubectl logs -n logging deployment/loki
    ```
+
+## CI/CD Benefits
+1. **Automated Workflows**
+   - Reduced manual intervention
+   - Consistent build processes
+   - Automated testing and validation
+
+2. **Security Integration**
+   - Early vulnerability detection
+   - Automated security patches
+   - Compliance maintenance
+
+3. **Efficiency Improvements**
+   - Parallel build processes
+   - Optimized caching
+   - Reduced deployment time
+
+4. **Quality Assurance**
+   - Consistent build environments
+   - Automated testing
+   - Version control integration
+
+## Best Practices
+1. Regular security updates
+2. Periodic workflow maintenance
+3. Secret rotation and management
+4. Build cache optimization
+5. Regular cleanup tasks
 
 ## Maintenance
 
