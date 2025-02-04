@@ -80,6 +80,7 @@ This project implements a production-grade Kubernetes infrastructure on AWS, fea
 ## Getting Started
 
 ### Infrastructure Deployment
+<details><summary>Click to expand Mermaid diagram</summary>
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/project-name.git
@@ -133,7 +134,7 @@ This project implements a production-grade Kubernetes infrastructure on AWS, fea
    ```bash
    kubectl apply -f external-secrets/secrets/
    ```
-
+</details>
 ### SSL/TLS Setup
 1. Request certificates in ACM
 2. Configure DNS in Route 53
