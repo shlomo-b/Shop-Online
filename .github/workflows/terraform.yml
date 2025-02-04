@@ -94,7 +94,7 @@ jobs:
         aws eks update-kubeconfig --name my-cluster --region us-east-1
          helm repo add argo https://argoproj.github.io/argo-helm
          helm repo update
-         helm install my-argo-cd argo/argo-cd --namespace argo-cd --create-namespace --version 7.6.12
+         helm install prod-argocd argo/argo-cd --namespace argocd --create-namespace --version 7.7.23
          kubectl apply -f secret-argo.yml
          sleep 45
          kubectl apply -f root-application.yaml

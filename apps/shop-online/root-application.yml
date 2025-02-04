@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: shop-online-app
-  namespace: argo-cd
+  namespace: argocd
 spec:
   project: default
   source:
@@ -11,15 +11,9 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: shop-online
-  # ignoreDifferences:
-  #   - group: "apps" # the group of the resource including the kind deployment
-  #     kind: "Deployment"
-  #     jsonPointers: # the json pointers to ignore, its deployment.
-  #     - /spec/replicas    
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-    #  - RespectIgnoreDifferences=true
       
     # track and sync all git changes the argo will check every 3 minutes
     automated:
