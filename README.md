@@ -197,6 +197,7 @@ The backend CI/CD pipeline handles the Flask application deployment:
    kubectl apply -f external-secrets/secrets/
    ```
 </details>
+
 ### SSL/TLS Setup
 1. Request certificates in ACM
 2. Configure DNS in Route 53
