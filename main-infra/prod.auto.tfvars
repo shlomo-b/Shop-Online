@@ -110,14 +110,14 @@ acm = {
       name = "acm-blackjack"
     }
   },
-   "argo-cd.spider-shlomo.com" = {
-    domain_name   =  ["argo-cd.spider-shlomo.com"]
+   "argocd.spider-shlomo.com" = {
+    domain_name   =  ["argocd.spider-shlomo.com"]
     tags = {
-      name = "acm-argo-cd"
+      name = "acm-argocd"
     }
   }
    "fronted.spider-shlomo.com" = {
-    domain_name   =  ["fronted-cd.spider-shlomo.com"]
+    domain_name   =  ["fronted.spider-shlomo.com"]
     tags = {
       name = "acm-fronted"
     }
