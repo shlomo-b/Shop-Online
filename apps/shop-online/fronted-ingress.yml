@@ -30,29 +30,29 @@ spec:
                 port:
                   name: use-annotation # use the annotation
 
-          - path: /add-product
-            pathType: Exact # allow only access to application
-            backend:
-              service:
-                name: ssl-redirect # the name of the service
-                port:
-                  name: use-annotation # use the annotation 
+          # - path: /add-product
+          #   pathType: Exact # allow only access to application
+          #   backend:
+          #     service:
+          #       name: ssl-redirect # the name of the service
+          #       port:
+          #         name: use-annotation # use the annotation 
 
-          - path: /login
-            pathType: Exact # allow only access to application
-            backend:
-              service:
-                name: ssl-redirect # the name of the service
-                port:
-                  name: use-annotation # use the annotation 
+          # - path: /login
+          #   pathType: Exact # allow only access to application
+          #   backend:
+          #     service:
+          #       name: ssl-redirect # the name of the service
+          #       port:
+          #         name: use-annotation # use the annotation 
                   
-          - path: /register
-            pathType: Exact # allow only access to application
-            backend:
-              service:
-                name: ssl-redirect # the name of the service
-                port:
-                  name: use-annotation # use the annotation                        
+          # - path: /register
+          #   pathType: Exact # allow only access to application
+          #   backend:
+          #     service:
+          #       name: ssl-redirect # the name of the service
+          #       port:
+          #         name: use-annotation # use the annotation                        
 
           - path: /
             pathType: Exact
@@ -62,26 +62,26 @@ spec:
                 port:
                   number: 3000
 
-          - path: /add-product
-            pathType: Exact
-            backend:
-              service:
-                name: fronted-svc
-                port:
-                  number: 3000    
+          # - path: /add-product
+          #   pathType: Exact
+          #   backend:
+          #     service:
+          #       name: fronted-svc
+          #       port:
+          #         number: 3000    
 
-          - path: /login
-            pathType: Exact
-            backend:
-              service:
-                name: fronted-svc
-                port:
-                  number: 3000  
+          # - path: /login
+          #   pathType: Exact
+          #   backend:
+          #     service:
+          #       name: fronted-svc
+          #       port:
+          #         number: 3000  
 
-          - path: /register
-            pathType: Exact
-            backend:
-              service:
-                name: fronted-svc
-                port:
-                  number: 3000                      
+          # - path: /register
+          #   pathType: Exact
+          #   backend:
+          #     service:
+          #       name: fronted-svc
+          #       port:
+          #         number: 3000                      
