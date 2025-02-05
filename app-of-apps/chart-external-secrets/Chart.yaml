@@ -6,4 +6,4 @@ appVersion: "0.12.1" # Optional, aligns with the app version you are deploying
 dependencies:
   - name: external-secrets
     version: "0.12.1"
-   # repository: oci://ghcr.io/external-secrets/charts
+    repository: oci://ghcr.io/external-secrets/charts
