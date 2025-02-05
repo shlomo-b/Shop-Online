@@ -55,7 +55,7 @@ spec:
           #         name: use-annotation # use the annotation                        
 
           - path: /
-            pathType: prefix
+            pathType: Prefix
             backend:
               service:
                 name: fronted-svc
