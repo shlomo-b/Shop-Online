@@ -159,7 +159,7 @@ The backend CI/CD pipeline handles the Flask application deployment:
 
 ### Application Deployment argocd and app of apps
 1. Apply the App of Apps pattern,the app of app includes applications
-   aws load balancer controller,external-dns,external-secrets,keel,metrics-server,promtail:
+   aws load balancer controller,external-dns,external-secrets,keel,metrics-server,promtail
    ```bash
    kubectl apply -f root-application.yaml
    ```
@@ -174,7 +174,7 @@ The backend CI/CD pipeline handles the Flask application deployment:
    kubectl port-forward service/prod-argocd-server -n argocd 8080:443
    ---
 
-4. Apply the secret file: for SSO
+4. Apply the secret file for SSO
    ```bash
    kubectl apply -f secret-sso.yml
    ```
