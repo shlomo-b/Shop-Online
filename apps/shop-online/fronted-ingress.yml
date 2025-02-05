@@ -23,7 +23,7 @@ spec:
       http:
         paths:
           - path: /
-            pathType: Exact # allow only access to application
+            pathType: Prefix # allow only access to application
             backend:
               service:
                 name: ssl-redirect # the name of the service
@@ -55,7 +55,7 @@ spec:
           #         name: use-annotation # use the annotation                        
 
           - path: /
-            pathType: Exact
+            pathType: prefix
             backend:
               service:
                 name: fronted-svc
