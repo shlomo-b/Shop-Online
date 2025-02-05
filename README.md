@@ -1,4 +1,4 @@
-# project shop-online
+# Poject Shop-Online
 # AWS Kubernetes Infrastructure Project
 
 ## Overview
@@ -201,7 +201,7 @@ The backend CI/CD pipeline handles the Flask application deployment:
 ### External Secrets
 1. Configure AWS Secrets Manager:
    ```bash
-   A service role for AWS Secrets Manager is required. Terraform will create this role, retrieve the secrets from GitHub, and push them to AWS
+   A service role for AWS Secrets Manager is required. Terraform will create this role, retrieve the secrets from GitHub, and push them to AWS, and put it on the values file of the exterle-secrets chart.
    ```
 
 2. Configure the ClusterSecretStore:
