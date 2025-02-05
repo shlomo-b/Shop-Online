@@ -287,3 +287,10 @@ If manual installation is required, the respective Helm charts can be installed 
 - AWS EKS Team
 - Argo CD Community
 - Kubernetes Community
+
+### Potential Improvements
+
+1. Nework policys for EKS
+2. Security policies for EKS
+3. Statefulset for MongoDB
+4. Improve the monitoring stack to work with charts in app of apps
