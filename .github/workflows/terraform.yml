@@ -1,113 +1,113 @@
-# name: Terraform CD
+name: Terraform CD
 
-# on:
-#   push: 
-#     branches: [ "main" ]
-#     paths:
-#       - 'main-infra/**'
-#   pull_request:
-#     paths:
-#       - 'main-infra/**'
+on:
+  push: 
+    branches: [ "main" ]
+    paths:
+      - 'main-infra/**'
+  pull_request:
+    paths:
+      - 'main-infra/**'
   
-# permissions:
-#   contents: read
+permissions:
+  contents: read
 
-# jobs: 
-#   terraform:
-#     name: 'Terraform'
-#     runs-on: ubuntu-latest
-#   #  environment: production
+jobs: 
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+  #  environment: production
 
-#     defaults:
-#       run:
-#         shell: bash
+    defaults:
+      run:
+        shell: bash
         
-#     steps:
-#     # Checkout: Access to my code, which can actually work with it.
-#     - name: Checkout
-#       uses: actions/checkout@v4
+    steps:
+    # Checkout: Access to my code, which can actually work with it.
+    - name: Checkout
+      uses: actions/checkout@v4
 
-#     # Configure AWS Credentials: It's for communication with AWS using the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
-#     - name: Configure AWS Credentials
-#       uses: aws-actions/configure-aws-credentials@v1
-#       with:
-#         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#         aws-region: us-east-1
+    # Configure AWS Credentials: It's for communication with AWS using the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
         
-#     # Setup Terraform CLI: Use the specified version of Terraform
-#     - name: Setup Terraform
-#       uses: hashicorp/setup-terraform@v2
-#       with:
-#         terraform_version: 1.5.6
+    # Setup Terraform CLI: Use the specified version of Terraform
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.5.6
 
-#     # Debug Environment: Verify if the AWS credentials and other environment variables are correctly set
-#     - name: Debug Environment
-#       run: |
-#         echo "GitHub Ref: ${{ github.ref }}"
-#         echo "GitHub Event Name: ${{ github.event_name }}"
-#         echo "AWS_ACCESS_KEY_ID is set: ${{ secrets.AWS_ACCESS_KEY_ID != '' }}"
-#         echo "AWS_SECRET_ACCESS_KEY is set: ${{ secrets.AWS_SECRET_ACCESS_KEY != '' }}"
-#         terraform version
-#         aws --version
-#       working-directory: ./main-infra  # run the tf files from directory main-infra
+    # Debug Environment: Verify if the AWS credentials and other environment variables are correctly set
+    - name: Debug Environment
+      run: |
+        echo "GitHub Ref: ${{ github.ref }}"
+        echo "GitHub Event Name: ${{ github.event_name }}"
+        echo "AWS_ACCESS_KEY_ID is set: ${{ secrets.AWS_ACCESS_KEY_ID != '' }}"
+        echo "AWS_SECRET_ACCESS_KEY is set: ${{ secrets.AWS_SECRET_ACCESS_KEY != '' }}"
+        terraform version
+        aws --version
+      working-directory: ./main-infra  # run the tf files from directory main-infra
 
-#     # Terraform Init: Sync with the S3 where the terraform.tfstate is stored
-#     - name: Terraform Init
-#       run: |
-#         terraform init \
-#           -backend-config="bucket=shlomo-project-ci-cd" \
-#           -backend-config="key=first-project-ci-cd/terraform.tfstate" \
-#           -backend-config="region=us-east-1" \
-#           -input=false
-#       working-directory: ./main-infra  
+    # Terraform Init: Sync with the S3 where the terraform.tfstate is stored
+    - name: Terraform Init
+      run: |
+        terraform init \
+          -backend-config="bucket=shlomo-project-ci-cd" \
+          -backend-config="key=first-project-ci-cd/terraform.tfstate" \
+          -backend-config="region=us-east-1" \
+          -input=false
+      working-directory: ./main-infra  
 
-#     # Terraform Validate: Validate the Terraform configuration files of the tf 
-#     - name: Terraform Validate
-#       run: terraform validate
-#       working-directory: ./main-infra  
+    # Terraform Validate: Validate the Terraform configuration files of the tf 
+    - name: Terraform Validate
+      run: terraform validate
+      working-directory: ./main-infra  
        
-#     # Terraform Plan: Generate and show an execution plan
-#     - name: Terraform Plan
-#       run: terraform plan -input=false # -no-color
-#       working-directory: ./main-infra  
+    # Terraform Plan: Generate and show an execution plan
+    - name: Terraform Plan
+      run: terraform plan -input=false # -no-color
+      working-directory: ./main-infra  
     
-#     # Terraform Apply: Apply the changes required to reach the desired state of the configuration
-#     - name: Terraform Apply
-#       # It's will be trigger when i push/merge to main branch
+    # Terraform Apply: Apply the changes required to reach the desired state of the configuration
+    - name: Terraform Apply
+      # It's will be trigger when i push/merge to main branch
       
-#       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-#       # run: terraform apply -auto-approve -input=false # -no-color
-#       working-directory: ./main-infra
-#       env:
-#          # environment variables for DB
-#         TF_VAR_db_username: ${{ secrets.DB_USERNAME }}
-#         TF_VAR_db_password: ${{ secrets.DB_PASSWORD }}
-#       run: |
-#         terraform apply -auto-approve -input=false \
-#         -var="db_username=${TF_VAR_db_username}" \
-#         -var="db_password=${TF_VAR_db_password}"  
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      # run: terraform apply -auto-approve -input=false # -no-color
+      working-directory: ./main-infra
+      env:
+         # environment variables for DB
+        TF_VAR_db_username: ${{ secrets.MONGO_INITDB_ROOT_USERNAME }}
+        TF_VAR_db_password: ${{ secrets.MONGO_INITDB_ROOT_PASSWORD }}
+      run: |
+        terraform apply -auto-approve -input=false \
+        -var="MONGO_INITDB_ROOT_USERNAME=${TF_VAR_MONGO_INITDB_ROOT_USERNAME}" \
+        -var="MONGO_INITDB_ROOT_PASSWORD=${TF_VAR_MONGO_INITDB_ROOT_PASSWORD}"  
         
-#     - name: Install Helm Chart Argo-cd
-#       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-#       run: |
-#         aws eks update-kubeconfig --name my-cluster --region us-east-1
-#          helm repo add argo https://argoproj.github.io/argo-helm
-#          helm repo update
-#          helm install prod-argocd argo/argo-cd --namespace argocd --create-namespace --version 7.7.23
-#          kubectl apply -f secret-argo.yml
-#          sleep 45
-#          kubectl apply -f root-application.yaml
-#       working-directory: ./app-of-apps
+    - name: Install Helm Chart Argo-cd
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        aws eks update-kubeconfig --name my-cluster --region us-east-1
+         helm repo add argo https://argoproj.github.io/argo-helm
+         helm repo update
+         helm install prod-argocd argo/argo-cd --namespace argocd --create-namespace --version 7.7.23
+         kubectl apply -f secret-argo.yml
+         sleep 45
+         kubectl apply -f root-application.yaml
+      working-directory: ./app-of-apps
     
-#     - name: Install ClusterSecretStore
-#       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-#       run: |
-#         aws eks update-kubeconfig --name my-cluster --region us-east-1
-#          sleep 45
-#          kubectl apply -f ClusterSecretStore-application.yml
-#       working-directory: ./apps/ClusterSecretStore
+    - name: Install ClusterSecretStore
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        aws eks update-kubeconfig --name my-cluster --region us-east-1
+         sleep 45
+         kubectl apply -f ClusterSecretStore-application.yml
+      working-directory: ./apps/ClusterSecretStore
 
-#     - name: Terraform Output
-#       run: terraform output
-#       working-directory: ./main-infra
+    - name: Terraform Output
+      run: terraform output
+      working-directory: ./main-infra

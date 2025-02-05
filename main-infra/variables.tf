@@ -96,14 +96,14 @@ variable "desired_size" {
 }
 #----------------DB CREDENTIALS------------------#
 
-variable "db_username" {
+variable "MONGO_INITDB_ROOT_USERNAME" {
   description = "Database root username"
   type        = string
   default = "value"
   sensitive = true
 }
 
-variable "db_password" {
+variable "MONGO_INITDB_ROOT_PASSWORD" {
   description = "Database root password"
   type        = string
   sensitive   = true
