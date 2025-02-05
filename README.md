@@ -133,7 +133,7 @@ The backend CI/CD pipeline handles the Flask application deployment:
 ### Infrastructure Deployment
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/project-name.git
+   https://github.com/shlomo-b/Shop-Online.git
    cd project-name
    ```
 
@@ -152,19 +152,16 @@ The backend CI/CD pipeline handles the Flask application deployment:
 ### Argo CD Setup
 1. Install Argo CD:
    ```bash
-   kubectl create namespace argocd
-   kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+   helm install prod-argocd argo/argo-cd --namespace argocd --create-namespace --version 7.7.23
+   apply the repo
+   kubectl apply -f repo.yml
    ```
 
-2. Configure Azure AD SSO:
+### Application Deployment argocd and app of apps
+1. Apply the App of Apps pattern,the app of app includes applications
+   aws load balancer controller,external-dns,external-secrets,keel,metrics-server,promtail:
    ```bash
-   kubectl apply -f azure-sso-config.yaml
-   ```
-
-### Application Deployment
-1. Apply the App of Apps pattern:
-   ```bash
-   kubectl apply -f apps/root-app.yaml
+   kubectl apply -f root-application.yaml
    ```
 
 2. Verify deployments:
@@ -172,6 +169,21 @@ The backend CI/CD pipeline handles the Flask application deployment:
    kubectl get applications -n argocd
    ```
 
+3. Verify access to argocd
+   ```bash
+   kubectl port-forward service/prod-argocd-server -n argocd 8080:443
+   ---
+
+4. Apply the secret file: for SSO
+   ```bash
+   kubectl apply -f secret-sso.yml
+   ```
+
+5. Upgrade argocd values.yaml,its for authentication SSO to Azure AD
+   You need ACM certificate and domain in Route53
+   ```bash   
+   helm upgrade prod-argocd argo/argo-cd --namespace argocd -f values.yaml --create-namespace --version 7.7.23
+   ```   
 ## Security Configuration
 
 ### Required Configuration
@@ -189,13 +201,18 @@ The backend CI/CD pipeline handles the Flask application deployment:
 ### External Secrets
 1. Configure AWS Secrets Manager:
    ```bash
-   kubectl apply -f external-secrets/cluster-secret-store.yaml
+   A service role for AWS Secrets Manager is required. Terraform will create this role, retrieve the secrets from GitHub, and push them to AWS
    ```
 
-2. Create secret definitions:
+2. Configure the ClusterSecretStore:
    ```bash
-   kubectl apply -f external-secrets/secrets/
-   ```
+   kubectl apply -f ClusterSecretStore-application.yml
+   ```  
+### Application Deployment Shop Online
+1. Deploy the application:
+   ```bash
+   kubectl apply -f root-application.yml
+   ``` 
 </details>
 
 ### SSL/TLS Setup
@@ -254,31 +271,6 @@ The backend CI/CD pipeline handles the Flask application deployment:
 3. Secret rotation and management
 4. Build cache optimization
 5. Regular cleanup tasks
-
-## Maintenance
-
-### Backup and Disaster Recovery
-- Regular state file backups
-- Cluster snapshot schedule
-- Application backup procedures
-
-### Updates and Upgrades
-- Kubernetes version management
-- Certificate rotation
-- Security patch application
-
-## Contributing
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
-## Support
-For support and queries, please create an issue in the GitHub repository or contact the infrastructure team.
-
-## Authors
-- Your Name
-- Infrastructure Team
 
 ## Acknowledgments
 - AWS EKS Team
