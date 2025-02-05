@@ -38,6 +38,14 @@ spec:
                 port:
                   name: use-annotation
 
+          - path: /api/register
+            pathType: Exact
+            backend:
+              service:
+                name: ssl-redirect
+                port:
+                  name: use-annotation        
+
           - path: /api/products
             pathType: Exact
             backend:
@@ -77,6 +85,14 @@ spec:
                 name: backend-svc
                 port:
                   number: 5050
+
+          - path: /api/register
+            pathType: Exact
+            backend:
+              service:
+                name: backend-svc
+                port:
+                  number: 5050        
 
           - path: /metrics
             pathType: Exact
