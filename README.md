@@ -1,4 +1,4 @@
-# Poject Shop-Online
+# Project Shop-Online
 # AWS Kubernetes Infrastructure Project
 
 ## Overview
@@ -191,6 +191,12 @@ The backend CI/CD pipeline handles the Flask application deployment:
 #### GitHub Secrets
 - `DOCKERHUB_USERNAME`: Docker Hub account name
 - `DOCKERHUB_TOKEN`: Access token for Docker Hub
+- `AWS_ACCESS_KEY_ID`: Access token for GitHub
+- `AWS_SECRET_ACCESS_KEY`: Access token for GitHub
+
+#### Environment Variables for application Shop Online
+- `MONGO_INITDB_ROOT_PASSWORD`: Database username
+- `MONGO_INITDB_ROOT_USERNAME`: Database password
 
 #### Repository Settings
 - Branch protection rules
@@ -222,27 +228,32 @@ The backend CI/CD pipeline handles the Flask application deployment:
 
 ## Monitoring Setup
 
-### Prometheus & Grafana
-1. Deploy monitoring stack:
-   ```bash
-   helm upgrade --install monitoring ./helm/monitoring
-   ```
+### Prometheus & Grafana & Loki & Promtail  
 
-2. Access Grafana:
-   ```bash
-   kubectl port-forward svc/grafana 3000:3000
-   ```
+All monitoring charts mentioned above are currently managed under the **App of Apps** architecture in the **on-prem** environment. Metrics and logs are securely transmitted from the cloud to the on-prem environment via an **IPsec tunnel**, ensuring encrypted and secure communication.  
 
-### Logging Configuration
-1. Deploy Loki and Promtail:
-   ```bash
-   helm upgrade --install logging ./helm/logging
-   ```
+In the future, this repository will be updated to include the full monitoring stack under the **App of Apps** deployment.  
 
-2. Verify log collection:
+If manual installation is required, the respective Helm charts can be installed using the following commands:  
+
+1. **Deploy monitoring stack:**  
    ```bash
-   kubectl logs -n logging deployment/loki
-   ```
+   grafana:
+   helm repo add grafana https://grafana.github.io/helm-charts
+   helm install my-grafana grafana/grafana --version 8.9.0
+   ```  
+
+2. **Deploy Prometheus:**  
+   ```bash
+   helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+   helm install my-prometheus prometheus-community/prometheus --version 27.3.0
+   ```  
+
+3. **Deploy Loki and Promtail:**  
+   ```bash
+   helm install my-loki grafana/loki --version 6.25.1
+   helm install my-promtail grafana/promtail --version 6.16.6
+   ```  
 
 ## CI/CD Benefits
 1. **Automated Workflows**
