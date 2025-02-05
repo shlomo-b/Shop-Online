@@ -2,7 +2,7 @@
 # kind: Application
 # metadata:
 #   name: tigera-operator
-#   namespace: argo-cd
+#   namespace: argocd
 #   annotations:
 #     argocd.argoproj.io/sync-options: Replace=true,SkipDryRunOnMissingResource=true
 # spec:
