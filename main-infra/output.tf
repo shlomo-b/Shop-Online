@@ -13,7 +13,7 @@
 #---------------output EC2s id -------------------#
 
 output "dns_a_record_route53" {
-  value       = "https://blackjack.spider-shlomo.com"
+  value       = "https://frontend.spider-shlomo-com"
   description = "a record for alb."
 }
 

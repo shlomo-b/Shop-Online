@@ -6,4 +6,4 @@
 #   - name: tigera-operator
 #     version: 3.29.1
 #     repository: https://docs.projectcalico.org/charts/
-#     condition: tigera-operator.enabled
+#    #  condition: tigera-operator.enabled

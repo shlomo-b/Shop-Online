@@ -10,4 +10,4 @@ dependencies:
   tags:
   - bitnami-common
   version: 8.5.1
-  condition: external-dns.enabled # only install if external-dns is enabled
+#  condition: external-dns.enabled # only install if external-dns is enabled
