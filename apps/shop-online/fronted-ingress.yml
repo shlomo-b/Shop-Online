@@ -22,7 +22,6 @@ spec:
     - host: fronted.spider-shlomo.com
       http:
         paths:
-          # 🔹 First rule: Redirect all traffic to HTTPS
           - path: /
             pathType: Prefix
             backend:
@@ -30,7 +29,15 @@ spec:
                 name: ssl-redirect
                 port:
                   name: use-annotation  # Ensure HTTPS redirect happens
-                  
+
+          - path: /register
+            pathType: Prefix
+            backend:
+              service:
+                name: ssl-redirect
+                port:
+                  name: use-annotation  # Ensure HTTPS redirect happens        
+
           - path: /
             pathType: Prefix
             backend:
