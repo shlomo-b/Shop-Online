@@ -195,8 +195,8 @@ The backend CI/CD pipeline handles the Flask application deployment:
 - `AWS_SECRET_ACCESS_KEY`: Access token for GitHub
 
 #### Environment Variables for application Shop Online
-- `MONGO_INITDB_ROOT_PASSWORD`: Database username
-- `MONGO_INITDB_ROOT_USERNAME`: Database password
+- `MONGO_INITDB_ROOT_USERNAME`: Database username
+- `MONGO_INITDB_ROOT_PASSWORD`: Database password
 
 #### Repository Settings
 - Branch protection rules
@@ -294,3 +294,4 @@ If manual installation is required, the respective Helm charts can be installed 
 2. Security policies for EKS
 3. Statefulset for MongoDB
 4. Improve the monitoring stack to work with charts in app of apps
+5. Split the infrastructure and application layer

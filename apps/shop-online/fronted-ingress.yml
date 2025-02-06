@@ -38,35 +38,35 @@ spec:
                 port:
                   number: 3000
 
-          - path: /register
-            pathType: Prefix
-            backend:
-              service:
-                name: ssl-redirect
-                port:
-                  name: use-annotation  # Ensure HTTPS redirect happens        
+          # - path: /register
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #       name: ssl-redirect
+          #       port:
+          #         name: use-annotation  # Ensure HTTPS redirect happens        
         
 
-          - path: /add-product
-            pathType: Exact
-            backend:
-              service:
-                name: fronted-svc
-                port:
-                  number: 3000    
+          # - path: /add-product
+          #   pathType: Exact
+          #   backend:
+          #     service:
+          #       name: fronted-svc
+          #       port:
+          #         number: 3000    
 
-          - path: /login
-            pathType: Exact
-            backend:
-              service:
-                name: fronted-svc
-                port:
-                  number: 3000  
+          # - path: /login
+          #   pathType: Exact
+          #   backend:
+          #     service:
+          #       name: fronted-svc
+          #       port:
+          #         number: 3000  
 
-          - path: /register
-            pathType: Exact
-            backend:
-              service:
-                name: fronted-svc
-                port:
-                  number: 3000
+          # - path: /register
+          #   pathType: Exact
+          #   backend:
+          #     service:
+          #       name: fronted-svc
+          #       port:
+          #         number: 3000
