@@ -39,7 +39,7 @@ spec:
                   name: use-annotation  # Ensure HTTPS redirect happens        
 
           - path: /
-            pathType: Exact
+            pathType: Prefix
             backend:
               service:
                 name: fronted-svc
