@@ -22,21 +22,21 @@ spec:
     - host: shop-online.spider-shlomo.com
       http:
         paths:
-          # - path: /
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: ssl-redirect
-          #       port:
-          #         name: use-annotation  # Ensure HTTPS redirect happens
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ssl-redirect
+                port:
+                  name: use-annotation  # Ensure HTTPS redirect happens
 
-          # - path: /register
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: ssl-redirect
-          #       port:
-          #         name: use-annotation  # Ensure HTTPS redirect happens        
+          - path: /register
+            pathType: Prefix
+            backend:
+              service:
+                name: ssl-redirect
+                port:
+                  name: use-annotation  # Ensure HTTPS redirect happens        
 
           - path: /
             pathType: Exact
