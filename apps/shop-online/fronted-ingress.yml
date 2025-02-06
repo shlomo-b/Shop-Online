@@ -8,7 +8,7 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip # the alb move the traffic directly to pods
     alb.ingress.kubernetes.io/security-groups: sg-09b52735903593977
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/fac304d9-f963-43cf-a186-acc0a936fb51
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148088962203:certificate/0e29c21b-6890-4848-a3d6-db640f1cc0d9
     alb.ingress.kubernetes.io/subnets: subnet-06ecc8dce3939bc67,subnet-09e3ef8e74de1afaf # Public subnetbs
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}, {"HTTP": 3000}]' # listen ports
     external-dns.alpha.kubernetes.io/ttl: "60"
@@ -19,27 +19,27 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - host: fronted.spider-shlomo.com
+    - host: shop-online.spider-shlomo.com
       http:
         paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: ssl-redirect
-                port:
-                  name: use-annotation  # Ensure HTTPS redirect happens
+          # - path: /
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #       name: ssl-redirect
+          #       port:
+          #         name: use-annotation  # Ensure HTTPS redirect happens
 
-          - path: /register
-            pathType: Prefix
-            backend:
-              service:
-                name: ssl-redirect
-                port:
-                  name: use-annotation  # Ensure HTTPS redirect happens        
+          # - path: /register
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #       name: ssl-redirect
+          #       port:
+          #         name: use-annotation  # Ensure HTTPS redirect happens        
 
           - path: /
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                 name: fronted-svc
@@ -47,7 +47,7 @@ spec:
                   number: 3000
 
           - path: /add-product
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                 name: fronted-svc
@@ -55,7 +55,7 @@ spec:
                   number: 3000    
 
           - path: /login
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                 name: fronted-svc
@@ -63,7 +63,7 @@ spec:
                   number: 3000  
 
           - path: /register
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                 name: fronted-svc

@@ -32,10 +32,10 @@ output "dns_a_record_route53" {
 #   description = "vpcs"
 # }
 
-# output "acm" {
-#   value       = { for k, v in module.acm : k => v.acm_certificate_arn }
-#   description = "acms"
-# }
+output "acms-arn" {
+  value       = { for k, v in module.acm : k => v.acm_certificate_arn }
+  description = "acms"
+}
 
 # output "sgs" {
 #   value       = { for k, v in module.sgs : k => v.security_group_id }

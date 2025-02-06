@@ -26,46 +26,6 @@ spec:
             pathType: Exact
             backend:
               service:
-                name: ssl-redirect
-                port:
-                  name: use-annotation
-
-          - path: /api/products
-            pathType: Exact
-            backend:
-              service:
-                name: ssl-redirect
-                port:
-                  name: use-annotation
-
-          - path: /api/register
-            pathType: Exact
-            backend:
-              service:
-                name: ssl-redirect
-                port:
-                  name: use-annotation        
-
-          - path: /api/products
-            pathType: Exact
-            backend:
-              service:
-                name: ssl-redirect
-                port:
-                  name: use-annotation        
-
-          - path: /metrics
-            pathType: Exact
-            backend:
-              service:
-                name: ssl-redirect
-                port:
-                  name: use-annotation
-
-          - path: /api/users
-            pathType: Exact
-            backend:
-              service:
                 name: backend-svc
                 port:
                   number: 5050
@@ -100,4 +60,4 @@ spec:
               service:
                 name: backend-svc
                 port:
-                  number: 5050        
+                  number: 5050
