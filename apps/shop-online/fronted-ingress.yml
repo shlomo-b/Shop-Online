@@ -14,7 +14,7 @@ metadata:
     external-dns.alpha.kubernetes.io/ttl: "60"
     alb.ingress.kubernetes.io/actions.ssl-redirect: > # redirect to https
       {"type": "redirect", "redirectConfig": { "protocol": "HTTPS", "port": "443", "statusCode": "HTTP_301"}}
-   # alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:us-east-1:148088962203:regional/webacl/blackjack-waf/6583d044-16e4-4b0c-99fb-20864ea5b1f8
+    alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:us-east-1:148088962203:regional/webacl/blackjack-waf/53995a69-92ca-45b3-8a79-1785cbf1eb9e
 
 spec:
   ingressClassName: alb

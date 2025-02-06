@@ -2,7 +2,7 @@ module "waf" {
   source = "umotif-public/waf-webaclv2/aws"
   version = "~> 5.0.0"
 
-  name_prefix = "blackjack-waf"
+  name_prefix = "Shop-Online-waf"
   create_alb_association = false
   allow_default_action = false # block all the request https
   

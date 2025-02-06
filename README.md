@@ -129,7 +129,7 @@ The backend CI/CD pipeline handles the Flask application deployment:
 - Terraform installed locally
 
 ## Getting Started
-<details><summary>Click to infrastructure deployment</summary>
+<details><summary>Click to infrastructure deployment and application deployment</summary>
 ### Infrastructure Deployment
 1. Clone the repository:
    ```bash
