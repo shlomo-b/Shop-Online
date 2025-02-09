@@ -17,10 +17,10 @@ output "dns_a_record_route53" {
   description = "a record for alb."
 }
 
-output "arn_waf" {
-  value       = module.waf.web_acl_arn
-  description = "arn"
-}
+# output "arn_waf" {
+#   value       = module.waf.web_acl_arn
+#   description = "arn"
+# }
 
 # output "rds" {
 #   value       = module.db.db_instance_endpoint
@@ -32,10 +32,10 @@ output "arn_waf" {
 #   description = "vpcs"
 # }
 
-output "acms-arn" {
-  value       = { for k, v in module.acm : k => v.acm_certificate_arn }
-  description = "acms"
-}
+# output "acms-arn" {
+#   value       = { for k, v in module.acm : k => v.acm_certificate_arn }
+#   description = "acms"
+# }
 
 # output "sgs" {
 #   value       = { for k, v in module.sgs : k => v.security_group_id }
