@@ -15,11 +15,10 @@ module "waf" {
  rules = [
     {
       # rules
-      
       # rule 1
       # this rule for allow access to app.
       name     = "IpSetRule-0"
-      priority = 3
+      priority = 0
       action = "allow"
 
         visibility_config = {
@@ -38,7 +37,7 @@ module "waf" {
        # rule 2
        # this rule to block after the /
       name = "Block_after_slash"
-      priority = 1
+      priority = 2
 
       action = "block"
 
@@ -65,9 +64,9 @@ module "waf" {
 
     {
        # rule 3
-       # allow /presentation
+       # web-acl
       name = "allow_web-acl"
-      priority = "0"
+      priority = 1
 
       action = "allow"
 

@@ -56,7 +56,7 @@ server:
       serviceType: ClusterIP
       backendProtocolVersion: GRPC
 
-#   # responsible for authenticating users    
+   # responsible for authenticating users | name of the secret certificate    
 dex:
   volumes:
     - name: sso-cert
