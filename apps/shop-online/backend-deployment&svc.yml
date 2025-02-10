@@ -19,7 +19,7 @@ spec:
     spec:
          # podAntiAffinity the pods will be runing on different nodes
       affinity:
-        podAntiAffinity:
+        podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
                 matchExpressions:
