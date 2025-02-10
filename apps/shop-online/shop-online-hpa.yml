@@ -44,8 +44,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name:  backend   # the name of the deployment from deployment file application
-  minReplicas: 2
-  maxReplicas: 3
+  minReplicas: 5
+  maxReplicas: 9
   metrics:
     - type: Resource
       resource:
