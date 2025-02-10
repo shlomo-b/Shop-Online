@@ -17,17 +17,13 @@ spec:
       labels:
         app: backend
     spec:
-         # podAntiAffinity the pods will be runing on different nodes
-      affinity:
-        podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app
-                    operator: In
-                    values:
-                      - backend
-              topologyKey: "kubernetes.io/hostname"
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: "kubernetes.io/hostname"
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: backend
       containers:
       - name: backend
         image: shlomobarzili/flask-backend:latest
