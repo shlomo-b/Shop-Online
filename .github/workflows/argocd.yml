@@ -1,8 +1,11 @@
 name: ArgoCD Upgrade
 
 on:
-  push:
+  push: 
     branches: [ "main" ]
+    paths:
+      - 'argocd/**'
+  pull_request:
     paths:
       - 'argocd/**'
 
