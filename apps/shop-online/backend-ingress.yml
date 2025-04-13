@@ -20,50 +20,42 @@ spec:
     - host: backend.spider-shlomo.com
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: /api/users
+            pathType: Exact
             backend:
               service:
                 name: backend-svc
                 port:
                   number: 5050
 
-          # - path: /api/products
-          #   pathType: Exact
-          #   backend:
-          #     service:
-          #       name: backend-svc
-          #       port:
-          #         number: 5050
+          - path: /api/products
+            pathType: Exact
+            backend:
+              service:
+                name: backend-svc
+                port:
+                  number: 5050
 
-          # - path: /api/login
-          #   pathType: Exact
-          #   backend:
-          #     service:
-          #       name: backend-svc
-          #       port:
-          #         number: 5050
+          - path: /api/login
+            pathType: Exact
+            backend:
+              service:
+                name: backend-svc
+                port:
+                  number: 5050
 
-          # - path: /api/register
-          #   pathType: Exact
-          #   backend:
-          #     service:
-          #       name: backend-svc
-          #       port:
-          #         number: 5050        
+          - path: /api/register
+            pathType: Exact
+            backend:
+              service:
+                name: backend-svc
+                port:
+                  number: 5050        
 
-          # - path: /metrics
-          #   pathType: Exact
-          #   backend:
-          #     service:
-          #       name: backend-svc
-          #       port:
-          #         number: 5050
-
-          # - path: /health
-          #   pathType: Exact
-          #   backend:
-          #     service:
-          #       name: backend-svc
-          #       port:
-          #         number: 5050        
+          - path: /metrics
+            pathType: Exact
+            backend:
+              service:
+                name: backend-svc
+                port:
+                  number: 5050
