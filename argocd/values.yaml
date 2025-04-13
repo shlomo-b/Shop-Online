@@ -1,4 +1,4 @@
-#argocd
+#argocd1
 global:
   domain: argocd.spider-shlomo.com
 
