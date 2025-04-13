@@ -100,20 +100,20 @@ jobs:
           else
             echo "ArgoCD is already installed. Skipping installation."
           fi
-          kubectl apply -f repo.yml
+        #  kubectl apply -f repo.yml
           sleep 45
-          kubectl apply -f root-application.yaml
+        #  kubectl apply -f root-application.yaml
       working-directory: ./app-of-apps
       
       
     
-    - name: Install ClusterSecretStore
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: |
-        aws eks update-kubeconfig --name my-cluster --region us-east-1
-         sleep 45
-         kubectl apply -f ClusterSecretStore-application.yml
-      working-directory: ./apps/ClusterSecretStore
+    # - name: Install ClusterSecretStore
+    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    #   run: |
+    #     aws eks update-kubeconfig --name my-cluster --region us-east-1
+    #      sleep 45
+    #      kubectl apply -f ClusterSecretStore-application.yml
+    #   working-directory: ./apps/ClusterSecretStore
 
     - name: Terraform Output
       run: terraform output
