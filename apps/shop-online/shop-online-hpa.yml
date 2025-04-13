@@ -45,7 +45,7 @@ spec:
     kind: Deployment
     name:  backend   # the name of the deployment from deployment file application
   minReplicas: 1
-  maxReplicas: 9
+  maxReplicas: 3
   metrics:
     - type: Resource
       resource:
