@@ -11,5 +11,3 @@ stringData:
   url: https://github.com/shlomo-b/Shop-Online.git
   username: shlomo-b
   password: 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
-#  username:  ${{ secrets.USER_ARGOCD }}
-#  password:  ${{ secrets.ARGO_TOKEN }}
