@@ -19,7 +19,7 @@ function App() {
       setUsername(storedUsername);
     }
     
-    // Check user's preferred color scheme
+    // Check user's preferred color scheme # test
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setIsDarkMode(true);
       document.documentElement.classList.add('dark');
