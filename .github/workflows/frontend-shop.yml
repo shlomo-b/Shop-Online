@@ -34,7 +34,9 @@ jobs:
       - name: Extract version from Git tag # only if pushed via git tag
         run: |
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
-            echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+            VERSION=${GITHUB_REF#refs/tags/}
+            echo "VERSION=$VERSION" >> $GITHUB_ENV
+            echo "export VERSION=$VERSION" >> $GITHUB_ENV_TEMP
           fi
 
       - name: Build Docker image (no push yet) # build only, without pushing yet
@@ -48,7 +50,7 @@ jobs:
 
       - name: Print built image tag # print the image tag that was just built
         run: |
-          echo "📦 Built image: react-fronted:${{ env.VERSION || github.run_id }}"
+          echo "📦 Built image: react-fronted:${VERSION:-${{ github.run_id }}}"
 
       - name: Scan Docker Image for Vulnerabilities # scan image before pushing
         uses: aquasecurity/trivy-action@0.28.0 
