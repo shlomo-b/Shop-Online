@@ -3,10 +3,10 @@ name: Docker Image CI Frontend
 on:
   push: 
     branches: [ "main" ]
-    tags:
-      - 'v*'  # support git tag pushes
     paths:
       - 'shop-online-app/frontend/**'
+    tags:
+      - 'v*'  # support git tag pushes
   pull_request:
     paths:
       - 'shop-online-app/frontend/**'
@@ -31,13 +31,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Extract version from Git tag # only if pushed via git tag
+      - name: Extract version from Git tag
         run: |
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/}
             echo "VERSION=$VERSION" >> $GITHUB_ENV
-            echo "export VERSION=$VERSION" >> $GITHUB_ENV_TEMP
           fi
+
 
       - name: Build Docker image (no push yet) # build only, without pushing yet
         uses: docker/build-push-action@v6
