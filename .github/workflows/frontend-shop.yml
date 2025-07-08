@@ -4,7 +4,7 @@ on:
   push: 
     branches: [ "main" ]
     tags:
-      - 'v*'  # support git tag pushes
+      - 'v*'
     paths:
       - 'shop-online-app/frontend/**'
   pull_request:
@@ -31,39 +31,37 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # ✅ Extract version if tag exists (and reuse it later)
       - name: Extract version from Git tag
-        if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
         run: |
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
             echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
           fi
 
-      # ✅ Echo tag version if this is a tag push
-      - name: Echo version from tag
-        if: startsWith(github.ref, 'refs/tags/')
-        run:  | 
-          echo "🎯 Building test image for version: $VERSION"
-
-      # ✅ Build image for tag only (without push)
-      - name: Build Docker image for tag (no push)
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Build Docker image (no push yet)
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./shop-online-app/frontend/Dockerfile
           push: false
           load: true
-          tags: react-fronted:${{ env.VERSION }}
+          tags: react-fronted:latest
 
-      # 🔍 Scan vulnerabilities before push to production
+      # ✅ NEW – Print the image tag that was built
+      - name: Print built image tag
+        run: |
+          TAG=${VERSION:-${{ github.run_id }}}
+          echo "📦 Built image: react-fronted:$TAG"
+
       - name: Scan Docker Image for Vulnerabilities
         uses: aquasecurity/trivy-action@0.28.0 
         with:
           image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:latest  
+          format: 'table'
+          exit-code: 1
+          ignore-unfixed: true
+          severity: 'CRITICAL'
 
-      # 🚀 Build and push image when pushing/merging to main
-      - name: Build and push
+      - name: Push image to Docker Hub
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
