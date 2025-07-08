@@ -2,11 +2,11 @@ name: Docker Image CI Frontend
 
 on:
   push: 
-    branches: [ "main" ]
+    tags:
+      - 'v*'  # ✅ trigger on version tags like v1.0.0
+    branches: [ "main" ] # ✅ trigger on push to main
     paths:
       - 'shop-online-app/frontend/**'
-    tags:
-      - 'v*'  # support git tag pushes
   pull_request:
     paths:
       - 'shop-online-app/frontend/**'
@@ -16,58 +16,67 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout # Access to my code so we can work with it
+      - name: 🛎️ Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up QEMU # for multi-arch build (arm64 + amd64)
+      - name: ⚙️ Set up QEMU for multi-arch builds
         uses: docker/setup-qemu-action@v3
 
-      - name: Set up Docker Buildx # advanced docker build tool for multi-arch
+      - name: 🛠️ Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Login to Docker Hub # login to DockerHub using secrets
+      - name: 🔐 Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Extract version from Git tag
+      - name: 🔢 Extract version from Git tag
+        if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
         run: |
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
-            VERSION=${GITHUB_REF#refs/tags/}
-            echo "VERSION=$VERSION" >> $GITHUB_ENV
+            echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
           fi
 
+      - name: 🧪 Echo version from tag
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          echo "🎯 Git tag detected: $VERSION"
 
-      - name: Build Docker image (no push yet) # build only, without pushing yet
+      - name: 🧱 Build Docker image (no push yet)
         uses: docker/build-push-action@v6
         with:
           context: . # root of the repo
-          file: ./shop-online-app/frontend/Dockerfile # path to Dockerfile
+          file: ./shop-online-app/frontend/Dockerfile
           push: false # don't push yet
-          load: true  # ← Required for Trivy to scan local image
-          tags: react-fronted:latest # default local tag
+          load: true  # required for Trivy to scan local image
+          tags: react-fronted:${{ env.VERSION || github.run_id }}
 
-      - name: Print built image tag # print the image tag that was just built
+      - name: 🧾 Print built image name + tag
         run: |
-          echo "📦 Built image: react-fronted:${VERSION:-${{ github.run_id }}}"
+          TAG="${{ env.VERSION }}"
+          if [ -z "$TAG" ]; then
+            TAG="${{ github.run_id }}"
+          fi
+          echo "📦 Built image: ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:$TAG"
 
-      - name: Scan Docker Image for Vulnerabilities # scan image before pushing
+      - name: 🔍 Scan Docker Image for Vulnerabilities
         uses: aquasecurity/trivy-action@0.28.0 
         with:
-          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:latest  # image to scan
-          format: 'table'              # format the output
-          exit-code: 0                 # ← don't fail the pipeline even if critical issues exist
-          ignore-unfixed: true         # don't fail on vulnerabilities that are not fixed
-          severity: 'CRITICAL'         # only show critical vulnerabilities
+          image-ref: react-fronted:${{ env.VERSION || github.run_id }}  # scan local image
+          format: 'table'               # format output
+          exit-code: 0                  # ← don’t fail the build on critical issues
+          ignore-unfixed: true          # ← ignore unfixed vulnerabilities
+          severity: 'CRITICAL'          # only show critical issues
 
-      - name: Push image to Docker Hub # ← only on merge to main branch
+      - name: 🚀 Build and push to Docker Hub
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
-          file: ./shop-online-app/frontend/Dockerfile # Dockerfile path
-          push: true # enable pushing to Docker Hub
-          platforms: linux/amd64,linux/arm64 # build multi-arch image
-          tags: | # push with version (if exists) or run_id
+          context: . 
+          file: ./shop-online-app/frontend/Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ env.VERSION || github.run_id }}
             ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:latest
