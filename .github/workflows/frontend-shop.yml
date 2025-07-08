@@ -1,15 +1,20 @@
 name: Docker Image CI Frontend
 
 on:
-  push: 
-    tags:
-      - 'v*'  # ✅ trigger on version tags like v1.0.0
-    branches: [ "main" ] # ✅ trigger on push to main
+  push:
+    branches:
+      - "main"
     paths:
       - 'shop-online-app/frontend/**'
+
+  create:
+    tags:
+      - 'v*'
+
   pull_request:
     paths:
       - 'shop-online-app/frontend/**'
+
 
 jobs:
   docker:
