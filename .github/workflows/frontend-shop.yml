@@ -2,11 +2,11 @@ name: Docker Image CI Frontend
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" ]  # 🔁 כשעושים push ל-main
+    tags:                 # 🏷️ כשעושים git tag (כמו v1.0.0)
+      - 'v*'
     paths:
       - 'shop-online-app/frontend/**'
-    tags:
-      - 'v*'  
   pull_request:
     paths:
       - 'shop-online-app/frontend/**'
@@ -31,26 +31,21 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # ✅ Extract version from Git tag if exists
-      - name: 🔢 Extract VERSION if Git tag
+      # ✅ הגדרת IMAGE_TAG לפי tag או fallback ל-run_id
+      - name: 🔢 Set IMAGE_TAG from Git tag or fallback
         run: |
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
-            echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-          fi
-
-      # ✅ Fallback to IMAGE_TAG if no VERSION
-      - name: 🧮 Set IMAGE_TAG (from version or run ID)
-        run: |
-          if [[ -n "${VERSION}" ]]; then
-            echo "IMAGE_TAG=${VERSION}" >> $GITHUB_ENV
+            VERSION="${GITHUB_REF#refs/tags/}"
+            echo "🎯 VERSION=$VERSION"
+            echo "IMAGE_TAG=$VERSION" >> $GITHUB_ENV
           else
+            echo "🪪 Fallback to run ID"
             echo "IMAGE_TAG=${GITHUB_RUN_ID}" >> $GITHUB_ENV
           fi
 
-      - name: 🧪 Print tag/version info
+      - name: 🧾 Print final image tag
         run: |
-          echo "🎯 VERSION=$VERSION"
-          echo "🖼️ IMAGE_TAG=$IMAGE_TAG"
+          echo  "📦 Image will be tagged as: ${{ env.IMAGE_TAG }}"
 
       - name: 🧱 Build Docker image (no push)
         uses: docker/build-push-action@v6
@@ -60,10 +55,6 @@ jobs:
           push: false
           load: true
           tags: react-fronted:${{ env.IMAGE_TAG }}
-
-      - name: 🧾 Print built image name
-        run: |
-          echo "📦 Built image: ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ env.IMAGE_TAG }}"
 
       - name: 🔍 Scan Docker Image for Vulnerabilities
         uses: aquasecurity/trivy-action@0.28.0 
