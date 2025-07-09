@@ -2,8 +2,7 @@ name: Docker Image CI Frontend
 
 on:
   push:
-    branches:
-      - "main"
+    branches: [ "main" ]
     paths:
       - 'shop-online-app/frontend/**'
     tags:

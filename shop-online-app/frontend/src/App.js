@@ -19,7 +19,7 @@ function App() {
       setUsername(storedUsername);
     }
     
-    // Check user's preferred color sche5s
+    // Check user's preferred color sche5
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setIsDarkMode(true);
       document.documentElement.classList.add('dark');
