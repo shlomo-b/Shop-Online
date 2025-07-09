@@ -71,7 +71,7 @@ jobs:
           severity: 'CRITICAL'          # only show critical issues
 
       - name: 🚀 Build and push to Docker Hub
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #  if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
           context: . 
