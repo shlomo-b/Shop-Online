@@ -6,12 +6,10 @@ on:
     paths:
       - 'shop-online-app/frontend/**'
     tags:
-      - 'v*'
-
+      - 'v*'  
   pull_request:
     paths:
       - 'shop-online-app/frontend/**'
-
 
 jobs:
   docker:
@@ -33,51 +31,56 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: 🔢 Extract version from Git tag
-        if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
+      # ✅ Extract version from Git tag if exists
+      - name: 🔢 Extract VERSION if Git tag
         run: |
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
             echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
           fi
 
-      - name: 🧪 Echo version from tag
+      # ✅ Fallback to IMAGE_TAG if no VERSION
+      - name: 🧮 Set IMAGE_TAG (from version or run ID)
         run: |
-          echo "🎯 Git tag detected: $VERSION"
+          if [[ -n "${VERSION}" ]]; then
+            echo "IMAGE_TAG=${VERSION}" >> $GITHUB_ENV
+          else
+            echo "IMAGE_TAG=${GITHUB_RUN_ID}" >> $GITHUB_ENV
+          fi
 
-      - name: 🧱 Build Docker image (no push yet)
+      - name: 🧪 Print tag/version info
+        run: |
+          echo "🎯 VERSION=$VERSION"
+          echo "🖼️ IMAGE_TAG=$IMAGE_TAG"
+
+      - name: 🧱 Build Docker image (no push)
         uses: docker/build-push-action@v6
         with:
-          context: . # root of the repo
+          context: .
           file: ./shop-online-app/frontend/Dockerfile
-          push: false # don't push yet
-          load: true  # required for Trivy to scan local image
-          tags: react-fronted:${{ env.VERSION || github.run_id }}
+          push: false
+          load: true
+          tags: react-fronted:${{ env.IMAGE_TAG }}
 
-      - name: 🧾 Print built image name + tag
+      - name: 🧾 Print built image name
         run: |
-          TAG="${{ env.VERSION }}"
-          if [ -z "$TAG" ]; then
-            TAG="${{ github.run_id }}"
-          fi
-          echo "📦 Built image: ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:$TAG"
+          echo "📦 Built image: ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ env.IMAGE_TAG }}"
 
       - name: 🔍 Scan Docker Image for Vulnerabilities
         uses: aquasecurity/trivy-action@0.28.0 
         with:
-          image-ref: react-fronted:${{ env.VERSION || github.run_id }}  # scan local image
-          format: 'table'               # format output
-          exit-code: 0                  # ← don’t fail the build on critical issues
-          ignore-unfixed: true          # ← ignore unfixed vulnerabilities
-          severity: 'CRITICAL'          # only show critical issues
+          image-ref: react-fronted:${{ env.IMAGE_TAG }}
+          format: 'table'
+          exit-code: 0
+          ignore-unfixed: true
+          severity: 'CRITICAL'
 
       - name: 🚀 Build and push to Docker Hub
-      #  if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
-          context: . 
+          context: .
           file: ./shop-online-app/frontend/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ env.VERSION || github.run_id }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ env.IMAGE_TAG }}
             ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:latest
