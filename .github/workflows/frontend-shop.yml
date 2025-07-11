@@ -52,9 +52,8 @@ jobs:
 
       - name: read file
         id: read-file
-        uses: satya-500/read-file-github-action@v1
-        with:
-          file: ./shop-online-app/image-tag.txt
+        run: |
+          echo "contents=$(cat ./shop-online-app/image-tag.txt)" >> $GITHUB_OUTPUT
 
       - name: File contents
         run: echo "${{ steps.read-file.outputs.contents }}"  
