@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: . # the context is the root directory
-          file: ./shop-online-app/Dockerfile
+          file: ./shop-online-app/frontend/Dockerfile
           push: false
           load: true  # ← Required for Trivy to scan local image
           tags: react-fronted:latest
@@ -53,7 +53,7 @@ jobs:
       - name: read file
         id: read-file
         run: |
-          echo "contents=$(cat ./shop-online-app/image-tag.txt)" >> $GITHUB_OUTPUT
+          echo "contents=$(cat ./shop-online-app/frontend/image-tag.txt)" >> $GITHUB_OUTPUT
 
       - name: File contents
         run: echo "${{ steps.read-file.outputs.contents }}"  
@@ -66,7 +66,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./shop-online-app//Dockerfile
+          file: ./shop-online-app/frontend/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |

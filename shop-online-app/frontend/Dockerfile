@@ -28,5 +28,5 @@ COPY shop-online-app/frontend .
 # Expose port
 EXPOSE 3000
 
-# Start development server with host set to 0.0.0.0 - tes
+# Start development server with host set to 0.0.0.0 - te
 CMD ["npm", "start"]
