@@ -34,24 +34,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build Docker image (no push yet)
-        uses: docker/build-push-action@v6
-        with:
-          context: . # the context is the root directory
-          file: ./shop-online-app/frontend/Dockerfile
-          push: false
-          load: true  # ← Required for Trivy to scan local image
-          tags: react-fronted:latest
-
-      - name: Scan local image with Trivy
-        uses: aquasecurity/trivy-action@0.28.0
-        with:
-          image-ref: 'react-fronted:latest'  # ← Local image tag
-          format: 'table' # format the output
-          exit-code: 0  # ← Fail workflow on vulnerabilities
-          ignore-unfixed: true # don't fail on vulnerabilities that are not fixed
-          severity: 'CRITICAL' # only show critical vulnerabilities
-
       # read file and output the tag to contents
       - name: read file
         id: read-file
@@ -60,7 +42,25 @@ jobs:
 
       # print the contents
       - name: PrintFile contents
-        run: echo "${{ steps.read-file.outputs.contents }}"  
+        run: echo "${{ steps.read-file.outputs.contents }}"      
+
+      - name: Build Docker image (no push yet)
+        uses: docker/build-push-action@v6
+        with:
+          context: . # the context is the root directory
+          file: ./shop-online-app/frontend/Dockerfile
+          push: false
+          load: true  # ← Required for Trivy to scan local image
+          tags: react-fronted:${{ steps.read-file.outputs.contents }}
+
+      - name: Scan local image with Trivy
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: 'react-fronted:${{ steps.read-file.outputs.contents }}'  # ← Local image tag
+          format: 'table' # format the output
+          exit-code: 0  # ← Fail workflow on vulnerabilities
+          ignore-unfixed: true # don't fail on vulnerabilities that are not fixed
+          severity: 'CRITICAL' # only show critical vulnerabilities
 
       # print the image with tag
       - name: Print image tag
