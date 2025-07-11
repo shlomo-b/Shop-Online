@@ -52,14 +52,17 @@ jobs:
           ignore-unfixed: true # don't fail on vulnerabilities that are not fixed
           severity: 'CRITICAL' # only show critical vulnerabilities
 
+      # read file and output the tag to contents
       - name: read file
         id: read-file
         run: |
           echo "contents=$(cat ./shop-online-app/frontend/image-tag.txt)" >> $GITHUB_OUTPUT
 
-      - name: File contents
+      # print the contents
+      - name: PrintFile contents
         run: echo "${{ steps.read-file.outputs.contents }}"  
 
+      # print the image with tag
       - name: Print image tag
         run: echo "${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ steps.read-file.outputs.contents }}"
 
@@ -72,7 +75,7 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ steps.read-file.outputs.contents }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ steps.read-file.outputs.contents }} # tag
             ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:latest
 
       - name: Create Git tag from file
@@ -83,4 +86,4 @@ jobs:
           git tag ${{ steps.read-file.outputs.contents }}
           git push origin ${{ steps.read-file.outputs.contents }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
