@@ -67,6 +67,7 @@ jobs:
         run: echo "${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ steps.tag.outputs.contents }}"
 
       - name: output only tag image
+        id: tag-only
         run: echo "tag=$(echo '${{ steps.tag.outputs.contents }}' | cut -d'-' -f2)"  
 
       - name: Push image to Docker Hub
@@ -78,7 +79,7 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ steps.tag-only.outputs.contents }}
             ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:latest
 
       - name: Create Git tag from file
