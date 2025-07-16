@@ -36,13 +36,13 @@ jobs:
 
       # read file and output the tag to contents
       - name: read file
-        id: read-file
+        id: tag
         run: |
           echo "contents=$(cat ./shop-online-app/frontend/image-tag.txt)" >> $GITHUB_OUTPUT
 
       # print the contents
       - name: PrintFile contents
-        run: echo "${{ steps.read-file.outputs.contents }}"      
+        run: echo "${{ steps.tag.outputs.contents }}"      
 
       - name: Build Docker image (no push yet)
         uses: docker/build-push-action@v6
@@ -51,12 +51,12 @@ jobs:
           file: ./shop-online-app/frontend/Dockerfile
           push: false
           load: true  # ← Required for Trivy to scan local image
-          tags: react-fronted:${{ steps.read-file.outputs.contents }}
+          tags: react-fronted:${{ steps.tag.outputs.contents }}
 
       - name: Scan local image with Trivy
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: 'react-fronted:${{ steps.read-file.outputs.contents }}'  # ← Local image tag
+          image-ref: 'react-fronted:${{ steps.tag.outputs.contents }}'  # ← Local image tag
           format: 'table' # format the output
           exit-code: 0  # ← Fail workflow on vulnerabilities
           ignore-unfixed: true # don't fail on vulnerabilities that are not fixed
@@ -64,7 +64,10 @@ jobs:
 
       # print the image with tag
       - name: Print image tag
-        run: echo "${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ steps.read-file.outputs.contents }}"
+        run: echo "${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ steps.tag.outputs.contents }}"
+
+      - name: output only tag image
+        run: echo "${{ tag=$(echo "${{ steps.tag.outputs.contents }}" | cut -d'-' -f1) }}"   
 
       - name: Push image to Docker Hub
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -75,7 +78,7 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ steps.read-file.outputs.contents }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ tag }}
             ${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:latest
 
       - name: Create Git tag from file
@@ -83,7 +86,7 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git tag ${{ steps.read-file.outputs.contents }}
-          git push origin ${{ steps.read-file.outputs.contents }}
+          git tag ${{ steps.tag.outputs.contents }}
+          git push origin ${{ steps.tag.outputs.contents }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
