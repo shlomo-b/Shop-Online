@@ -66,9 +66,9 @@ jobs:
       - name: Print image tag
         run: echo "${{ secrets.DOCKERHUB_USERNAME }}/react-fronted:${{ steps.tag.outputs.contents }}"
 
-      - name: output only tag image
+      - name: output tag image only
         id: tag-only
-        run: echo "tag=$(echo '${{ steps.tag.outputs.contents }}' | cut -d'-' -f2)"  
+        run: echo "$(echo '${{ steps.tag.outputs.contents }}' | cut -d'-' -f2)"  
 
       - name: Push image to Docker Hub
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
