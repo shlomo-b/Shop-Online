@@ -2,7 +2,7 @@ FROM node
 
 WORKDIR /app
 
-# Install dependencies first (better caching)
+# Install dependencies first (better caching)sd
 COPY shop-online-app/frontend/package*.json ./
 RUN npm ci --silent
 
