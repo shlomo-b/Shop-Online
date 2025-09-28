@@ -25,7 +25,6 @@ variable "sgs" {
     vpc_key       = string      # VPC where the security group will be created
     description = string      # Description of the security group
     ingress_cidr_blocks = list(string)
-    vpc_key     = string  
     ingress_with_cidr_blocks = map(object({
       from_port   = number         # Starting port for the rule
       to_port     = number         # Ending port for the rule
@@ -65,7 +64,7 @@ variable "cluster_name" {
 }
 
 variable "cluster_version" {
-  default = "1.31"
+  default = "1.33"
   type = string
 }
 
